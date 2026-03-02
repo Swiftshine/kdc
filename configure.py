@@ -158,7 +158,7 @@ if not config.non_matching:
 # Tool versions
 config.binutils_tag = "2.42-1"
 config.compilers_tag = "20250812"
-config.dtk_tag = "v1.6.2"
+config.dtk_tag = "v1.8.2"
 config.objdiff_tag = "v3.0.0-beta.14"
 config.sjiswrap_tag = "v1.2.1"
 config.wibo_tag = "0.7.0"
@@ -248,7 +248,7 @@ cflags_rel = [
     "-sdata2 0",
 ]
 
-config.linker_version = "GC/1.3.2"
+config.linker_version = "Wii/1.3"
 
 
 # Helper function for Dolphin libraries

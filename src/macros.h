@@ -19,6 +19,10 @@
 #define __CONCAT(x, y) x##y
 #define CONCAT(x, y) __CONCAT(x, y)
 
+// Structure filling
+#define STRUCT_FILL(size) CONCAT(u8 unk_contents_, __LINE__)[size]
+#define PAD(size) CONCAT(u8 padding_, __LINE__)[size]
+
 // Multi-character character constants
 // clang-format off
 #define TWOCC(c0, c1)                                                          \

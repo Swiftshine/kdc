@@ -26,6 +26,7 @@ public:
 private:
     /* 0x0 */ const char* mParamName;
     /* 0x4 */ ParamAccessor* mAccessor;
+    /* 0x8 */ STRUCT_FILL(0x8);
 };
 
 }

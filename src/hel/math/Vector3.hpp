@@ -1,5 +1,7 @@
-#ifndef HEL_MATH_VECTOR3_H
-#define HEL_MATH_VECTOR3_H
+#ifndef HEL_MATH_VECTOR3_HPP
+#define HEL_MATH_VECTOR3_HPP
+
+#include <nw4r/math.h>
 
 namespace hel { namespace math {
     class Vector3 {

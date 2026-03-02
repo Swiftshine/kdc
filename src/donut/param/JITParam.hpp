@@ -1,9 +1,18 @@
-#ifndef DONUT_PARAM_JITPARAM_H
-#define DONUT_PARAM_JITPARAM_H
+#ifndef DONUT_PARAM_JITPARAM_HPP
+#define DONUT_PARAM_JITPARAM_HPP
+
+#include "xdata/XData.hpp"
 
 namespace param {
 
-class ParamAccessor;
+class ParamAccessor {
+public:
+
+private:
+friend class JITParam;
+    int m_0;
+    xdata::XDataHeader* mXData;
+};
 
 class JITParam {
 public:
@@ -11,6 +20,7 @@ public:
     ~JITParam();
 
     void loadCheck() const;
+
     template <typename T>
     const T& data() const;
 private:

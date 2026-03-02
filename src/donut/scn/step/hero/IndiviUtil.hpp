@@ -1,14 +1,19 @@
-#ifndef DONUT_SCN_STEP_HERO_INDIVIUTIL_H
-#define DONUT_SCN_STEP_HERO_INDIVIUTIL_H
+#ifndef DONUT_SCN_STEP_HERO_INDIVIUTIL_HPP
+#define DONUT_SCN_STEP_HERO_INDIVIUTIL_HPP
 
-#include "scn/step/common/Param.h"
-#include "scn/step/hero/Hero.h"
+#include "scn/step/common/Param.hpp"
+#include "scn/step/hero/Hero.hpp"
 
-#include <hel/math/Vector3.h>
+#include <hel/math/Vector3.hpp>
 
 namespace scn { namespace step { namespace hero {
 
-struct NodeAttach { };
+class NodeAttach {
+public:
+    void setOffset(const hel::math::Vector3& rOffset);
+    void setRotate(const hel::math::Vector3& rRotate);
+    void setScale(float scale);
+};
 
 struct NodeAttachParam {
     /* 0x00 */ hel::math::Vector3 mOffset;

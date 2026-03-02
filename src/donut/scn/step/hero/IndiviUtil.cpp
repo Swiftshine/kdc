@@ -1,5 +1,6 @@
-#include "scn/step/hero/IndiviUtil.h"
-#include "param/JITParam.h"
+#include "scn/step/hero/IndiviUtil.hpp"
+#include "hel/math/Vector3.hpp"
+#include "param/JITParam.hpp"
 
 using namespace scn::step::hero;
 
@@ -21,8 +22,53 @@ scn::step::common::Param* IndiviUtil::Param(const Hero& rHero) {
     }
 }
 
+template <>
+const NodeAttachParam& param::JITParam::data<NodeAttachParam>() const;
+
+// https://decomp.me/scratch/lY9I9
 void IndiviUtil::InitNodeAttach(NodeAttach& rNodeAttach, Kind kind) {
-    // not decompiled
+    switch (kind) {
+        case KIND_META: {
+            param::JITParam param("step/hero/nodeattach/Meta");
+            const NodeAttachParam& data = param.data<NodeAttachParam>();
+
+            rNodeAttach.setOffset(hel::math::Vector3(data.mOffset.x, data.mOffset.y, data.mOffset.z));
+            rNodeAttach.setRotate(hel::math::Vector3(data.mRotate.x, data.mRotate.y, data.mRotate.z));
+            rNodeAttach.setScale(data.mScale);
+
+            break;
+        }
+
+        case KIND_DEDEDE: {
+            param::JITParam param("step/hero/nodeattach/Dedede");
+            const NodeAttachParam& data = param.data<NodeAttachParam>();
+
+            rNodeAttach.setOffset(hel::math::Vector3(data.mOffset.x, data.mOffset.y, data.mOffset.z));
+            rNodeAttach.setRotate(hel::math::Vector3(data.mRotate.x, data.mRotate.y, data.mRotate.z));
+            rNodeAttach.setScale(data.mScale);
+            break;
+        }
+
+        case KIND_DEE: {
+            param::JITParam param("step/hero/nodeattach/Dee");
+            const NodeAttachParam& data = param.data<NodeAttachParam>();
+
+            rNodeAttach.setOffset(hel::math::Vector3(data.mOffset.x, data.mOffset.y, data.mOffset.z));
+            rNodeAttach.setRotate(hel::math::Vector3(data.mRotate.x, data.mRotate.y, data.mRotate.z));
+            rNodeAttach.setScale(data.mScale);
+            break;
+        }
+
+        default: break;
+    }
+}
+
+// https://decomp.me/scratch/CdXv3
+template <>
+const NodeAttachParam& param::JITParam::data<NodeAttachParam>() const {
+    loadCheck();
+    xdata::XDataHeader* header = mAccessor->mXData;
+    return (NodeAttachParam&)(*(NodeAttachParam*)xdata::XData::dataHeadAddress(header));
 }
 
 float IndiviUtil::CenterOffset(Kind kind) {

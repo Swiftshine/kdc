@@ -38,4 +38,6 @@ typedef int BOOL;
 
 typedef void (*funcptr_t)(void);
 
+#define nullptr NULL
+
 #endif

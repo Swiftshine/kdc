@@ -255,7 +255,7 @@ cflags_rel = [
 cflags_donut = [
     *cflags_base,
     "-i src/donut/",
-    "-inline off",
+    "-inline noauto",
     "-enc SJIS",
     "-O3",
 ]

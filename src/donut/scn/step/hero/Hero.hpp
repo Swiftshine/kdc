@@ -1,7 +1,7 @@
-#ifndef DONUT_SCN_STEP_HERO_HERO_H
-#define DONUT_SCN_STEP_HERO_HERO_H
+#ifndef DONUT_SCN_STEP_HERO_HERO_HPP
+#define DONUT_SCN_STEP_HERO_HERO_HPP
 
-#include "scn/step/common/Param.h"
+#include "scn/step/common/Param.hpp"
 
 namespace scn { namespace step { namespace hero {
     class Param { // todo: put this in its own file

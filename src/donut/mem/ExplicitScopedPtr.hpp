@@ -1,6 +1,8 @@
 #ifndef DONUT_MEM_EXPLICITSCOPEDPTR_H
 #define DONUT_MEM_EXPLICITSCOPEDPTR_H
 
+#include <types.h>
+
 namespace mem {
 
 template <typename T>
@@ -9,10 +11,6 @@ public:
     ExplicitScopedPtr(T* pPtr)
         : mPtr(pPtr)
     { }
-
-    /* 0x08 */ virtual ~ExplicitScopedPtr();
-    /* 0x0C */ virtual void vfC();
-    /* 0x10 */ virtual void vf10();
 
     /// Destructs the pointer.
     void destruct();

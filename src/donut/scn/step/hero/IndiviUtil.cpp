@@ -1,3 +1,5 @@
+#pragma peephole off
+
 #include "scn/step/hero/IndiviUtil.hpp"
 #include "hel/math/Vector3.hpp"
 #include "param/JITParam.hpp"
@@ -25,7 +27,6 @@ scn::step::common::Param* IndiviUtil::Param(const Hero& rHero) {
 template <>
 const NodeAttachParam& param::JITParam::data<NodeAttachParam>() const;
 
-// https://decomp.me/scratch/lY9I9
 void IndiviUtil::InitNodeAttach(NodeAttach& rNodeAttach, Kind kind) {
     switch (kind) {
         case KIND_META: {

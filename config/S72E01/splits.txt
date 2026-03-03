@@ -13,6 +13,10 @@ Sections:
 	.sdata2     type:rodata align:16
 	.sbss2      type:bss align:32
 
+nw4r/g3d/g3d_camera.cpp:
+	.text       start:0x800E5AF0 end:0x800E6A10
+	.sdata2     start:0x8055F040 end:0x8055F070
+
 hel/geo/Rect.cpp:
 	.text       start:0x8019FD54 end:0x801A01FC
 	.sdata2     start:0x8055F8A8 end:0x8055F8B8

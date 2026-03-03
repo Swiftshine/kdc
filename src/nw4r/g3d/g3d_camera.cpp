@@ -1,3 +1,4 @@
+#include "g3d/g3d_camera.h"
 #include <nw4r/g3d.h>
 #include <nw4r/math.h>
 
@@ -92,6 +93,31 @@ void Camera::SetPosition(const math::VEC3& rPos) {
 
     r.cameraPos = rPos;
     r.flags &= ~CameraData::FLAG_CAM_MTX_READY;
+}
+
+void Camera::GetPosture(PostureInfo* pInfo) const {
+    if (pInfo == nullptr) {
+        return;
+    }
+
+    if (!IsValid()) {
+        return;
+    }
+
+    const CameraData& r = ref();
+
+    if (r.flags & CameraData::FLAG_CAM_LOOKAT) {
+        pInfo->tp = POSTURE_LOOKAT;
+        pInfo->cameraUp = r.cameraUp;
+        pInfo->cameraTarget = r.cameraTarget;
+    } else if (r.flags & CameraData::FLAG_CAM_ROTATE) {
+        pInfo->tp = POSTURE_ROTATE;
+        pInfo->cameraRotate = r.cameraRotate;
+    } else {
+        pInfo->tp = POSTURE_AIM;
+        pInfo->cameraTarget = r.cameraTarget;
+        pInfo->cameraTwist = r.cameraTwist;
+    }
 }
 
 void Camera::SetPosture(const PostureInfo& rInfo) {

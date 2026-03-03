@@ -176,6 +176,7 @@ config.asflags = [
 config.ldflags = [
     "-fp hardware",
     "-nodefaults",
+    "-code_merging all",
 ]
 if args.debug:
     config.ldflags.append("-g")  # Or -gdwarf-2 for Wii linkers
@@ -213,6 +214,7 @@ cflags_base = [
     "-enc SJIS",
     "-i src/",
     "-i src/MSL/MSL_C/",
+    "-i src/MSL/MSL_C/internal/",
     "-i src/revolution/",
     "-i src/nw4r/",
     f"-i build/{config.version}/src",
@@ -256,7 +258,8 @@ cflags_hel = [
     *cflags_base,
     "-i src/hel/",
     "-inline noauto",
-    "-O3"
+    "-O3",
+    "-func_align 4"
 ]
 
 cflags_donut = [
@@ -265,6 +268,16 @@ cflags_donut = [
     "-inline noauto",
     "-enc SJIS",
     "-O3",
+    "-func_align 4"
+]
+
+cflags_nw4r = [
+    *cflags_base,
+    "-inline on",
+    "-fp_contract off",
+    "-O4,p",
+    "-func_align 16",
+    "-ipa file"
 ]
 
 config.linker_version = "Wii/1.3"
@@ -322,6 +335,15 @@ config.libs = [
         "progress_category": "hel",
         "objects": [
             Object(NonMatching, "hel/geo/Rect.cpp"),
+        ]
+    },
+    {
+        "lib": "nw4r/g3d",
+        "mw_version": config.linker_version,
+        "cflags": cflags_nw4r,
+        "progress_category": "sdk",
+        "objects": [
+            Object(Matching, "nw4r/g3d/g3d_camera.cpp"),
         ]
     },
     {

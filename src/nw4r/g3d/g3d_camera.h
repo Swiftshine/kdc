@@ -81,6 +81,7 @@ public:
     void SetPosition(f32 x, f32 y, f32 z);
     void SetPosition(const math::VEC3& rPos);
 
+    void GetPosture(PostureInfo* pInfo) const;
     void SetPosture(const PostureInfo& rInfo);
     void SetCameraMtxDirectly(const math::MTX34& rMtx);
     void SetPerspective(f32 fovy, f32 aspect, f32 near, f32 far);

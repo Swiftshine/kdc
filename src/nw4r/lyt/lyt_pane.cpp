@@ -208,7 +208,7 @@ Material *Pane::FindMaterialByName(const char *findName, bool bRecursive) {
 
     if (bRecursive) {
         for (ut::LinkList<Pane, 4>::Iterator it = this->mChildList.GetBeginIter(); it != this->mChildList.GetEndIter(); it++) {
-            if (!detail::EqualsResName(it->mName, "RootPane")) {
+            if (!detail::EqualsMaterialName(it->mName, "RootPane")) {
                 Material *pPane = it->FindMaterialByName(findName, bRecursive);
                 if (pPane != nullptr) {
                     return pPane;

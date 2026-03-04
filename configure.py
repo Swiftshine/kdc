@@ -340,21 +340,21 @@ config.libs = [
         ],
     },
     {
+        "lib": "revolution/OS",
+        "mw_version": "Wii/1.0",
+        "cflags": cflags_rvl,
+        "progress_category": "sdk",
+        "objects": [
+            Object(NonMatching, "revolution/OS/OSThread.c"),
+        ]
+    },
+    {
         "lib": "nw4r/g3d",
         "mw_version": config.linker_version,
         "cflags": cflags_nw4r,
         "progress_category": "sdk",
         "objects": [
             Object(Matching, "nw4r/g3d/g3d_camera.cpp"),
-        ]
-    },
-    {
-        "lib": "revolution/OS",
-        "mw_version": config.linker_version,
-        "cflags": cflags_rvl,
-        "progress_category": "sdk",
-        "objects": [
-            Object(NonMatching, "revolution/OS/OSThread.c"),
         ]
     },
     {

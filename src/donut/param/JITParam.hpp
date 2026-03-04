@@ -6,29 +6,33 @@
 
 namespace param {
 
-class ParamAccessor {
-public:
-    ~ParamAccessor();
-private:
-friend class JITParam;
-    int m_0;
-    xdata::XData* mXData;
-};
+    class ParamAccessor {
+    public:
+        ~ParamAccessor();
 
-class JITParam {
-public:
-    JITParam(const char* pParamName);
-    ~JITParam();
+        inline xdata::XData* get() { // unofficial name
+            return reinterpret_cast<xdata::XData*>(
+                reinterpret_cast<u8*>(&mXData) + 4
+            );
+        }
+    private:
+    friend class JITParam;
+        xdata::XData* mXData;
+    };
 
-    void loadCheck() const;
+    class JITParam {
+    public:
+        JITParam(const char* pParamName);
+        ~JITParam();
 
-    template <typename T>
-    const T& data() const;
-private:
-    /* 0x0 */ const char* mParamName;
-    /* 0x4 */ util::PlacementNew<ParamAccessor> mAccessor;
-    /* 0x8 */ STRUCT_FILL(0x8);
-};
+        void loadCheck() const;
+
+        template <typename T>
+        const T& data() const;
+        /* 0x0 */ const char* mParamName;
+        /* 0x4 */ ParamAccessor* mAccessor;
+        STRUCT_FILL(8);
+    };
 
 }
 

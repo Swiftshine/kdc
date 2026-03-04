@@ -14,29 +14,30 @@ private:
         /* 0xC */ u32 unk;
     };
 public:
-    inline void* dataHeadAddress() {
-        XDataHeader* header = &mHeader;
+    // inline void* dataHeadAddress() {
+    //     XDataHeader* header = &mHeader;
 
-        bool magic = false, bom = false, size = false;
+    //     bool magic = false, bom = false, size = false;
 
-        if (header != nullptr && header->mMagic == 'XBIN') {
-            magic = true;
-        }
+    //     if (header != nullptr && header->mMagic == 'XBIN') {
+    //         magic = true;
+    //     }
 
-        if (magic && header->mBOM == 0x1234) {
-            bom = true;
-        }
+    //     if (magic && header->mBOM == 0x1234) {
+    //         bom = true;
+    //     }
 
-        if (bom && header->mFilesize >= sizeof(XData)) {
-            size = true;
-        }
+    //     if (bom && header->mFilesize >= sizeof(XData)) {
+    //         size = true;
+    //     }
 
-        if (size) {
-            return reinterpret_cast<char*>(header) + sizeof(XData);
-        }
+    //     if (size) {
+    //         return reinterpret_cast<char*>(header) + sizeof(XData);
+    //     }
 
-        return nullptr;
-    }
+    //     return nullptr;
+    // }
+    void* dataHeadAddress();
 private:
     /* 0x0 */ XDataHeader mHeader;
 };

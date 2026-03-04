@@ -356,6 +356,15 @@ config.libs = [
         ]
     },
     {
+        "lib": "scn/step/enemy",
+        "mw_version": config.linker_version,
+        "cflags": cflags_donut,
+        "progress_category": "donut",
+        "objects": [
+            Object(NonMatching, "donut/scn/step/enemy/Param.cpp"),
+        ]
+    },
+    {
         "lib": "scn/step/hero",
         "mw_version": config.linker_version,
         "cflags": cflags_donut,

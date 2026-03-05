@@ -1,9 +1,9 @@
 #pragma peephole off
+#define DONUT_INLINE true
 
 #include <hel/math/Vector3.hpp>
-
-#include "scn/step/hero/IndiviUtil.hpp"
 #include "param/JITParam.hpp"
+#include "scn/step/hero/IndiviUtil.hpp"
 
 using namespace scn::step::hero;
 
@@ -92,9 +92,9 @@ void IndiviUtil::VacuumAttackerOffset() {
     m_4 = 0.75f;
 }
 
-// https://decomp.me/scratch/HpNqE
+// matches with O3,s
 bool IndiviUtil::IsKirby(Kind kind) {
-    return kind < KIND_META;
+    return static_cast<u32>(kind) <= KIND_KIRBY_GREEN;
 }
 
 bool IndiviUtil::IsMeta(Kind kind) {
@@ -109,6 +109,8 @@ bool IndiviUtil::IsDee(Kind kind) {
     return kind == KIND_DEE;
 }
 
+
+// matches in O3
 bool IndiviUtil::CanHover(Kind kind) {
     if (IsKirby(kind)) {
         return true;

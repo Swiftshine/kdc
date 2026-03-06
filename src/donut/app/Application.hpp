@@ -3,14 +3,18 @@
 
 #include <hel/common/ExplicitSingleton.hpp>
 #include "app/HIDErrorMenu.hpp"
+#include "msg/Manager.hpp"
 
 namespace app {
 
 class Application {
-    hel::common::ExplicitSingleton<Application> instance;
 public:
+    static hel::common::ExplicitSingleton<Application> Instance;
+
     HIDErrorMenu& hidErrorMenu();
+    msg::Manager& messageManager();
 };
+
 
 } // app
 

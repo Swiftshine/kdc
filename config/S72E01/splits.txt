@@ -46,6 +46,9 @@ donut/app/Locale.cpp:
 	.rodata     start:0x804144E0 end:0x80414500
 	.sdata      start:0x80556BF8 end:0x80556C30
 
+donut/app/Message.cpp:
+	.text       start:0x801793BC end:0x801798A8
+
 hel/geo/Rect.cpp:
 	.text       start:0x8019FD54 end:0x801A01FC
 	.sdata2     start:0x8055F8A8 end:0x8055F8B8

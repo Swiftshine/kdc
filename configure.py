@@ -385,6 +385,7 @@ config.libs = [
         "progress_category": "donut",
         "objects": [
             Object(NonMatching, "donut/app/Locale.cpp"),
+            Object(NonMatching, "donut/app/Message.cpp"),
         ],
     },
     {

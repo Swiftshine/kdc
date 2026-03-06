@@ -348,6 +348,7 @@ config.libs = [
         "cflags": cflags_nw4r,
         "progress_category": "sdk",
         "objects": [
+            Object(NonMatching, "nw4r/g3d/g3d_basic.cpp"),
             Object(Matching, "nw4r/g3d/g3d_camera.cpp"),
         ],
     },
@@ -358,6 +359,7 @@ config.libs = [
         "progress_category": "sdk",
         "objects": [
             Object(Matching, "nw4r/lyt/lyt_pane.cpp"),
+            Object(NonMatching, "nw4r/lyt/lyt_group.cpp"),
         ],
     },
     {

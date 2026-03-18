@@ -4,6 +4,7 @@ object: sys/main.dol
 hash: 14bf34bafa177caf1eada83bbe26f1c130ed3c4a
 symbols: config/S72E01/symbols.txt
 splits: config/S72E01/splits.txt
+ldscript_template: config/S72E01/ldscript.tpl
 # Change this to match the linker version.
 # See config.example.yml for a list.
 mw_comment_version: 14

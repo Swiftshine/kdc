@@ -44,8 +44,9 @@ nw4r/g3d/g3d_camera.cpp:
 	.text       start:0x800E5AF0 end:0x800E6A10
 	.sdata2     start:0x8055F040 end:0x8055F070
 
-nw4r/g3d/g3d_basic.cpp:
+nw4r/g3d/dcc/g3d_basic.cpp:
 	.text       start:0x800E6A10 end:0x800E6CE0 align:16
+	.sdata2     start:0x8055F070 end:0x8055F080
 
 nw4r/lyt/lyt_pane.cpp:
 	.text       start:0x800F2BA0 end:0x800F3AF0

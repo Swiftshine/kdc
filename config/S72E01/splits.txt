@@ -48,6 +48,11 @@ nw4r/g3d/dcc/g3d_basic.cpp:
 	.text       start:0x800E6A10 end:0x800E6CE0 align:16
 	.sdata2     start:0x8055F070 end:0x8055F080
 
+nw4r/g3d/dcc/g3d_maya.cpp:
+	.text       start:0x800E6CE0 end:0x800E79F0 align:16
+	.rodata     start:0x80408DE8 end:0x80408E20
+	.sdata2     start:0x8055F080 end:0x8055F098
+
 nw4r/lyt/lyt_pane.cpp:
 	.text       start:0x800F2BA0 end:0x800F3AF0
 	.ctors      start:0x80406280 end:0x80406284

@@ -1,4 +1,4 @@
-#include "scn/step/gimmick/block/BlockInfo.hpp"
+#include "scn/step/block/BlockInfo.hpp"
 
 using scn::step::block::BlockInfo;
 

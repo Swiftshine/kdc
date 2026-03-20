@@ -1,7 +1,13 @@
+#pragma peephole off
+
 #include <types.h>
+
+#include "scn/step/gimmick/block/BlockAttackResult.hpp"
 #include "ocoll/Gimmick.hpp"
 
+
 using namespace ocoll;
+using scn::step::gimmick::block::BlockAttackResult;
 
 Gimmick::Gimmick(Manager& rManager)
     : mManager(rManager)
@@ -11,6 +17,8 @@ Gimmick::Gimmick(Manager& rManager)
 void Gimmick::chkCollide(AttackRoot& rAttackRoot, AttackResultGimmick& rAttackResultGimmick) {
     // not decompiled
 }
+
+BlockAttackResult::~BlockAttackResult() { }
 
 bool Gimmick::mfIsBreakFire(const AttackData& rAttackData) const {
     u8 elem = rAttackData.mType.mElement;

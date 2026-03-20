@@ -414,21 +414,21 @@ config.libs = [
         ],
     },
     {
+        "lib": "scn/step/block",
+        "mw_version": config.linker_version,
+        "cflags": cflags_donut,
+        "progress_category": "donut",
+        "objects": [
+            Object(NonMatching, "donut/scn/step/block/BlockInfo.cpp"),
+        ],
+    },
+    {
         "lib": "scn/step/enemy",
         "mw_version": config.linker_version,
         "cflags": cflags_donut,
         "progress_category": "donut",
         "objects": [
             Object(NonMatching, "donut/scn/step/enemy/Param.cpp"),
-        ],
-    },
-    {
-        "lib": "scn/step/gimmick",
-        "mw_version": config.linker_version,
-        "cflags": cflags_donut,
-        "progress_category": "donut",
-        "objects": [
-            Object(NonMatching, "donut/scn/step/gimmick/block/BlockInfo.cpp"),
         ],
     },
     {

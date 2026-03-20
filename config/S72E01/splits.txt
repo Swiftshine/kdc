@@ -87,7 +87,7 @@ donut/scn/step/enemy/Param.cpp:
 	.text       start:0x8028C248 end:0x8028DA10
 	.data       start:0x804726D8 end:0x80472C18
 
-donut/scn/step/gimmick/block/BlockInfo.cpp:
+donut/scn/step/block/BlockInfo.cpp:
 	.text       start:0x80300700 end:0x80300760
 
 donut/scn/step/hero/IndiviUtil.cpp:

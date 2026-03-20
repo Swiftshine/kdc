@@ -8,7 +8,7 @@ namespace hel { namespace common {
 template <typename T, size_t S>
 class MutableArray {
 public:
-    ~MutableArray() { }
+    ~MutableArray();
 private:
     /* 0x0 */ T mArray[S];
 };

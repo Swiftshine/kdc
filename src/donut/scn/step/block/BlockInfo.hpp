@@ -1,5 +1,5 @@
-#ifndef DONUT_SCN_STEP_GIMMICK_BLOCKINFO_HPP
-#define DONUT_SCN_STEP_GIMMICK_BLOCKINFO_HPP
+#ifndef DONUT_SCN_STEP_BLOCK_BLOCKINFO_HPP
+#define DONUT_SCN_STEP_BLOCK_BLOCKINFO_HPP
 
 #include "scn/step/GridPos.hpp"
 #include "scn/step/map/BinGmkBlockKind.hpp"
@@ -14,8 +14,8 @@ public:
     const GridPos& gridPos() const;
     bool isValid() const;
 private:
-    map::BinGmkBlockKind mKind;
-    GridPos mGridPos;
+    /* 0x0 */ map::BinGmkBlockKind mKind;
+    /* 0x4 */ GridPos mGridPos;
 };
 
 

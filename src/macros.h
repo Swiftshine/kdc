@@ -22,6 +22,7 @@
 // Structure filling
 #define STRUCT_FILL(size) CONCAT(u8 unk_contents_, __LINE__)[size]
 #define PAD(size) CONCAT(u8 padding_, __LINE__)[size]
+#define STRUCT_MEMBER(name, size) u8 name[size]
 
 // Multi-character character constants
 // clang-format off

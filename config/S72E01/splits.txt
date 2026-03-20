@@ -79,6 +79,10 @@ donut/ocoll/Gimmick.cpp:
 donut/scn/step/Component.cpp:
 	.text       start:0x8021D0D4 end:0x80220F6C
 
+donut/scn/step/GridPos.cpp:
+	.text       start:0x802214BC end:0x80221668
+	.sdata2     start:0x80560200 end:0x80560210
+
 donut/scn/step/enemy/Param.cpp:
 	.text       start:0x8028C248 end:0x8028DA10
 	.data       start:0x804726D8 end:0x80472C18

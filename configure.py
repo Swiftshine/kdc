@@ -410,6 +410,7 @@ config.libs = [
         "progress_category": "donut",
         "objects": [
             Object(NonMatching, "donut/scn/step/Component.cpp"),
+            Object(NonMatching, "donut/scn/step/GridPos.cpp"),
         ],
     },
     {

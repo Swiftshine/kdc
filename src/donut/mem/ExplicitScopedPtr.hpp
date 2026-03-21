@@ -5,6 +5,8 @@
 
 namespace mem {
 
+class IAllocator;
+
 template <typename T>
 class ExplicitScopedPtr {
 public:
@@ -19,6 +21,7 @@ public:
 
     T* operator->();
 private:
+    /* 0x0 */ IAllocator& mAllocator;
     /* 0x4 */ T* mPtr;
 };
 

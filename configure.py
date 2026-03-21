@@ -377,6 +377,15 @@ config.libs = [
         ],
     },
     {
+        "lib": "hel/math",
+        "mw_version": config.linker_version,
+        "cflags": cflags_hel,
+        "progress_category": "hel",
+        "objects": [
+            Object(NonMatching, "hel/math/Random.cpp"),
+        ],
+    },
+    {
         "lib": "donut",
         "mw_version": config.linker_version,
         "cflags": cflags_donut,

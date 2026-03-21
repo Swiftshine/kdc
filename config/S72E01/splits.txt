@@ -80,6 +80,10 @@ donut/app/Locale.cpp:
 donut/app/Message.cpp:
 	.text       start:0x801793BC end:0x801798A8
 
+hel/math/Random.cpp:
+	.text       start:0x8019EC7C end:0x8019EF58
+	.sdata2     start:0x8055F850 end:0x8055F868
+
 hel/geo/Rect.cpp:
 	.text       start:0x8019FD54 end:0x801A01FC
 	.sdata2     start:0x8055F8A8 end:0x8055F8B8

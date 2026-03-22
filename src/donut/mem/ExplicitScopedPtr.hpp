@@ -2,10 +2,9 @@
 #define DONUT_MEM_EXPLICITSCOPEDPTR_H
 
 #include <types.h>
+#include "mem/IAllocator.hpp"
 
 namespace mem {
-
-class IAllocator;
 
 template <typename T>
 class ExplicitScopedPtr {

@@ -9,7 +9,7 @@ namespace app {
 
 class Application {
 public:
-    static hel::common::ExplicitSingleton<Application> Instance;
+    DECL_EXPLICIT_SINGLETON(Application);
 
     HIDErrorMenu& hidErrorMenu();
     msg::Manager& messageManager();

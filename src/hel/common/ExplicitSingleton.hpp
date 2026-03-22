@@ -28,4 +28,6 @@ private:
 } // common
 } // hel
 
+#define DECL_EXPLICIT_SINGLETON(T) static hel::common::ExplicitSingleton<T> Instance;
+
 #endif

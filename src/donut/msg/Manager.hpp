@@ -1,6 +1,8 @@
 #ifndef DONUT_MSG_MANAGER_HPP
 #define DONUT_MSG_MANAGER_HPP
 
+#include <types.h>
+
 namespace msg {
 
 class Manager {
@@ -27,8 +29,14 @@ public:
         CAT_STAFFCREDIT,
     };
 
+    Manager();
+    ~Manager();
+
     const char* text(Category category, const char* pText);
     const char* unsafedText(Category category, const char* pText);
+
+private:
+    STRUCT_FILL(0x1A8);
 };
 }
 

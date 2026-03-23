@@ -23,12 +23,7 @@ namespace hel { namespace math {
         Vector3(f32 _x, f32 _y, f32 _z);
         Vector3();
 
-        void operator=(const Vector3& rOther) {
-            x = rOther.x;
-            y = rOther.y;
-            z = rOther.z;
-        }
-
+        void operator=(const Vector3& rOther);
         Vector3 operator+(const Vector3& rOther) const;
         void operator+=(const Vector3& rOther);
         void operator-=(const Vector3& rOther);

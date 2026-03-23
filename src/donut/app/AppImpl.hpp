@@ -19,8 +19,9 @@
 #include "file/FDGManager.hpp"
 #include "file/FileManager.hpp"
 #include "font/FontManager.hpp"
-#include "gfx/GameScreen.hpp"
 #include "gfx/EFBToLetterBox.hpp"
+#include "gfx/IDrawer.hpp"
+#include "gfx/GameScreen.hpp"
 #include "hid/HIDManager.hpp"
 #include "hbm/HomeButtonMenu.hpp"
 #include "msg/Manager.hpp"
@@ -34,13 +35,16 @@ namespace app {
 class AppImpl;
 class System;
 
-class AppImpl : public hel::common::NonCopyable, public hel::common::ProtectedSingleton<AppImpl> {
+class AppImpl : public gfx::IDrawer, public hel::common::NonCopyable, public hel::common::ProtectedSingleton<AppImpl> {
 public:
     AppImpl(System& rSystem);
 
     /* 0x8 */ virtual ~AppImpl();
-    /* 0xC */ virtual void drawerExecDraw();
+    /* 0xC */ virtual void drawerExecDraw() override;
 
+    inline void DeleteInstance() {
+        ptr_ = nullptr;
+    }
 private:
     /* 0x0008 */ System& mSystem;
     /* 0x000C */ Reset mReset;

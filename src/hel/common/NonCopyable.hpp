@@ -6,7 +6,6 @@ namespace hel { namespace common {
 class NonCopyable {
 public:
     NonCopyable() { }
-    virtual ~NonCopyable();
 private:
     NonCopyable(const NonCopyable& rOther);
 };

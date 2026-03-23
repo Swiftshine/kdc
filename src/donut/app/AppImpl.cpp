@@ -6,7 +6,6 @@
 
 using namespace app;
 
-// https://decomp.me/scratch/1HHKQ
 AppImpl::AppImpl(System& rSystem)
     : mSystem(rSystem)
     , mReset()
@@ -45,7 +44,6 @@ AppImpl::AppImpl(System& rSystem)
     mem::OperatorNewDelete::SetDefaultAllocator(mem::Memory::Instance->sceneHeap());
 }
 
-// https://decomp.me/scratch/1COHB
 AppImpl::~AppImpl() {
-    ptr_ = nullptr;
+    DeleteInstance();
 }

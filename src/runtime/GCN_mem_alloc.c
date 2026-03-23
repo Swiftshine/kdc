@@ -1,33 +1,31 @@
 #include <revolution/OS.h>
 #include <runtime/GCN_mem_alloc.h>
 
-static void InitDefaultHeap(void) {
-    void* start;
-    void* end;
-    s32 heap;
+inline static void InitDefaultHeap(void) {
+	void* arenaLo;
+	void* arenaHi;
 
-    OSReport("GCN_Mem_Alloc.c : InitDefaultHeap. No Heap Available\n");
-    OSReport("Metrowerks CW runtime library initializing default heap\n");
+	OSReport("GCN_Mem_Alloc.c : InitDefaultHeap. No Heap Available\n");
+	OSReport("Metrowerks CW runtime library initializing default heap\n");
 
-    start = OSGetArenaLo();
-    end = OSGetArenaHi();
+	arenaLo = OSGetArenaLo();
+	arenaHi = OSGetArenaHi();
 
-    start = OSInitAlloc(start, end, 1);
-    OSSetArenaLo(start);
+	arenaLo = OSInitAlloc(arenaLo, arenaHi, 1);
+	OSSetArenaLo(arenaLo);
 
-    start = ROUND_UP_PTR(start, 32);
-    end = ROUND_DOWN_PTR(end, 32);
+	arenaLo = (void*)OSRoundUp32B(arenaLo);
+	arenaHi = (void*)OSRoundDown32B(arenaHi);
 
-    heap = OSCreateHeap(start, end);
-    OSSetCurrentHeap(heap);
-
-    OSSetArenaLo(end);
+	OSSetCurrentHeap(OSCreateHeap(arenaLo, arenaHi));
+	OSSetArenaLo(arenaLo = arenaHi);
 }
 
-DECL_WEAK void __sys_free(void* block) {
+/* 80362914-803629CC 35D254 00B8+00 0/0 1/1 0/0 .text            __sys_free */
+void __sys_free(void* p) {
     if (__OSCurrHeap == -1) {
         InitDefaultHeap();
     }
 
-    OSFreeToHeap(__OSCurrHeap, block);
+    OSFreeToHeap(__OSCurrHeap, p);
 }

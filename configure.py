@@ -333,6 +333,7 @@ config.libs = [
             Object(NonMatching, "runtime/runtime.c"),
             Object(NonMatching, "runtime/__init_cpp_exceptions.cpp"),
             Object(NonMatching, "runtime/__mem.c"),
+            Object(NonMatching, "runtime/GCN_mem_alloc.c"),
             # Object(NonMatching, "Runtime.PPCEABI.H/global_destructor_chain.c"),
             # Object(NonMatching, "Runtime.PPCEABI.H/__init_cpp_exceptions.cpp"),
         ],

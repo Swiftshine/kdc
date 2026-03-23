@@ -44,10 +44,6 @@ void Matrix34::CreateLookAt(const Vector3& rPosition, const Vector3& rUp, const 
 }
 
 
-inline f32 testInline(f32 arg1, f32 arg2, f32 arg3, f32 arg4) {
-    return arg1 * arg2 - arg3 * arg4;
-}
-
 //https://decomp.me/scratch/6aYu7
 void Matrix34::mtxInverse(const Mtx arg1, Mtx arg2) const {
     f32 firstPart = arg1[0][0] * arg1[2][1];
@@ -106,5 +102,6 @@ Matrix44 Matrix34::toMatrix44() const {
     toReturn.mBaseMtx[2][1] = mBaseMtx[2][1];
     toReturn.mBaseMtx[2][2] = mBaseMtx[2][2];
     toReturn.mBaseMtx[2][3] = mBaseMtx[2][3];
+
     return toReturn;
 }

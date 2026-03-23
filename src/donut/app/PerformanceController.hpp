@@ -12,6 +12,7 @@ public:
 
     void onSceneStart();
     void resetSetting();
+    void onFrameBegin();
 private:
     STRUCT_FILL(0x14);
 };

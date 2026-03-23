@@ -15,6 +15,7 @@ public:
     ~DvdWatch();
 
     void setBGMode(bool mode);
+    void check();
 private:
     STRUCT_FILL(0x344);
 };

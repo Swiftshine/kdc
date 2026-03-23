@@ -4,7 +4,7 @@
 namespace scn {
     class IScene {
     public:
-        /* 0x08 */ virtual ~IScene();
+        /* 0x08 */ virtual ~IScene() { }
         /* 0x0C */ virtual void vfC();
         /* 0x10 */ virtual void vf10();
         /* 0x14 */ virtual void vf14();

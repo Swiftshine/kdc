@@ -3,6 +3,7 @@
 #include "app/AppImpl.hpp"
 #include "mem/Memory.hpp"
 #include "mem/OperatorNewDelete.hpp"
+#include "snd/SoundManager.hpp"
 
 using namespace app;
 
@@ -89,6 +90,30 @@ void AppImpl::onSceneStartProcess(scn::IScene& rScene) {
     mResidentFile.startIfNecessary();
     mPerformanceController.onSceneStart();
     mDvdWatch.setBGMode(false);
+}
+
+void AppImpl::beginFrameProcess() {
+    mDvdWatch.check();
+    mPerformanceController.onFrameBegin();
+    mHIDManager.updateMaster();
+    mHIDManager.updateDebug();
+    snd::SoundManager::Instance->update();
+}
+
+void AppImpl::updateProcess(scn::IScene& rScene) {
+    // not decompiled
+}
+
+void AppImpl::updateHBMProcess() {
+    // not decompiled
+}
+
+void AppImpl::drawProcess(scn::IScene& rScene) {
+    // not decompiled
+}
+
+void AppImpl::endFrameProcess(scn::IScene& rScene) {
+    // not decompiled
 }
 
 void AppImpl::onSceneEndProcess(scn::IScene&) {

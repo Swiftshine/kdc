@@ -12,6 +12,9 @@ public:
 
     void updateGame();
     void resetButtonConvertKind();
+    void updateMaster();
+
+    void updateDebug() DONT_INLINE { }
 private:
     STRUCT_FILL(0x15A8);
 };

@@ -330,6 +330,7 @@ config.libs = [
         "cflags": cflags_runtime,
         "progress_category": "sdk",  # str | List[str]
         "objects": [
+            Object(NonMatching, "runtime/runtime.c"),
             Object(NonMatching, "runtime/__init_cpp_exceptions.cpp"),
             Object(NonMatching, "runtime/__mem.c"),
             # Object(NonMatching, "Runtime.PPCEABI.H/global_destructor_chain.c"),
@@ -385,6 +386,7 @@ config.libs = [
         "cflags": cflags_hel,
         "progress_category": "hel",
         "objects": [
+            Object(NonMatching, "hel/math/Matrix34.cpp"),
             Object(Matching, "hel/math/Random.cpp"),
             Object(NonMatching, "hel/math/Vector2.cpp"),
             Object(NonMatching, "hel/math/Vector3.cpp"),

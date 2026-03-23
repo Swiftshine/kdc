@@ -532,6 +532,10 @@ inline MTX34 *MTX34RotAxisRad(MTX34 *out, const VEC3 *axis, f32 frad) {
     return MTX34RotAxisFIdx(out, axis, NW4R_MATH_RAD_TO_FIDX(frad));
 }
 
+inline MTX34 *MTX34RotAxisDeg(MTX34 *out, const VEC3 *axis, f32 frad) {
+    return MTX34RotAxisFIdx(out, axis, NW4R_MATH_DEG_TO_FIDX(frad));
+}
+
 inline MTX34 *MTX34RotXYZDeg(MTX34 *mtx, f32 dx, f32 dy, f32 dz) {
     return MTX34RotXYZFIdx(mtx, NW4R_MATH_DEG_TO_FIDX(dx), NW4R_MATH_DEG_TO_FIDX(dy), NW4R_MATH_DEG_TO_FIDX(dz));
 }

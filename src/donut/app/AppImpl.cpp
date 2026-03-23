@@ -36,13 +36,15 @@ AppImpl::AppImpl(System& rSystem)
     OSInitSemaphore(&mSemaphore, 0);
     m_EBCC = false;
 
-    for (s32 tick = OSGetTick() & (0xFFFF); tick != 0; tick--) {
+    for (s32 tick = OSGetTick() & 0xFFFF; tick != 0; tick--) {
         mRandom(1);
     }
 
     ptr_ = this;
     mem::OperatorNewDelete::SetDefaultAllocator(mem::Memory::Instance->sceneHeap());
 }
+
+Reset::~Reset() { }
 
 AppImpl::~AppImpl() {
     DeleteInstance();

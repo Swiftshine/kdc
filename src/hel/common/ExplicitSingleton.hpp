@@ -8,7 +8,7 @@ namespace hel { namespace common {
 template<typename T>
 class ExplicitSingleton {
 public:
-    ~ExplicitSingleton() { }
+    ~ExplicitSingleton();
 
     static bool IsExist() {
         return object_ != nullptr;

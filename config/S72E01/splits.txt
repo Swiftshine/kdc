@@ -17,6 +17,10 @@ runtime/__mem.c:
 	.init       start:0x80004000 end:0x80004380
 	.text       start:0x80006A8C end:0x80006AA8
 
+runtime/runtime.c:
+	.text       start:0x80007214 end:0x800079FC
+	.rodata     start:0x80406580 end:0x80406598
+
 runtime/__init_cpp_exceptions.cpp:
 	.text       start:0x800079FC end:0x80007A6C
 	.ctors      start:0x80406260 end:0x80406264 rename:.ctors$10
@@ -83,6 +87,10 @@ donut/app/Locale.cpp:
 
 donut/app/Message.cpp:
 	.text       start:0x801793BC end:0x801798A8
+
+hel/math/Matrix34.cpp:
+	.text       start:0x8019E590 end:0x8019EAEC
+	.sdata2     start:0x8055F838 end:0x8055F848
 
 hel/math/Random.cpp:
 	.text       start:0x8019EC7C end:0x8019EF58

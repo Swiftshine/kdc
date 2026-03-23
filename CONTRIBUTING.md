@@ -71,6 +71,8 @@ void MyClass::SomeFunction() {
 }
 ```
 
+Before making a pull request, make sure the output of neither `ninja` nor `ninja diff` return any errors.
+
 ### Structures
 Class and struct members must be prefixed with `m`.
 

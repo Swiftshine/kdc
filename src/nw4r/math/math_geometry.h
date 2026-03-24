@@ -1,5 +1,6 @@
 #ifndef NW4R_MATH_GEOMETRY_H
 #define NW4R_MATH_GEOMETRY_H
+
 #include "nw4r/math/math_types.h"
 #include "nw4r/types_nw4r.h"
 

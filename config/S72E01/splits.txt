@@ -28,6 +28,12 @@ runtime/New.cpp:
 	.rodata     start:0x80406560 end:0x80406570
 	.sdata      start:0x80556420 end:0x80556428
 
+runtime/NMWException.cpp:
+	extab       start:0x80006748 end:0x80006788
+	extabindex  start:0x800068EC end:0x8000691C
+	.text       start:0x80006C10 end:0x80007194
+	.sdata      start:0x80556428 end:0x80556430
+
 runtime/ptmf.c:
 	.text       start:0x80007194 end:0x80007214
 	.rodata     start:0x80406570 end:0x80406580
@@ -47,6 +53,7 @@ runtime/Gecko_ExceptionPPC.cpp:
 	extab       start:0x80006788 end:0x800067F4
 	extabindex  start:0x8000691C end:0x80006964
 	.text       start:0x80007A6C end:0x8000917C
+	.rodata     start:0x80406598 end:0x80406600
 	.data       start:0x80421040 end:0x804210F8
 	.sdata      start:0x80556438 end:0x80556440
 

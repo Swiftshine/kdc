@@ -338,6 +338,7 @@ config.libs = [
             Object(NonMatching, "runtime/GCN_mem_alloc.c", extra_cflags=["-O4,p"]),
             Object(NonMatching, "runtime/Gecko_ExceptionPPC.cpp", extra_cflags=["-RTTI on"]),
             Object(NonMatching, "runtime/New.cpp", extra_cflags=["-RTTI on"]),
+            Object(NonMatching, "runtime/NMWException.cpp", extra_cflags=["-O4,p"]),
         ],
     },
     {

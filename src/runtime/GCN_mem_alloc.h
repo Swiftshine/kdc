@@ -7,9 +7,6 @@ extern "C" {
 
 void __sys_free(void* block);
 
-#define OSRoundUp32B(x) (((unsigned int)(x) + 32 - 1) & ~(32 - 1))
-#define OSRoundDown32B(x) (((unsigned int)(x)) & ~(32 - 1))
-
 #ifdef __cplusplus
 }
 #endif

@@ -70,6 +70,9 @@ extern BOOL __OSIsGcam;
 extern s64 __OSStartTime;
 extern OSExecParams __OSRebootParams;
 
+#define OSRoundUp32B(x) (((unsigned int)(x) + 32 - 1) & ~(32 - 1))
+#define OSRoundDown32B(x) (((unsigned int)(x)) & ~(32 - 1))
+
 void __OSFPRInit(void);
 u32 __OSGetHollywoodRev(void);
 void __OSGetIOSRev(OSIOSRev* rev);

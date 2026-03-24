@@ -213,7 +213,7 @@ cflags_base = [
     "-i libs/",
     "-i libs/MSL/MSL_C/",
     "-i libs/MSL/MSL_C/MSL_Common/Include",
-    "-i libs/MSL/MSL_C/MSL_Common/Include/internal",
+    "-i libs/MSL/MSL_C/MSL_Common_Embedded/Include/",
     "-i libs/MSL/MSL_C++/MSL_Common/Include",
     "-i libs/MSL/MSL_C/PPC_EABI/Include",
     "-i src/revolution/",

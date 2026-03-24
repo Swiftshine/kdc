@@ -2,7 +2,7 @@
 #define MSL_STRING_H
 #include <types.h>
 
-#include <internal/mem.h>
+#include <mem.h>
 
 #include <extras.h>
 #ifdef __cplusplus

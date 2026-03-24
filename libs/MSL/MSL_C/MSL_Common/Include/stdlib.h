@@ -1,8 +1,8 @@
 #ifndef MSL_STDLIB_H
 #define MSL_STDLIB_H
-#include <internal/mbstring.h>
-#include <internal/rand.h>
-#include <internal/strtold.h>
+#include <mbstring.h>
+#include <rand.h>
+#include <strtold.h>
 
 #include <arith.h>
 #endif

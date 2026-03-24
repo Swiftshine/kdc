@@ -2,11 +2,11 @@
 #define MSL_MATH_H
 #include <types.h>
 
-#include <internal/float.h>
-#include <internal/math_api.h>
-#include <internal/math_double.h>
-#include <internal/math_ppc.h>
-#include <internal/math_sun.h>
+#include <float.h>
+#include <math_api.h>
+#include <math_double.h>
+#include <math_ppc.h>
+#include <math_sun.h>
 #ifdef __cplusplus
 extern "C" {
 #endif

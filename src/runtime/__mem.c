@@ -1,4 +1,4 @@
-#include "runtime/__mem.h"
+#include <runtime/__mem.h>
 
 /* Source: https://github.com/Swiftshine/key/blob/d72e17891992c16fcf04a42c2d73005e0db71d86/src/PowerPC_EABI_Support/Runtime/__mem.c */
 /* Handwritten asm; attempted to match as C here: https://decomp.me/scratch/R3nOu */

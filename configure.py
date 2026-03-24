@@ -330,11 +330,15 @@ config.libs = [
         "cflags": cflags_runtime,
         "progress_category": "sdk",  # str | List[str]
         "objects": [
+            Object(NonMatching, "runtime/ptmf.c"),
             Object(NonMatching, "runtime/runtime.c"),
             Object(NonMatching, "runtime/__init_cpp_exceptions.cpp"),
             Object(NonMatching, "runtime/__mem.c"),
-            # Object(NonMatching, "Runtime.PPCEABI.H/global_destructor_chain.c"),
-            # Object(NonMatching, "Runtime.PPCEABI.H/__init_cpp_exceptions.cpp"),
+            Object(NonMatching, "runtime/global_destructor_chain.c"),
+            Object(NonMatching, "runtime/GCN_mem_alloc.c", extra_cflags=["-O4,p"]),
+            Object(NonMatching, "runtime/Gecko_ExceptionPPC.cpp", extra_cflags=["-RTTI on"]),
+            Object(NonMatching, "runtime/New.cpp", extra_cflags=["-RTTI on"]),
+            Object(NonMatching, "runtime/NMWException.cpp", extra_cflags=["-O4,p"]),
         ],
     },
     {

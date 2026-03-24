@@ -1,7 +1,7 @@
 #include <revolution/OS.h>
 #include <runtime/Gecko_ExceptionPPC.h>
 
-#define NUM_FRAGMENT 1
+#define NUM_FRAGMENT 32
 
 typedef struct FragmentInfo {
     const ExtabIndexInfo* eti; // at 0x0
@@ -12,17 +12,16 @@ typedef struct FragmentInfo {
 static FragmentInfo fragmentInfo[NUM_FRAGMENT];
 
 int __register_fragment(const ExtabIndexInfo* eti, void* toc) {
-    int i;
     FragmentInfo* frag;
+    int i;
 
-    for (i = 0; i < NUM_FRAGMENT; i++) {
-        frag = &fragmentInfo[i];
+    for (i = 0, frag = fragmentInfo; i < NUM_FRAGMENT; i++, ++frag) {
 
         if (!frag->regist) {
             frag->eti = eti;
             frag->toc = toc;
             frag->regist = TRUE;
-            return 0;
+            return i;
         }
     }
 
@@ -32,16 +31,18 @@ int __register_fragment(const ExtabIndexInfo* eti, void* toc) {
 void __unregister_fragment(int i) {
     FragmentInfo* frag;
 
-    if (i < 0) {
-        return;
+    if (i >= 0 && i < NUM_FRAGMENT) {
+        frag = &fragmentInfo[i];
+        frag->eti = NULL;
+        frag->toc = NULL;
+        frag->regist = FALSE;
     }
-
-    if (i >= NUM_FRAGMENT) {
-        return;
-    }
-
-    frag = &fragmentInfo[i];
-    frag->eti = NULL;
-    frag->toc = NULL;
-    frag->regist = FALSE;
 }
+
+namespace std {
+    bad_exception::~bad_exception() {}
+
+    const char* bad_exception::what() const {
+        return "bad_exception";
+    }
+};

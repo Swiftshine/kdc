@@ -1,571 +1,798 @@
-#include <types.h>
+#include <runtime/runtime.h>
 
-const u64 __constants[] = {
-    0x0000000000000000, // 0
-    0x41F0000000000000, // ULONG_MAX + 1
-    0x41E0000000000000  // INT_MAX + 1
+/* clang-format off *//* asm funcs */
+
+#define ENTRY_SAVE_FPR(reg) entry SAVE_FPR(reg)
+#define ENTRY_SAVE32_GPR(reg) entry SAVE32_GPR(reg)
+#define ENTRY_RESTORE_FPR(reg) entry RESTORE_FPR(reg)
+#define ENTRY_SAVE_GPR(reg) entry SAVE_GPR(reg)
+#define ENTRY_RESTORE_GPR(reg) entry RESTORE_GPR(reg)
+#define ENTRY_RESTORE32_GPR(reg) entry RESTORE32_GPR(reg)
+
+#define ENTRY_SAVE_FPR2(reg) entry SAVE_FPR2(reg)
+#define ENTRY_RESTORE_FPR2(reg) entry RESTORE_FPR2(reg)
+
+#define save_restore_reg r11
+
+static const unsigned long __constants[] = {
+    0x00000000, 0x00000000,
+    0x41F00000, 0x00000000,
+    0x41E00000, 0x00000000,
 };
 
-asm u32 __cvt_fp2unsigned(register f32 x) {
-    // clang-format off
-    nofralloc
-    stwu r1, -0x10(r1)
-        
-    lis r4, __constants@ha
-    addi r4, r4, __constants@l
-
-    li r3, 0
-        
-    lfd f0, 0(r4)
-    lfd f3, 8(r4)
-    lfd f4, 16(r4)
-    
-    // Clamp value to [0, ULONG_MAX]
-    fcmpu cr0, x, f0
-    fcmpu cr6, x, f3
-    blt cr0, epilogue
-    subi r3, r3, 1
-    bge cr6, epilogue
-
-    // Convert float to unsigned (subract INT_MAX)
-    fcmpu cr7, x, f4
-    fmr f2, x
-    blt cr7, convert_fp
-    fsub f2, x, f4
-
-convert_fp:
-    // Convert to unsigned (using stack to change register class)
-    fctiwz f2, f2
-    stfd f2, 8(r1)
-    lwz r3, 0xc(r1)
-    blt cr7, epilogue
-
-    // Sign extend if necessary
-    addis r3, r3, 0x8000
-
-epilogue:
-    addi r1, r1, 0x10
-    blr
-    // clang-format on
+asm unsigned long __cvt_fp2unsigned(register double d)
+{
+	    stwu    r1,-16(r1)
+		lis		r4, __constants@ha
+		addi    r4, r4, __constants@l
+		li		r3,0
+		lfd		fp0,0(r4)
+		lfd		fp3,8(r4)
+		lfd		fp4,16(r4)
+		fcmpu	cr0,fp1,fp0
+		fcmpu	cr6,fp1,fp3
+		blt		cr0, @exit
+		addi	r3,r3,-1
+		bge		cr6,@exit
+		fcmpu	cr7,fp1,fp4
+		fmr		fp2,fp1
+		blt		cr7,@1
+		fsub	fp2,fp1,fp4
+@1		fctiwz	fp2,fp2
+		stfd	fp2,8(r1)
+		lwz		r3,12(r1)
+		blt		cr7,@exit
+		addis	r3,r3,-0x8000
+@exit:
+		addi    r1,r1,16
+		blr
 }
 
-// Macro setup
-#define REG_START 14
-#define FPR_FULL_STACK 0x90
-#define GPR_FULL_STACK 0x48
-#define FPR_SIZE 8
-#define GPR_SIZE 4
-// clang-format off
-#define USE_REGS \
-    X(14) X(15) X(16) X(17) X(18) X(19) \
-    X(20) X(21) X(22) X(23) X(24) X(25) \
-    X(26) X(27) X(28) X(29) X(30) X(31) // clang-format on
-
-// Build function prototypes
-#define X(Y) void _savefpr_##Y(void);
-USE_REGS
-#undef X
-#define X(Y) void _restfpr_##Y(void);
-USE_REGS
-#undef X
-#define X(Y) void _savegpr_##Y(void);
-USE_REGS
-#undef X
-#define X(Y) void _restgpr_##Y(void);
-USE_REGS
-#undef X
-
-// Build SAVEFPR bodies
-#define X(Y)                                                                   \
-    entry _savefpr_##Y;                                                        \
-    stfd f##Y, -(FPR_FULL_STACK - (FPR_SIZE * (Y - REG_START)))(r11);
-asm void __save_fpr(void) {
-    // clang-format off
-    nofralloc
-    USE_REGS;
-    blr
-    // clang-format on
-}
-#undef X
-
-// Build RESTFPR bodies
-#define X(Y)                                                                   \
-    entry _restfpr_##Y;                                                        \
-    lfd f##Y, -(FPR_FULL_STACK - (FPR_SIZE * (Y - REG_START)))(r11);
-asm void __restore_fpr(void) {
-    // clang-format off
-    nofralloc
-    USE_REGS;
-    blr
-    // clang-format on
-}
-#undef X
-
-// Build SAVEGPR bodies
-#define X(Y)                                                                   \
-    entry _savegpr_##Y;                                                        \
-    stw r##Y, -(GPR_FULL_STACK - (GPR_SIZE * (Y - REG_START)))(r11);
-asm void __save_gpr(void) {
-    // clang-format off
-    nofralloc
-    USE_REGS;
-    blr
-    // clang-format on
-}
-#undef X
-
-// Build RESTGPR bodies
-#define X(Y)                                                                   \
-    entry _restgpr_##Y;                                                        \
-    lwz r##Y, -(GPR_FULL_STACK - (GPR_SIZE * (Y - REG_START)))(r11);
-asm void __restore_gpr(void) {
-    // clang-format off
-    nofralloc
-    USE_REGS;
-    blr
-    // clang-format on
-}
-#undef X
-
-asm u64 __div2u(u64 dividend, u64 divisor) {
-    // clang-format off
-    nofralloc
-
-    cmpwi r3, 0
-    cntlzw r0, r3
-    cntlzw r9, r4
-    bne lbl_800B1DBC
-    addi r0, r9, 0x20
-
-lbl_800B1DBC:
-    cmpwi r5, 0
-    cntlzw r9, r5
-    cntlzw r10, r6
-    bne lbl_800B1DD0
-    addi r9, r10, 0x20
-
-lbl_800B1DD0:
-    cmpw r0, r9
-    subfic r10, r0, 0x40
-    bgt lbl_800B1E88
-    addi r9, r9, 1
-    subfic r9, r9, 0x40
-    add r0, r0, r9
-    subf r9, r9, r10
-    mtctr r9
-    cmpwi r9, 0x20
-    addi r7, r9, -32
-    blt lbl_800B1E08
-    srw r8, r3, r7
-    li r7, 0
-    b lbl_800B1E1C
-
-lbl_800B1E08:
-    srw r8, r4, r9
-    subfic r7, r9, 0x20
-    slw r7, r3, r7
-    or r8, r8, r7
-    srw r7, r3, r9
-
-lbl_800B1E1C:
-    cmpwi r0, 0x20
-    addic r9, r0, -32
-    blt lbl_800B1E34
-    slw r3, r4, r9
-    li r4, 0
-    b lbl_800B1E48
-
-lbl_800B1E34:
-    slw r3, r3, r0
-    subfic r9, r0, 0x20
-    srw r9, r4, r9
-    or r3, r3, r9
-    slw r4, r4, r0
-
-lbl_800B1E48:
-    li r10, -1
-    addic r7, r7, 0
-
-lbl_800B1E50:
-    adde r4, r4, r4
-    adde r3, r3, r3
-    adde r8, r8, r8
-    adde r7, r7, r7
-    subfc r0, r6, r8
-    subfe. r9, r5, r7
-    blt lbl_800B1E78
-    mr r8, r0
-    mr r7, r9
-    addic r0, r10, 1
-
-lbl_800B1E78:
-    bdnz lbl_800B1E50
-    adde r4, r4, r4
-    adde r3, r3, r3
-    blr 
-
-lbl_800B1E88:
-    li r4, 0
-    li r3, 0
-    blr
-    // clang-format on
+static asm void __save_fpr(void)
+{
+	ENTRY_SAVE_FPR(14)
+	ENTRY_SAVE_FPR2(14)
+		stfd	fp14,-144(save_restore_reg)
+	ENTRY_SAVE_FPR(15)
+	ENTRY_SAVE_FPR2(15)
+		stfd	fp15,-136(save_restore_reg)
+	ENTRY_SAVE_FPR(16)
+	ENTRY_SAVE_FPR2(16)
+		stfd	fp16,-128(save_restore_reg)
+	ENTRY_SAVE_FPR(17)
+	ENTRY_SAVE_FPR2(17)
+		stfd	fp17,-120(save_restore_reg)
+	ENTRY_SAVE_FPR(18)
+	ENTRY_SAVE_FPR2(18)
+		stfd	fp18,-112(save_restore_reg)
+	ENTRY_SAVE_FPR(19)
+	ENTRY_SAVE_FPR2(19)
+		stfd	fp19,-104(save_restore_reg)
+	ENTRY_SAVE_FPR(20)
+	ENTRY_SAVE_FPR2(20)
+		stfd	fp20,-96(save_restore_reg)
+	ENTRY_SAVE_FPR(21)
+	ENTRY_SAVE_FPR2(21)
+		stfd	fp21,-88(save_restore_reg)
+	ENTRY_SAVE_FPR(22)
+	ENTRY_SAVE_FPR2(22)
+		stfd	fp22,-80(save_restore_reg)
+	ENTRY_SAVE_FPR(23)
+	ENTRY_SAVE_FPR2(23)
+		stfd	fp23,-72(save_restore_reg)
+	ENTRY_SAVE_FPR(24)
+	ENTRY_SAVE_FPR2(24)
+		stfd	fp24,-64(save_restore_reg)
+	ENTRY_SAVE_FPR(25)
+	ENTRY_SAVE_FPR2(25)
+		stfd	fp25,-56(save_restore_reg)
+	ENTRY_SAVE_FPR(26)
+	ENTRY_SAVE_FPR2(26)
+		stfd	fp26,-48(save_restore_reg)
+	ENTRY_SAVE_FPR(27)
+	ENTRY_SAVE_FPR2(27)
+		stfd	fp27,-40(save_restore_reg)
+	ENTRY_SAVE_FPR(28)
+	ENTRY_SAVE_FPR2(28)
+		stfd	fp28,-32(save_restore_reg)
+	ENTRY_SAVE_FPR(29)
+	ENTRY_SAVE_FPR2(29)
+		stfd	fp29,-24(save_restore_reg)
+	ENTRY_SAVE_FPR(30)
+	ENTRY_SAVE_FPR2(30)
+		stfd	fp30,-16(save_restore_reg)
+	ENTRY_SAVE_FPR(31)
+	ENTRY_SAVE_FPR2(31)
+		stfd	fp31,-8(save_restore_reg)
+		blr
 }
 
-asm s64 __div2i(s64 dividend, s64 divisor) {
-    // clang-format off
-    nofralloc
-
-    stwu r1, -0x10(r1)
-    rlwinm. r9, r3, 0, 0, 0
-    beq lbl_800B1EA8
-    subfic r4, r4, 0
-    subfze r3, r3
-
-lbl_800B1EA8:
-    stw r9, 8(r1)
-    rlwinm. r10, r5, 0, 0, 0
-    beq lbl_800B1EBC
-    subfic r6, r6, 0
-    subfze r5, r5
-
-lbl_800B1EBC:
-    stw r10, 0xc(r1)
-    cmpwi r3, 0
-    cntlzw r0, r3
-    cntlzw r9, r4
-    bne lbl_800B1ED4
-    addi r0, r9, 0x20
-
-lbl_800B1ED4:
-    cmpwi r5, 0
-    cntlzw r9, r5
-    cntlzw r10, r6
-    bne lbl_800B1EE8
-    addi r9, r10, 0x20
-
-lbl_800B1EE8:
-    cmpw r0, r9
-    subfic r10, r0, 0x40
-    bgt lbl_800B1FBC
-    addi r9, r9, 1
-    subfic r9, r9, 0x40
-    add r0, r0, r9
-    subf r9, r9, r10
-    mtctr r9
-    cmpwi r9, 0x20
-    addi r7, r9, -32
-    blt lbl_800B1F20
-    srw r8, r3, r7
-    li r7, 0
-    b lbl_800B1F34
-
-lbl_800B1F20:
-    srw r8, r4, r9
-    subfic r7, r9, 0x20
-    slw r7, r3, r7
-    or r8, r8, r7
-    srw r7, r3, r9
-
-lbl_800B1F34:
-    cmpwi r0, 0x20
-    addic r9, r0, -32
-    blt lbl_800B1F4C
-    slw r3, r4, r9
-    li r4, 0
-    b lbl_800B1F60
-
-lbl_800B1F4C:
-    slw r3, r3, r0
-    subfic r9, r0, 0x20
-    srw r9, r4, r9
-    or r3, r3, r9
-    slw r4, r4, r0
-
-lbl_800B1F60:
-    li r10, -1
-    addic r7, r7, 0
-
-lbl_800B1F68:
-    adde r4, r4, r4
-    adde r3, r3, r3
-    adde r8, r8, r8
-    adde r7, r7, r7
-    subfc r0, r6, r8
-    subfe. r9, r5, r7
-    blt lbl_800B1F90
-    mr r8, r0
-    mr r7, r9
-    addic r0, r10, 1
-
-lbl_800B1F90:
-    bdnz lbl_800B1F68
-    adde r4, r4, r4
-    adde r3, r3, r3
-    lwz r9, 8(r1)
-    lwz r10, 0xc(r1)
-    xor. r7, r9, r10
-    beq lbl_800B1FB8
-    cmpwi r9, 0
-    subfic r4, r4, 0
-    subfze r3, r3
-
-lbl_800B1FB8:
-    b lbl_800B1FC4
-
-lbl_800B1FBC:
-    li r4, 0
-    li r3, 0
-
-lbl_800B1FC4:
-    addi r1, r1, 0x10
-    blr
-    // clang-format on
+static asm void __restore_fpr(void)
+{
+	ENTRY_RESTORE_FPR(14)
+	ENTRY_RESTORE_FPR2(14)
+		lfd		fp14,-144(save_restore_reg)
+	ENTRY_RESTORE_FPR(15)
+	ENTRY_RESTORE_FPR2(15)
+		lfd		fp15,-136(save_restore_reg)
+	ENTRY_RESTORE_FPR(16)
+	ENTRY_RESTORE_FPR2(16)
+		lfd		fp16,-128(save_restore_reg)
+	ENTRY_RESTORE_FPR(17)
+	ENTRY_RESTORE_FPR2(17)
+		lfd		fp17,-120(save_restore_reg)
+	ENTRY_RESTORE_FPR(18)
+	ENTRY_RESTORE_FPR2(18)
+		lfd		fp18,-112(save_restore_reg)
+	ENTRY_RESTORE_FPR(19)
+	ENTRY_RESTORE_FPR2(19)
+		lfd		fp19,-104(save_restore_reg)
+	ENTRY_RESTORE_FPR(20)
+	ENTRY_RESTORE_FPR2(20)
+		lfd		fp20,-96(save_restore_reg)
+	ENTRY_RESTORE_FPR(21)
+	ENTRY_RESTORE_FPR2(21)
+		lfd		fp21,-88(save_restore_reg)
+	ENTRY_RESTORE_FPR(22)
+	ENTRY_RESTORE_FPR2(22)
+		lfd		fp22,-80(save_restore_reg)
+	ENTRY_RESTORE_FPR(23)
+	ENTRY_RESTORE_FPR2(23)
+		lfd		fp23,-72(save_restore_reg)
+	ENTRY_RESTORE_FPR(24)
+	ENTRY_RESTORE_FPR2(24)
+		lfd		fp24,-64(save_restore_reg)
+	ENTRY_RESTORE_FPR(25)
+	ENTRY_RESTORE_FPR2(25)
+		lfd		fp25,-56(save_restore_reg)
+	ENTRY_RESTORE_FPR(26)
+	ENTRY_RESTORE_FPR2(26)
+		lfd		fp26,-48(save_restore_reg)
+	ENTRY_RESTORE_FPR(27)
+	ENTRY_RESTORE_FPR2(27)
+		lfd		fp27,-40(save_restore_reg)
+	ENTRY_RESTORE_FPR(28)
+	ENTRY_RESTORE_FPR2(28)
+		lfd		fp28,-32(save_restore_reg)
+	ENTRY_RESTORE_FPR(29)
+	ENTRY_RESTORE_FPR2(29)
+		lfd		fp29,-24(save_restore_reg)
+	ENTRY_RESTORE_FPR(30)
+	ENTRY_RESTORE_FPR2(30)
+		lfd		fp30,-16(save_restore_reg)
+	ENTRY_RESTORE_FPR(31)
+	ENTRY_RESTORE_FPR2(31)
+		lfd		fp31,-8(save_restore_reg)
+		blr
 }
 
-asm u64 __mod2u(u64 dividend, u64 divisor) {
-    // clang-format off
-    nofralloc
-
-    cmpwi r3, 0
-    cntlzw r0, r3
-    cntlzw r9, r4
-    bne lbl_800B1FE0
-    addi r0, r9, 0x20
-
-lbl_800B1FE0:
-    cmpwi r5, 0
-    cntlzw r9, r5
-    cntlzw r10, r6
-    bne lbl_800B1FF4
-    addi r9, r10, 0x20
-
-lbl_800B1FF4:
-    cmpw r0, r9
-    subfic r10, r0, 0x40
-    bgt lbl_800B20AC
-    addi r9, r9, 1
-    subfic r9, r9, 0x40
-    add r0, r0, r9
-    subf r9, r9, r10
-    mtctr r9
-    cmpwi r9, 0x20
-    addi r7, r9, -32
-    blt lbl_800B202C
-    srw r8, r3, r7
-    li r7, 0
-    b lbl_800B2040
-
-lbl_800B202C:
-    srw r8, r4, r9
-    subfic r7, r9, 0x20
-    slw r7, r3, r7
-    or r8, r8, r7
-    srw r7, r3, r9
-
-lbl_800B2040:
-    cmpwi r0, 0x20
-    addic r9, r0, -32
-    blt lbl_800B2058
-    slw r3, r4, r9
-    li r4, 0
-    b lbl_800B206C
-
-lbl_800B2058:
-    slw r3, r3, r0
-    subfic r9, r0, 0x20
-    srw r9, r4, r9
-    or r3, r3, r9
-    slw r4, r4, r0
-
-lbl_800B206C:
-    li r10, -1
-    addic r7, r7, 0
-
-lbl_800B2074:
-    adde r4, r4, r4
-    adde r3, r3, r3
-    adde r8, r8, r8
-    adde r7, r7, r7
-    subfc r0, r6, r8
-    subfe. r9, r5, r7
-    blt lbl_800B209C
-    mr r8, r0
-    mr r7, r9
-    addic r0, r10, 1
-
-lbl_800B209C:
-    bdnz lbl_800B2074
-    mr r4, r8
-    mr r3, r7
-    blr 
-
-lbl_800B20AC:
-    blr
-    // clang-format on
+static asm void __save_gpr(void)
+{
+	ENTRY_SAVE_GPR(14)
+	ENTRY_SAVE32_GPR(14)
+		stw		r14,-72(save_restore_reg)
+	ENTRY_SAVE_GPR(15)
+	ENTRY_SAVE32_GPR(15)
+		stw		r15,-68(save_restore_reg)
+	ENTRY_SAVE_GPR(16)
+	ENTRY_SAVE32_GPR(16)
+		stw		r16,-64(save_restore_reg)
+	ENTRY_SAVE_GPR(17)
+	ENTRY_SAVE32_GPR(17)
+		stw		r17,-60(save_restore_reg)
+	ENTRY_SAVE_GPR(18)
+	ENTRY_SAVE32_GPR(18)
+		stw		r18,-56(save_restore_reg)
+	ENTRY_SAVE_GPR(19)
+	ENTRY_SAVE32_GPR(19)
+		stw		r19,-52(save_restore_reg)
+	ENTRY_SAVE_GPR(20)
+	ENTRY_SAVE32_GPR(20)
+		stw		r20,-48(save_restore_reg)
+	ENTRY_SAVE_GPR(21)
+	ENTRY_SAVE32_GPR(21)
+		stw		r21,-44(save_restore_reg)
+	ENTRY_SAVE_GPR(22)
+	ENTRY_SAVE32_GPR(22)
+		stw		r22,-40(save_restore_reg)
+	ENTRY_SAVE_GPR(23)
+	ENTRY_SAVE32_GPR(23)
+		stw		r23,-36(save_restore_reg)
+	ENTRY_SAVE_GPR(24)
+	ENTRY_SAVE32_GPR(24)
+		stw		r24,-32(save_restore_reg)
+	ENTRY_SAVE_GPR(25)
+	ENTRY_SAVE32_GPR(25)
+		stw		r25,-28(save_restore_reg)
+	ENTRY_SAVE_GPR(26)
+	ENTRY_SAVE32_GPR(26)
+		stw		r26,-24(save_restore_reg)
+	ENTRY_SAVE_GPR(27)
+	ENTRY_SAVE32_GPR(27)
+		stw		r27,-20(save_restore_reg)
+	ENTRY_SAVE_GPR(28)
+	ENTRY_SAVE32_GPR(28)
+		stw		r28,-16(save_restore_reg)
+	ENTRY_SAVE_GPR(29)
+	ENTRY_SAVE32_GPR(29)
+		stw		r29,-12(save_restore_reg)
+	ENTRY_SAVE_GPR(30)
+	ENTRY_SAVE32_GPR(30)
+		stw		r30,-8(save_restore_reg)
+	ENTRY_SAVE_GPR(31)
+	ENTRY_SAVE32_GPR(31)
+		stw		r31,-4(save_restore_reg)
+		blr
 }
 
-asm s64 __mod2i(s64 dividend, s64 divisor) {
-    // clang-format off
-    nofralloc
-
-    cmpwi cr7, r3, 0
-    bge cr7, lbl_800B20C0
-    subfic r4, r4, 0
-    subfze r3, r3
-
-lbl_800B20C0:
-    cmpwi r5, 0
-    bge lbl_800B20D0
-    subfic r6, r6, 0
-    subfze r5, r5
-
-lbl_800B20D0:
-    cmpwi r3, 0
-    cntlzw r0, r3
-    cntlzw r9, r4
-    bne lbl_800B20E4
-    addi r0, r9, 0x20
-
-lbl_800B20E4:
-    cmpwi r5, 0
-    cntlzw r9, r5
-    cntlzw r10, r6
-    bne lbl_800B20F8
-    addi r9, r10, 0x20
-
-lbl_800B20F8:
-    cmpw r0, r9
-    subfic r10, r0, 0x40
-    bgt lbl_800B21AC
-    addi r9, r9, 1
-    subfic r9, r9, 0x40
-    add r0, r0, r9
-    subf r9, r9, r10
-    mtctr r9
-    cmpwi r9, 0x20
-    addi r7, r9, -32
-    blt lbl_800B2130
-    srw r8, r3, r7
-    li r7, 0
-    b lbl_800B2144
-
-lbl_800B2130:
-    srw r8, r4, r9
-    subfic r7, r9, 0x20
-    slw r7, r3, r7
-    or r8, r8, r7
-    srw r7, r3, r9
-
-lbl_800B2144:
-    cmpwi r0, 0x20
-    addic r9, r0, -32
-    blt lbl_800B215C
-    slw r3, r4, r9
-    li r4, 0
-    b lbl_800B2170
-
-lbl_800B215C:
-    slw r3, r3, r0
-    subfic r9, r0, 0x20
-    srw r9, r4, r9
-    or r3, r3, r9
-    slw r4, r4, r0
-
-lbl_800B2170:
-    li r10, -1
-    addic r7, r7, 0
-
-lbl_800B2178:
-    adde r4, r4, r4
-    adde r3, r3, r3
-    adde r8, r8, r8
-    adde r7, r7, r7
-    subfc r0, r6, r8
-    subfe. r9, r5, r7
-    blt lbl_800B21A0
-    mr r8, r0
-    mr r7, r9
-    addic r0, r10, 1
-
-lbl_800B21A0:
-    bdnz lbl_800B2178
-    mr r4, r8
-    mr r3, r7
-
-lbl_800B21AC:
-    bge cr7, lbl_800B21B8
-    subfic r4, r4, 0
-    subfze r3, r3
-
-lbl_800B21B8:
-    blr
-    // clang-format on
+static asm void __restore_gpr(void)
+{
+	ENTRY_RESTORE_GPR(14)
+	ENTRY_RESTORE32_GPR(14)
+		lwz		r14,-72(save_restore_reg)
+	ENTRY_RESTORE_GPR(15)
+	ENTRY_RESTORE32_GPR(15)
+		lwz		r15,-68(save_restore_reg)
+	ENTRY_RESTORE_GPR(16)
+	ENTRY_RESTORE32_GPR(16)
+		lwz		r16,-64(save_restore_reg)
+	ENTRY_RESTORE_GPR(17)
+	ENTRY_RESTORE32_GPR(17)
+		lwz		r17,-60(save_restore_reg)
+	ENTRY_RESTORE_GPR(18)
+	ENTRY_RESTORE32_GPR(18)
+		lwz		r18,-56(save_restore_reg)
+	ENTRY_RESTORE_GPR(19)
+	ENTRY_RESTORE32_GPR(19)
+		lwz		r19,-52(save_restore_reg)
+	ENTRY_RESTORE_GPR(20)
+	ENTRY_RESTORE32_GPR(20)
+		lwz		r20,-48(save_restore_reg)
+	ENTRY_RESTORE_GPR(21)
+	ENTRY_RESTORE32_GPR(21)
+		lwz		r21,-44(save_restore_reg)
+	ENTRY_RESTORE_GPR(22)
+	ENTRY_RESTORE32_GPR(22)
+		lwz		r22,-40(save_restore_reg)
+	ENTRY_RESTORE_GPR(23)
+	ENTRY_RESTORE32_GPR(23)
+		lwz		r23,-36(save_restore_reg)
+	ENTRY_RESTORE_GPR(24)
+	ENTRY_RESTORE32_GPR(24)
+		lwz		r24,-32(save_restore_reg)
+	ENTRY_RESTORE_GPR(25)
+	ENTRY_RESTORE32_GPR(25)
+		lwz		r25,-28(save_restore_reg)
+	ENTRY_RESTORE_GPR(26)
+	ENTRY_RESTORE32_GPR(26)
+		lwz		r26,-24(save_restore_reg)
+	ENTRY_RESTORE_GPR(27)
+	ENTRY_RESTORE32_GPR(27)
+		lwz		r27,-20(save_restore_reg)
+	ENTRY_RESTORE_GPR(28)
+	ENTRY_RESTORE32_GPR(28)
+		lwz		r28,-16(save_restore_reg)
+	ENTRY_RESTORE_GPR(29)
+	ENTRY_RESTORE32_GPR(29)
+		lwz		r29,-12(save_restore_reg)
+	ENTRY_RESTORE_GPR(30)
+	ENTRY_RESTORE32_GPR(30)
+		lwz		r30,-8(save_restore_reg)
+	ENTRY_RESTORE_GPR(31)
+	ENTRY_RESTORE32_GPR(31)
+		lwz		r31,-4(save_restore_reg)
+		blr
 }
 
-asm s64 __shl2i(s64 x, register int n) {
-    // clang-format off
-    nofralloc
-
-    subfic r8, n, 32
-    addic r9, n, -32
-
-    slw r3, r3, n
-    srw r10, r4, r8
-    or r3, r3, r10
-    slw r10, r4, r9
-    or r3, r3, r10
-    slw r4, r4, n
-
-    blr
-    // clang-format on
+asm void __div2u(void)
+{
+       cmpwi	cr0,r3,0
+       cntlzw	r0,r3
+       cntlzw	r9,r4
+       bne		cr0,lab1
+       addi		r0,r9,32
+ lab1:
+       cmpwi	cr0,r5,0
+       cntlzw	r9,r5
+       cntlzw	r10,r6
+       bne		cr0,lab2
+       addi		r9,r10,32
+ lab2:
+       cmpw		cr0,r0,r9
+       subfic	r10,r0,64
+       bgt		cr0,lab9
+       addi		r9,r9,1
+       subfic	r9,r9,64
+       add		r0,r0,r9
+       subf		r9,r9,r10
+       mtctr	r9
+       cmpwi	cr0,r9,32
+       addi		r7,r9,-32
+       blt		cr0,lab3
+       srw		r8,r3,r7
+       li		r7,0
+       b		lab4
+ lab3:
+       srw		r8,r4,r9
+       subfic	r7,r9,32
+       slw		r7,r3,r7
+       or		r8,r8,r7
+       srw		r7,r3,r9
+ lab4:
+       cmpwi	cr0,r0,32
+       addic	r9,r0,-32
+       blt		cr0,lab5
+       slw		r3,r4,r9
+       li		r4,0
+       b		lab6
+ lab5:
+       slw		r3,r3,r0
+       subfic	r9,r0,32
+       srw		r9,r4,r9
+       or		r3,r3,r9
+       slw		r4,r4,r0
+ lab6:
+       li		r10,-1
+       addic	r7,r7,0
+ lab7:
+       adde		r4,r4,r4
+       adde		r3,r3,r3
+       adde		r8,r8,r8
+       adde		r7,r7,r7
+       subfc	r0,r6,r8
+       subfe.	r9,r5,r7
+       blt		cr0,lab8
+       mr		r8,r0
+       mr		r7,r9
+       addic	r0,r10,1
+ lab8:
+       bdnz		lab7
+       adde		r4,r4,r4
+       adde		r3,r3,r3
+       blr
+ lab9:
+       li		r4,0
+       li		r3,0
+       blr
 }
 
-asm u64 __cvt_dbl_ull(f64 x) {
-    // clang-format off
-    nofralloc
+#pragma push
+#pragma optimization_level 0
+#pragma optimizewithasm off
+asm void __div2i(void)
+{
+	   stwu     r1,-16(r1)
+       rlwinm.  r9,r3,0,0,0
+       beq      cr0,positive1
+       subfic   r4,r4,0
+       subfze   r3,r3
+positive1:
+       stw      r9,8(r1)
+       rlwinm.  r10,r5,0,0,0
+       beq      cr0,positive2
+       subfic   r6,r6,0
+       subfze   r5,r5
+positive2:
+       stw      r10,12(r1)
+       cmpwi	cr0,r3,0
+       cntlzw	r0,r3
+       cntlzw	r9,r4
+       bne		cr0,lab1
+       addi		r0,r9,32
+ lab1:
+       cmpwi	cr0,r5,0
+       cntlzw	r9,r5
+       cntlzw	r10,r6
+       bne		cr0,lab2
+       addi		r9,r10,32
+ lab2:
+       cmpw		cr0,r0,r9
+       subfic	r10,r0,64
+       bgt		cr0,lab9
+       addi		r9,r9,1
+       subfic	r9,r9,64
+       add		r0,r0,r9
+       subf		r9,r9,r10
+       mtctr	r9
+       cmpwi	cr0,r9,32
+       addi		r7,r9,-32
+       blt		cr0,lab3
+       srw		r8,r3,r7
+       li		r7,0
+       b		lab4
+ lab3:
+       srw		r8,r4,r9
+       subfic	r7,r9,32
+       slw		r7,r3,r7
+       or		r8,r8,r7
+       srw		r7,r3,r9
+ lab4:
+       cmpwi	cr0,r0,32
+       addic	r9,r0,-32
+       blt		cr0,lab5
+       slw		r3,r4,r9
+       li		r4,0
+       b		lab6
+ lab5:
+       slw		r3,r3,r0
+       subfic	r9,r0,32
+       srw		r9,r4,r9
+       or		r3,r3,r9
+       slw		r4,r4,r0
+ lab6:
+       li		r10,-1
+       addic	r7,r7,0
+ lab7:
+       adde		r4,r4,r4
+       adde		r3,r3,r3
+       adde		r8,r8,r8
+       adde		r7,r7,r7
+       subfc	r0,r6,r8
+       subfe.	r9,r5,r7
+       blt		cr0,lab8
+       mr		r8,r0
+       mr		r7,r9
+       addic	r0,r10,1
+ lab8:
+       bdnz		lab7
+       adde		r4,r4,r4
+       adde		r3,r3,r3
+       lwz		r9,8(r1)
+       lwz		r10,12(r1)
+       xor.		r7,r9,r10
+       beq		cr0,no_adjust
+       cmpwi	cr0,r9,0
+       subfic   r4,r4,0
+       subfze   r3,r3
 
+ no_adjust:
+       b    func_end
+
+ lab9:
+       li		r4,0
+       li		r3,0
+ func_end:
+	   addi     r1,r1,16
+       blr
+}
+#pragma pop
+
+#pragma push
+#pragma optimization_level 0
+#pragma optimizewithasm off
+asm void __mod2u(void)
+{
+       cmpwi	cr0,r3,0
+       cntlzw	r0,r3
+       cntlzw	r9,r4
+       bne		cr0,lab1
+       addi		r0,r9,32
+ lab1:
+       cmpwi	cr0,r5,0
+       cntlzw	r9,r5
+       cntlzw	r10,r6
+       bne		cr0,lab2
+       addi		r9,r10,32
+ lab2:
+       cmpw		cr0,r0,r9
+       subfic	r10,r0,64
+       bgt		cr0,lab9
+       addi		r9,r9,1
+       subfic	r9,r9,64
+       add		r0,r0,r9
+       subf		r9,r9,r10
+       mtctr	r9
+       cmpwi	cr0,r9,32
+       addi		r7,r9,-32
+       blt		cr0,lab3
+       srw		r8,r3,r7
+       li		r7,0
+       b		lab4
+ lab3:
+       srw		r8,r4,r9
+       subfic	r7,r9,32
+       slw		r7,r3,r7
+       or		r8,r8,r7
+       srw		r7,r3,r9
+ lab4:
+       cmpwi	cr0,r0,32
+       addic	r9,r0,-32
+       blt		cr0,lab5
+       slw		r3,r4,r9
+       li		r4,0
+       b		lab6
+ lab5:
+       slw		r3,r3,r0
+       subfic	r9,r0,32
+       srw		r9,r4,r9
+       or		r3,r3,r9
+       slw		r4,r4,r0
+ lab6:
+       li		r10,-1
+       addic	r7,r7,0
+ lab7:
+       adde		r4,r4,r4
+       adde		r3,r3,r3
+       adde		r8,r8,r8
+       adde		r7,r7,r7
+       subfc	r0,r6,r8
+       subfe.	r9,r5,r7
+       blt		cr0,lab8
+       mr		r8,r0
+       mr		r7,r9
+       addic	r0,r10,1
+ lab8:
+       bdnz		lab7
+       mr		r4,r8
+       mr		r3,r7
+       blr
+ lab9:
+       blr
+}
+#pragma pop
+
+#pragma push
+#pragma optimization_level 0
+#pragma optimizewithasm off
+asm void __mod2i(void)
+{
+       cmpwi	cr7,r3,0
+       bge	cr7,positive1
+       subfic   r4,r4,0
+       subfze   r3,r3
+positive1:
+       cmpwi	cr0,r5,0
+       bge      cr0,positive2
+       subfic   r6,r6,0
+       subfze   r5,r5
+positive2:
+       cmpwi	cr0,r3,0
+       cntlzw	r0,r3
+       cntlzw	r9,r4
+       bne	cr0,lab1
+       addi	r0,r9,32
+ lab1:
+       cmpwi	cr0,r5,0
+       cntlzw	r9,r5
+       cntlzw	r10,r6
+       bne	cr0,lab2
+       addi	r9,r10,32
+ lab2:
+       cmpw	cr0,r0,r9
+       subfic	r10,r0,64
+       bgt	cr0,lab9
+       addi	r9,r9,1
+       subfic	r9,r9,64
+       add	r0,r0,r9
+       subf	r9,r9,r10
+       mtctr	r9
+       cmpwi	cr0,r9,32
+       addi	r7,r9,-32
+       blt	cr0,lab3
+       srw	r8,r3,r7
+       li	r7,0
+       b	lab4
+ lab3:
+       srw	r8,r4,r9
+       subfic	r7,r9,32
+       slw	r7,r3,r7
+       or	r8,r8,r7
+       srw	r7,r3,r9
+ lab4:
+       cmpwi	cr0,r0,32
+       addic	r9,r0,-32
+       blt	cr0,lab5
+       slw	r3,r4,r9
+       li	r4,0
+       b	lab6
+ lab5:
+       slw	r3,r3,r0
+       subfic	r9,r0,32
+       srw	r9,r4,r9
+       or	r3,r3,r9
+       slw	r4,r4,r0
+ lab6:
+       li	r10,-1
+       addic	r7,r7,0
+ lab7:
+       adde	r4,r4,r4
+       adde	r3,r3,r3
+       adde	r8,r8,r8
+       adde	r7,r7,r7
+       subfc	r0,r6,r8
+       subfe.	r9,r5,r7
+       blt	cr0,lab8
+       mr	r8,r0
+       mr	r7,r9
+       addic	r0,r10,1
+ lab8:
+       bdnz	lab7
+       mr	r4,r8
+       mr	r3,r7
+ lab9:
+       bge	cr7,no_adjust
+       subfic   r4,r4,0
+       subfze   r3,r3
+ no_adjust:
+       blr
+}
+#pragma pop
+
+asm void __shl2i(void)
+{
+	subfic	r8,r5,32
+	subic	r9,r5,32
+	slw		r3,r3,r5
+	srw		r10,r4,r8
+	or		r3,r3,r10
+	slw		r10,r4,r9
+	or		r3,r3,r10
+	slw		r4,r4,r5
+	blr
+}
+
+
+asm void __cvt_sll_dbl(void)
+{
+	stwu r1,-16(r1)
+  	rlwinm.	r5,r3,0,0,0
+	beq positive
+	subfic r4,r4,0
+	subfze r3,r3
+positive:
+	or. r7,r3,r4
+	li r6,0
+	beq zero
+	cntlzw r7,r3
+	cntlzw r8,r4
+	rlwinm r9,r7,26,0,4
+	srawi r9,r9,31
+	and r9,r9,r8
+	add r7,r7,r9
+	subfic r8,r7,32
+	subic r9,r7,32
+	slw r3,r3,r7
+	srw r10,r4,r8
+	or r3,r3,r10
+	slw r10,r4,r9
+	or r3,r3,r10
+	slw r4,r4,r7
+	sub r6,r6,r7
+	rlwinm r7,r4,0,21,31
+	cmpi cr0,r7,0x400
+	addi r6,r6,1086
+	blt noround
+	bgt round
+	rlwinm.	r7,r4,0,20,20
+	beq noround
+round:
+	addic r4,r4,0x0800
+	addze r3,r3
+	addze r6,r6
+noround:
+	rlwinm r4,r4,21,0,31
+	rlwimi r4,r3,21,0,10
+	rlwinm r3,r3,21,12,31
+	rlwinm r6,r6,20,0,11
+	or r3,r6,r3
+	or r3,r5,r3
+zero:
+	stw	r3,8(r1)
+	stw	r4,12(r1)
+	lfd	f1,8(r1)
+	addi r1,r1,16
+	blr
+}
+
+//https://github.com/zeldaret/oot-gc/blob/6e449e1748a02c12b4cb218453c529175b85364a/src/runtime/runtime.c#L14
+asm void __cvt_dbl_usll(void) {
+#ifdef __MWERKS__ // clang-format off
+    nofralloc
+    stwu    r1,-16(r1)
+    stfd    f1,8(r1)
+    lwz        r3,8(r1)
+    lwz        r4,12(r1)
+    rlwinm   r5,r3,12,21,31
+    cmpli    cr0,0,r5,1023
+    bge        cr0,not_fraction
+    li        r3,0
+    li        r4,0
+    b        func_end
+not_fraction:
+    mr        r6,r3
+    rlwinm    r3,r3,0,12,31
+    oris    r3,r3,0x0010
+    addi    r5,r5,-1075
+    cmpwi    cr0,r5,0
+    bge        cr0,left
+    neg        r5,r5
+    subfic    r8,r5,32
+    subic    r9,r5,32
+    srw        r4,r4,r5
+    slw        r10,r3,r8
+    or        r4,r4,r10
+    srw        r10,r3,r9
+    or        r4,r4,r10
+    srw        r3,r3,r5
+    b        around
+left:
+    cmpwi    cr0,r5,10
+    ble+    no_overflow
+    rlwinm.    r6,r6,0,0,0
+    beq        cr0,max_positive
+    lis        r3,0x8000
+    li        r4,0
+    b        func_end
+max_positive:
+    lis        r3,0x7FFF
+    ori        r3,r3,0xFFFF
+    li        r4,-1
+    b        func_end
+no_overflow:
+    subfic    r8,r5,32
+    subic    r9,r5,32
+    slw        r3,r3,r5
+    srw        r10,r4,r8
+    or        r3,r3,r10
+    slw        r10,r4,r9
+    or        r3,r3,r10
+    slw        r4,r4,r5
+around:
+    rlwinm.    r6,r6,0,0,0
+    beq        cr0,positive
+    subfic    r4,r4,0
+    subfze    r3,r3
+positive:
+func_end:
+    addi    r1,r1,16
+    blr
+#endif // clang-format on
+}
+
+asm void __cvt_dbl_ull(void)
+{
     stwu r1, -0x10(r1)
     stfd f1, 8(r1)
     lwz r3, 8(r1)
-    lwz r4, 0xc(r1)
-    rlwinm r5, r3, 0xc, 0x15, 0x1f
-    cmplwi r5, 0x3ff
-    bge lbl_800B2208
+    lwz r4, 0xC(r1)
+    extrwi r5, r3, 11, 1
+    cmplwi r5, 0x3FF
+    bge not_fraction
 
-lbl_800B21FC:
+return_zero:
     li r3, 0
     li r4, 0
-    b lbl_800B2280
+    b func_end
 
-lbl_800B2208:
-    rlwinm. r6, r3, 0, 0, 0
-    bne lbl_800B21FC
-    clrlwi r3, r3, 0xc
+not_fraction:
+    clrrwi. r6, r3, 31
+    bne return_zero
+    clrlwi r3, r3, 12
     oris r3, r3, 0x10
-    addi r5, r5, -1075
+    addi r5, r5, -0x433
     cmpwi r5, 0
-    bge lbl_800B224C
+    bge left
     neg r5, r5
     subfic r8, r5, 0x20
-    addic r9, r5, -32
+    addic r9, r5, -0x20
     srw r4, r4, r5
     slw r10, r3, r8
     or r4, r4, r10
     srw r10, r3, r9
     or r4, r4, r10
     srw r3, r3, r5
-    b lbl_800B2280
+    b around
 
-lbl_800B224C:
-    cmpwi r5, 0xb
-    ble+ lbl_800B2260
+left:
+    cmpwi r5, 0xB
+    ble+ no_overflow
     li r3, -1
     li r4, -1
-    b lbl_800B2280
+    b func_end
 
-lbl_800B2260:
+no_overflow:
     subfic r8, r5, 0x20
-    addic r9, r5, -32
+    addic r9, r5, -0x20
     slw r3, r3, r5
     srw r10, r4, r8
     or r3, r3, r10
@@ -573,8 +800,8 @@ lbl_800B2260:
     or r3, r3, r10
     slw r4, r4, r5
 
-lbl_800B2280:
+around:
+func_end:
     addi r1, r1, 0x10
     blr
-    // clang-format on
 }

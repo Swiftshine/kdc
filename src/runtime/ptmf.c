@@ -61,3 +61,31 @@ call_function:
     bctr
     // clang-format on
 }
+
+asm void __ptmf_scall4(void) {
+    // clang-format off
+    nofralloc
+
+    lwz r0, PTMF.clsoffset(r12)
+    lwz r11, PTMF.vfoffset(r12)
+    lwz r12, PTMF.vtoffset(r12)
+
+    // Apply offset to this pointer
+    add r4, r4, r0
+
+    // -1 vfoffset means not a virtual call
+    // (vtoffset will be the function address)
+    cmpwi r11, 0
+    blt call_function
+
+    // Load virtual function table
+    lwzx r12, r4, r12
+    // Load virtual function pointer
+    lwzx r12, r12, r11
+
+call_function:
+    // Call function
+    mtctr r12
+    bctr
+    // clang-format on
+}

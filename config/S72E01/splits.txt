@@ -17,6 +17,27 @@ runtime/__mem.c:
 	.init       start:0x80004000 end:0x80004380
 	.text       start:0x80006A8C end:0x80006AA8
 
+runtime/global_destructor_chain.c:
+	.text       start:0x80006B70 end:0x80006BD0
+	.sbss       start:0x8055C6E0 end:0x8055C6E8
+
+runtime/New.cpp:
+	extab       start:0x80006740 end:0x80006748
+	extabindex  start:0x800068E0 end:0x800068EC
+	.text       start:0x80006BD0 end:0x80006C10
+	.rodata     start:0x80406560 end:0x80406570
+	.sdata      start:0x80556420 end:0x80556428
+
+runtime/NMWException.cpp:
+	extab       start:0x80006748 end:0x80006788
+	extabindex  start:0x800068EC end:0x8000691C
+	.text       start:0x80006C10 end:0x80007194
+	.sdata      start:0x80556428 end:0x80556430
+
+runtime/ptmf.c:
+	.text       start:0x80007194 end:0x80007214
+	.rodata     start:0x80406570 end:0x80406580
+
 runtime/runtime.c:
 	.text       start:0x80007214 end:0x800079FC
 	.rodata     start:0x80406580 end:0x80406598
@@ -27,6 +48,18 @@ runtime/__init_cpp_exceptions.cpp:
 	.dtors      start:0x80406540 end:0x80406544 rename:.dtors$10
 	.dtors      start:0x80406544 end:0x80406548 rename:.dtors$15
 	.sdata      start:0x80556430 end:0x80556438
+
+runtime/Gecko_ExceptionPPC.cpp:
+	extab       start:0x80006788 end:0x800067F4
+	extabindex  start:0x8000691C end:0x80006964
+	.text       start:0x80007A6C end:0x8000917C
+	.rodata     start:0x80406598 end:0x80406600
+	.data       start:0x80421040 end:0x804210F8
+	.sdata      start:0x80556438 end:0x80556440
+
+runtime/GCN_mem_alloc.c:
+	.text       start:0x8000917C end:0x80009234
+	.rodata     start:0x80406600 end:0x80406670
 
 revolution/OS/OSAlarm.c:
 	.text       start:0x8001B7A0 end:0x8001C050

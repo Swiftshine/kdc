@@ -1,3 +1,4 @@
+//Note: File ends up unused
 #ifndef MSL_MATH_PPC_H
 #define MSL_MATH_PPC_H
 #include <types.h>

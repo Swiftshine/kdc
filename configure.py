@@ -355,13 +355,15 @@ config.libs = [
         ],
     },
     {
-        "lib": "MSL_C PPC_EABI",
-        "src_dir": "libs",
+        "lib": "MSL_C.PPCEABI.bare",
+        "src_dir": "libs/",
         "mw_version": config.linker_version,
         "cflags": cflags_msl,
         "progress_category": "msl",  # str | List[str]
         "objects": [
+            Object(Matching, "MSL/MSL_C/MSL_Common/Src/float.c"),
             Object(NonMatching, "MSL/MSL_C/PPC_EABI/SRC/abort_exit_ppc_eabi.c"),
+            Object(Matching, "MSL/MSL_C/MSL_Common_Embedded/Math/Double_precision/e_acos.c", extra_cflags=["-fp_contract off"]),
         ],
     },
     {

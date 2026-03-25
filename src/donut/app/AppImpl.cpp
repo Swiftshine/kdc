@@ -1,10 +1,15 @@
+#include "GX/GXAttr.h"
+#include "GX/GXMisc.h"
+#include "gfx/GXFifoProtectCanceler.hpp"
 #pragma peephole off
 
 #include "app/AppImpl.hpp"
+#include "gfx/EFBToLetterBox.hpp"
 #include "mem/Memory.hpp"
 #include "mem/OperatorNewDelete.hpp"
 #include "snd/BGM.hpp"
 #include "snd/SoundManager.hpp"
+
 using namespace app;
 
 AppImpl::AppImpl(System& rSystem)
@@ -162,7 +167,19 @@ void AppImpl::updateHBMProcess() {
 #pragma pop
 
 void AppImpl::drawProcess(scn::IScene& rScene) {
-    // not decompiled
+    gfx::GXFifoProtectCanceler canceler(mSystem.gfxFifoMemoryManager());
+    GXResetOverflowCount();
+
+    if (!mPerformanceController.canDraw()) {
+        return;
+    }
+
+    mDrawDone = true;
+    GXSetDrawDoneCallback(OnDrawDone);
+
+    void* target = mSystem.xfbManager().drawTargetXFB();
+    mSystem.renderSetting().render(*this, target);
+    GXSetDrawDone();
 }
 
 void AppImpl::endFrameProcess(scn::IScene& rScene) {

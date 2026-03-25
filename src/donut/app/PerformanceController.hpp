@@ -13,6 +13,7 @@ public:
     void onSceneStart();
     void resetSetting();
     void onFrameBegin();
+    bool canDraw() const;
 private:
     STRUCT_FILL(0x14);
 };

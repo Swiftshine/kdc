@@ -13,6 +13,7 @@ void GXFlush(void);
 void GXResetWriteGatherPipe(void);
 
 void GXAbortFrame(void);
+void GXSetDrawDone(void);
 
 void GXSetDrawSync(u16 token);
 

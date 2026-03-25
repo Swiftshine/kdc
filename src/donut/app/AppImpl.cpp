@@ -1,14 +1,16 @@
-#include "GX/GXAttr.h"
-#include "GX/GXMisc.h"
-#include "OS/OSSemaphore.h"
-#include "VI/vi.h"
-#include "gfx/GXFifoProtectCanceler.hpp"
 #pragma peephole off
+
+#include <revolution/GX.h>
+#include <revolution/OS.h>
+#include <revolution/VI.h>
 
 #include "app/AppImpl.hpp"
 #include "gfx/EFBToLetterBox.hpp"
+#include "gfx/GXFifoProtectCanceler.hpp"
+#include "gfx/Utility.hpp"
 #include "mem/Memory.hpp"
 #include "mem/OperatorNewDelete.hpp"
+#include "scn/DrawReqInfo.hpp"
 #include "snd/BGM.hpp"
 #include "snd/SoundManager.hpp"
 
@@ -56,6 +58,27 @@ Reset::~Reset() { }
 
 AppImpl::~AppImpl() {
     DeleteInstance();
+}
+
+void AppImpl::drawerExecDraw() {
+    gfx::Utility::SetGXStateDirty();
+    scn::DrawReqInfo info;
+    mScene->draw(info);
+    mSaveInfo.draw();
+    mHIDErrorMenu.draw();
+    mNANDErrorMenu.draw();
+    mEFBToLetterBox.draw();
+    mHomeButtonMenu.display();
+    mReset.draw();
+}
+
+void AppImpl::OnDrawDone() {
+    ptr_->onDrawDone();
+}
+
+void AppImpl::onDrawDone() {
+    mDrawDone = false;
+    OSSignalSemaphore(&mSemaphore);
 }
 
 void AppImpl::onBeforeSceneCreate() {

@@ -13,6 +13,7 @@ public:
 
     void afterSceneDestroy(bool);
     void update();
+    void draw();
 private:
     STRUCT_FILL(0x3B8);
 };

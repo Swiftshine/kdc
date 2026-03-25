@@ -17,6 +17,7 @@ public:
     bool isSetupFinished() const;
     void open();
     void process(bool);
+    void display();
 private:
     STRUCT_FILL(0x5E0);
 };

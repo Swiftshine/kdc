@@ -14,6 +14,7 @@ public:
 
     bool isOpened() const;
     void update();
+    void draw();
 private:
     STRUCT_FILL(0x68);
 };

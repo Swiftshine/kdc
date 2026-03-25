@@ -13,6 +13,7 @@ public:
     bool isOpened() const;
     void onAfterSceneDestroy();
     void update();
+    void draw();
 private:
     STRUCT_FILL(0x70);
 };

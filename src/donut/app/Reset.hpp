@@ -14,6 +14,7 @@ public:
     bool canFrameUpdate() const;
     bool isExecuted() const;
     bool isExecuting() const;
+    void draw();
 private:
     STRUCT_FILL(0x54);
 };

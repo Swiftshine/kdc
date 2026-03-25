@@ -77,7 +77,7 @@ void AppImpl::sceneLoop(scn::IScene& rScene) {
         updateProcess(rScene);
         endFrameProcess(rScene);
 
-        if (rScene.vf20()) {
+        if (rScene.isSceneEnd()) {
             break;
         }
     } while (!mReset.isExecuted());
@@ -101,7 +101,29 @@ void AppImpl::beginFrameProcess() {
 }
 
 void AppImpl::updateProcess(scn::IScene& rScene) {
-    // not decompiled
+    if (!canFrameUpdate()) {
+        return;
+    }
+
+    mHIDManager.updateGame();
+    updateHBMProcess();
+
+    if (!mHomeButtonMenu.isOpened() && !mReset.isExecuting() && !mNANDErrorMenu.isOpened()) {
+        mHIDErrorMenu.update();
+    }
+
+    if (!mHomeButtonMenu.isOpened() && !mReset.isExecuting() && !mHIDErrorMenu.isOpened()) {
+        mNANDErrorMenu.update();
+        mSaveInfo.update();
+    }
+
+    if (canSceneUpdate()) {
+        mAutoResetTimer.update();
+    }
+
+    if (canSceneUpdate()) {
+        rScene.updateMain();
+    }
 }
 
 void AppImpl::updateHBMProcess() {

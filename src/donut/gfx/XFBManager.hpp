@@ -6,6 +6,7 @@ namespace gfx {
 class XFBManager {
 public:
     void* drawTargetXFB();
+    void changeDrawTargetXFB();
 };
 
 }

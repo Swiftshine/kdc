@@ -1,5 +1,7 @@
 #include "GX/GXAttr.h"
 #include "GX/GXMisc.h"
+#include "OS/OSSemaphore.h"
+#include "VI/vi.h"
 #include "gfx/GXFifoProtectCanceler.hpp"
 #pragma peephole off
 
@@ -183,7 +185,28 @@ void AppImpl::drawProcess(scn::IScene& rScene) {
 }
 
 void AppImpl::endFrameProcess(scn::IScene& rScene) {
-    // not decompiled
+    {
+        gfx::GXFifoProtectCanceler canceler(mSystem.gfxFifoMemoryManager());
+
+        if (mPerformanceController.canDraw()) {
+            OSWaitSemaphore(&mSemaphore);
+        }
+
+        if (canSceneUpdate()) {
+            rScene.updateUseGPU();
+        }
+    }
+
+    if (mPerformanceController.canDraw()) {
+        void* target = mSystem.xfbManager().drawTargetXFB();
+        VISetNextFrameBuffer(target);
+        VISetBlack(FALSE);
+        VIFlush();
+        mPerformanceController.waitVSync();
+        mSystem.xfbManager().changeDrawTargetXFB();
+    }
+
+    mPerformanceController.onFrameEnd();
 }
 
 void AppImpl::onSceneEndProcess(scn::IScene&) {

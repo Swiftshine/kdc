@@ -3,8 +3,8 @@
 #include "app/AppImpl.hpp"
 #include "mem/Memory.hpp"
 #include "mem/OperatorNewDelete.hpp"
+#include "snd/BGM.hpp"
 #include "snd/SoundManager.hpp"
-
 using namespace app;
 
 AppImpl::AppImpl(System& rSystem)
@@ -126,9 +126,40 @@ void AppImpl::updateProcess(scn::IScene& rScene) {
     }
 }
 
+#pragma push
+#pragma optimize_for_size on
 void AppImpl::updateHBMProcess() {
-    // not decompiled
+    if (mHomeButtonMenu.getIgnore()) {
+        return;
+    }
+
+    bool found = false;
+
+    for (u32 i = 0; i < MAX_HID_COUNT; i++) {
+        if (mHIDManager.gameHID(i).button().isTrigger(0x8000)) {
+            found = true;
+            break;
+        }
+    }
+
+    if (found) {
+        if (!mHomeButtonMenu.isEnable()) {
+            mHomeButtonMenu.startDisableIconAnimIfPossible();
+        } else if (!mHomeButtonMenu.isOpened() && mHomeButtonMenu.isSetupFinished()) {
+            mHomeButtonMenu.open();
+        }
+    }
+
+    bool opened = mHomeButtonMenu.isOpened();
+    mHomeButtonMenu.process(true);
+
+    if (opened) {
+        if (!mHomeButtonMenu.isOpened()) {
+            snd::startAllSoundForBGMStopMenuClosed();
+        }
+    }
 }
+#pragma pop
 
 void AppImpl::drawProcess(scn::IScene& rScene) {
     // not decompiled

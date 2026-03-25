@@ -11,6 +11,12 @@ public:
     ~HomeButtonMenu();
 
     bool isOpened() const;
+    bool getIgnore() const;
+    bool isEnable() const;
+    void startDisableIconAnimIfPossible();
+    bool isSetupFinished() const;
+    void open();
+    void process(bool);
 private:
     STRUCT_FILL(0x5E0);
 };

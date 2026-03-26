@@ -8,6 +8,8 @@ namespace app {
 class AutoResetTimer {
 public:
     AutoResetTimer();
+
+    void update();
 private:
     STRUCT_FILL(0xC);
 };

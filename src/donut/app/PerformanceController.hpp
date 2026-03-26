@@ -13,6 +13,9 @@ public:
     void onSceneStart();
     void resetSetting();
     void onFrameBegin();
+    void onFrameEnd();
+    bool canDraw() const;
+    void waitVSync();
 private:
     STRUCT_FILL(0x14);
 };

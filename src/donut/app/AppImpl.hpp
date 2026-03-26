@@ -17,6 +17,7 @@
 #include "app/ResidentFile.hpp"
 #include "app/RomFontWrapper.hpp"
 #include "app/SaveInfo.hpp"
+#include "app/System.hpp"
 #include "file/FDGManager.hpp"
 #include "file/FileManager.hpp"
 #include "font/FontManager.hpp"
@@ -36,7 +37,6 @@
 namespace app {
 
 class AppImpl;
-class System;
 
 class AppImpl : public gfx::IDrawer, public hel::common::NonCopyable, public hel::common::ProtectedSingleton<AppImpl> {
 public:
@@ -46,7 +46,6 @@ public:
     /* 0xC */ virtual void drawerExecDraw() override;
 
     void run(bool, bool, bool);
-    void OnDrawDone();
     void onDrawDone();
     void runWithRootSequence(std::auto_ptr<seq::ISequence> pSequence);
     void enterSceneSequence(seq::ISequence& rSequence);
@@ -62,6 +61,8 @@ public:
     void onSceneEndProcess(scn::IScene&);
     bool canFrameUpdate() const;
     bool canSceneUpdate() const;
+
+    static void OnDrawDone();
 
     inline void DeleteInstance() {
         ptr_ = nullptr;

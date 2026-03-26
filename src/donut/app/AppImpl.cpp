@@ -1,8 +1,17 @@
 #pragma peephole off
 
+#include <revolution/GX.h>
+#include <revolution/OS.h>
+#include <revolution/VI.h>
+
 #include "app/AppImpl.hpp"
+#include "gfx/EFBToLetterBox.hpp"
+#include "gfx/GXFifoProtectCanceler.hpp"
+#include "gfx/Utility.hpp"
 #include "mem/Memory.hpp"
 #include "mem/OperatorNewDelete.hpp"
+#include "scn/DrawReqInfo.hpp"
+#include "snd/BGM.hpp"
 #include "snd/SoundManager.hpp"
 
 using namespace app;
@@ -51,6 +60,27 @@ AppImpl::~AppImpl() {
     DeleteInstance();
 }
 
+void AppImpl::drawerExecDraw() {
+    gfx::Utility::SetGXStateDirty();
+    scn::DrawReqInfo info;
+    mScene->draw(info);
+    mSaveInfo.draw();
+    mHIDErrorMenu.draw();
+    mNANDErrorMenu.draw();
+    mEFBToLetterBox.draw();
+    mHomeButtonMenu.display();
+    mReset.draw();
+}
+
+void AppImpl::OnDrawDone() {
+    ptr_->onDrawDone();
+}
+
+void AppImpl::onDrawDone() {
+    mDrawDone = false;
+    OSSignalSemaphore(&mSemaphore);
+}
+
 void AppImpl::onBeforeSceneCreate() {
     mPerformanceController.resetSetting();
     mHIDManager.updateGame();
@@ -77,7 +107,7 @@ void AppImpl::sceneLoop(scn::IScene& rScene) {
         updateProcess(rScene);
         endFrameProcess(rScene);
 
-        if (rScene.vf20()) {
+        if (rScene.isSceneEnd()) {
             break;
         }
     } while (!mReset.isExecuted());
@@ -101,19 +131,105 @@ void AppImpl::beginFrameProcess() {
 }
 
 void AppImpl::updateProcess(scn::IScene& rScene) {
-    // not decompiled
+    if (!canFrameUpdate()) {
+        return;
+    }
+
+    mHIDManager.updateGame();
+    updateHBMProcess();
+
+    if (!mHomeButtonMenu.isOpened() && !mReset.isExecuting() && !mNANDErrorMenu.isOpened()) {
+        mHIDErrorMenu.update();
+    }
+
+    if (!mHomeButtonMenu.isOpened() && !mReset.isExecuting() && !mHIDErrorMenu.isOpened()) {
+        mNANDErrorMenu.update();
+        mSaveInfo.update();
+    }
+
+    if (canSceneUpdate()) {
+        mAutoResetTimer.update();
+    }
+
+    if (canSceneUpdate()) {
+        rScene.updateMain();
+    }
 }
 
+#pragma push
+#pragma optimize_for_size on
 void AppImpl::updateHBMProcess() {
-    // not decompiled
+    if (mHomeButtonMenu.getIgnore()) {
+        return;
+    }
+
+    bool found = false;
+
+    for (u32 i = 0; i < MAX_HID_COUNT; i++) {
+        if (mHIDManager.gameHID(i).button().isTrigger(0x8000)) {
+            found = true;
+            break;
+        }
+    }
+
+    if (found) {
+        if (!mHomeButtonMenu.isEnable()) {
+            mHomeButtonMenu.startDisableIconAnimIfPossible();
+        } else if (!mHomeButtonMenu.isOpened() && mHomeButtonMenu.isSetupFinished()) {
+            mHomeButtonMenu.open();
+        }
+    }
+
+    bool opened = mHomeButtonMenu.isOpened();
+    mHomeButtonMenu.process(true);
+
+    if (opened) {
+        if (!mHomeButtonMenu.isOpened()) {
+            snd::startAllSoundForBGMStopMenuClosed();
+        }
+    }
 }
+#pragma pop
 
 void AppImpl::drawProcess(scn::IScene& rScene) {
-    // not decompiled
+    gfx::GXFifoProtectCanceler canceler(mSystem.gfxFifoMemoryManager());
+    GXResetOverflowCount();
+
+    if (!mPerformanceController.canDraw()) {
+        return;
+    }
+
+    mDrawDone = true;
+    GXSetDrawDoneCallback(OnDrawDone);
+
+    void* target = mSystem.xfbManager().drawTargetXFB();
+    mSystem.renderSetting().render(*this, target);
+    GXSetDrawDone();
 }
 
 void AppImpl::endFrameProcess(scn::IScene& rScene) {
-    // not decompiled
+    {
+        gfx::GXFifoProtectCanceler canceler(mSystem.gfxFifoMemoryManager());
+
+        if (mPerformanceController.canDraw()) {
+            OSWaitSemaphore(&mSemaphore);
+        }
+
+        if (canSceneUpdate()) {
+            rScene.updateUseGPU();
+        }
+    }
+
+    if (mPerformanceController.canDraw()) {
+        void* target = mSystem.xfbManager().drawTargetXFB();
+        VISetNextFrameBuffer(target);
+        VISetBlack(FALSE);
+        VIFlush();
+        mPerformanceController.waitVSync();
+        mSystem.xfbManager().changeDrawTargetXFB();
+    }
+
+    mPerformanceController.onFrameEnd();
 }
 
 void AppImpl::onSceneEndProcess(scn::IScene&) {

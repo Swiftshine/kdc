@@ -11,6 +11,7 @@ class EFBToLetterBox {
 public:
     EFBToLetterBox(GameScreen&);
     ~EFBToLetterBox();
+    void draw();
 private:
     STRUCT_FILL(0x18);
 };

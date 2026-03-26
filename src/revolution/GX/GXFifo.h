@@ -28,6 +28,8 @@ void GXDisableBreakPt(void);
 
 OSThread* GXGetCurrentGXThread(void);
 
+void GXResetOverflowCount(void);
+
 #ifdef __cplusplus
 }
 #endif

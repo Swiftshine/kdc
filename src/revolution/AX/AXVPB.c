@@ -228,6 +228,7 @@ void __AXServiceVPB(AXVPB* vpb) {
     }
 }
 
+//besides being inlined is left unused
 void __AXDumpVPB(AXVPB* vpb) {
     AXPB* pb = &__AXPB[vpb->index];
 

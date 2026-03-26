@@ -138,6 +138,10 @@ u32 __AXOutNewFrame(void) {
 void __AXOutAiCallback(void) {
     u32 frame;
 
+    if (__AXDSPDoneFlag == 1) {
+        return;
+    }
+
     if (__AXOutDspReady == 1) {
         __AXOutDspReady = 0;
         __AXOutNewFrame();

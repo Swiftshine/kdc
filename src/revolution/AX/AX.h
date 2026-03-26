@@ -6,6 +6,9 @@ extern "C" {
 #endif
 
 void AXInit(void);
+BOOL AXIsInit();
+
+//unused besides inline
 void AXInitEx(u32 mode);
 
 #ifdef __cplusplus

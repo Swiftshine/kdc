@@ -7,6 +7,7 @@
 #include <revolution/PAD.h>
 #include <revolution/SC.h>
 #include <revolution/SI.h>
+#include <revolution/version.h>
 
 #include <MetroTRK.h>
 #include <string.h>
@@ -32,8 +33,7 @@ DECL_WEAK BOOL __OSIsGcam;
 BOOL __OSInNandBoot;
 BOOL __OSInIPL;
 
-const char* __OSVersion =
-    "<< RVL_SDK - OS \trelease build: Apr 24 2007 11:50:47 (0x4199_60831) >>";
+RVL_LIB_VERSION_KDC(OS, "17:33:06");
 
 static void OSExceptionInit(void);
 

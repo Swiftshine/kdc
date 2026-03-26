@@ -1,13 +1,17 @@
 #include <revolution/AX.h>
 #include <revolution/OS.h>
+#include <revolution/version.h>
 
-const char* __AXVersion =
-    "<< RVL_SDK - AX \trelease build: Dec 18 2006 15:43:48 (0x4199_60831) >>";
+RVL_LIB_VERSION_KDC(AX, "17:29:51");
 
 static BOOL __init = FALSE;
 
 void AXInit(void) {
     AXInitEx(0);
+}
+
+BOOL AXIsInit() {
+    return __init;
 }
 
 void AXInitEx(u32 mode) {
@@ -23,4 +27,5 @@ void AXInitEx(u32 mode) {
 
         __init = TRUE;
     }
+
 }

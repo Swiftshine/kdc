@@ -4,7 +4,6 @@
 // Compression parameters.
 // Later versions of AX have these as static vars
 #define THRESHOLD 32768
-#define RELEASE_FRAMES 10
 
 // Space is allocated for two commands lists
 #define LIST_MAX 2
@@ -50,6 +49,8 @@ static u32 __AXCommandListCycles;
 static u8 __AXCommandList[AX_CL_SIZE * LIST_MAX];
 
 static BOOL __AXCompressor;
+static u16* __AXCompressorTable;
+static u16 __AXCompressorReleaseFrames;
 
 static volatile u16 __AXMasterVolume;
 static u16 __AXAuxAVolume;
@@ -199,7 +200,7 @@ void __AXNextFrame(void* surround, void* lr, void* rmt) {
     if (__AXCompressor) {
         LIST_WRITE_16(COMMAND_COMPRESSOR);
         LIST_WRITE_16(THRESHOLD);
-        LIST_WRITE_16(RELEASE_FRAMES);
+        LIST_WRITE_16(__AXCompressorReleaseFrames);
         LIST_WRITE_32((uintptr_t)__AXCompressorTable);
         __AXCommandListCycles += 1850;
     }
@@ -236,6 +237,8 @@ void __AXClInit(void) {
     __AXCommandListPosition = 0;
     __AXClWrite = (u16*)__AXCommandList;
     __AXCompressor = TRUE;
+    __AXCompressorTable = __AXCompressorDefaultTable;
+    __AXCompressorReleaseFrames =10;
 
     __AXAuxCVolume = __AXAuxBVolume = __AXAuxAVolume = __AXMasterVolume =
         AX_MAX_VOLUME;
@@ -245,6 +248,7 @@ void AXSetMode(u32 mode) {
     __AXClMode = mode;
 }
 
+//inlined
 u32 AXGetMode(void) {
     return __AXClMode;
 }

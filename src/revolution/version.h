@@ -7,4 +7,5 @@
         "<< RVL_SDK - " #NAME " \trelease build: " ORIGINAL_DATE               \
         " " ORIGINAL_TIME " (" ORIGINAL_CWCC ") >>"
 
+#define RVL_LIB_VERSION_KDC(NAME, TIME) RVL_LIB_VERSION(NAME, "Aug 23 2010", TIME, "0x4302_145")
 #endif

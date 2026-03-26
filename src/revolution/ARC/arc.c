@@ -223,7 +223,7 @@ s32 ARCConvertPathToEntrynum(ARCHandle* handle, const char* path) {
 
         // If the name was delimited by a '/' rather than truncated.
         // This must be expressed as a ternary, and an enum cannot be used..
-        name_delimited_by_slash = (name_end[0] != '\0') ? 1 : 0;
+        name_delimited_by_slash = (name_end[0] == '\0') ? 0 : 1;
         name_length = name_end - path;
 
         // Traverse all children of the parent.
@@ -296,10 +296,6 @@ static u32 entryToPath(ARCHandle* handle, u32 entrynum, char* string,
 
 void* ARCGetStartAddrInMem(ARCFileInfo* info) {
     return (u8*)info->handle->archiveStartAddr + info->startOffset;
-}
-
-u32 ARCGetStartOffset(ARCFileInfo* info) {
-    return info->startOffset;
 }
 
 u32 ARCGetLength(ARCFileInfo* info) {

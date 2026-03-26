@@ -28,6 +28,7 @@ void __AXServiceCallbackStack(void) {
     }
 }
 
+//only inlined in this file, else unused
 void __AXInitVoiceStacks(void) {
     u32 prio;
 
@@ -48,6 +49,7 @@ void __AXPushFreeStack(AXVPB* vpb) {
     vpb->priority = AX_PRIORITY_FREE;
 }
 
+//only inlined in this file, else unused
 AXVPB* __AXPopFreeStack(void) {
     AXVPB* head = __AXStackHead[AX_PRIORITY_FREE];
 
@@ -63,6 +65,7 @@ void __AXPushCallbackStack(AXVPB* vpb) {
     __AXCallbackStack = vpb;
 }
 
+//only inlined in this file, else unused
 AXVPB* __AXPopCallbackStack(void) {
     AXVPB* head = __AXCallbackStack;
 
@@ -95,6 +98,7 @@ void __AXRemoveFromStack(AXVPB* vpb) {
     }
 }
 
+//only used in this file inlined
 void __AXPushStackHead(AXVPB* vpb, u32 prio) {
     vpb->next = __AXStackHead[prio];
     vpb->prev = NULL;
@@ -110,6 +114,7 @@ void __AXPushStackHead(AXVPB* vpb, u32 prio) {
     vpb->priority = prio;
 }
 
+//only used in this file for inlining
 AXVPB* __AXPopStackFromBottom(u32 prio) {
     AXVPB* vpb = NULL;
 

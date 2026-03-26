@@ -17,9 +17,11 @@ typedef struct AXFX_REVERBHI {
     f32 crosstalk;         // at 0x15C
 } AXFX_REVERBHI;
 
+//unused
 u32 AXFXReverbHiGetMemSize(AXFX_REVERBHI* fx);
 BOOL AXFXReverbHiInit(AXFX_REVERBHI* fx);
 BOOL AXFXReverbHiShutdown(AXFX_REVERBHI* fx);
+//unused
 BOOL AXFXReverbHiSettings(AXFX_REVERBHI* fx);
 void AXFXReverbHiCallback(void* chans, void* context);
 

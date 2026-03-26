@@ -21,10 +21,14 @@ extern u32 __AXClMode;
 
 u32 __AXGetCommandListCycles(void);
 void* __AXGetCommandListAddress(void);
+
+//inlined and placed in macro, besides that unused
 void __AXWriteToCommandList(u16 cmd);
 void __AXNextFrame(void* surround, void* lr, void* rmt);
 void __AXClInit(void);
 void AXSetMode(u32 mode);
+
+//not used besides inline in AXCL
 u32 AXGetMode(void);
 u16 AXGetAuxAReturnVolume(void);
 u16 AXGetAuxBReturnVolume(void);

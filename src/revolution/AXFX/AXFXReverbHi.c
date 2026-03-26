@@ -2,10 +2,6 @@
 
 static void __ParamConvert(AXFX_REVERBHI* fx);
 
-u32 AXFXReverbHiGetMemSize(AXFX_REVERBHI* fx) {
-    fx->exp.preDelayTimeMax = fx->preDelay;
-    return AXFXReverbHiExpGetMemSize(&fx->exp);
-}
 
 BOOL AXFXReverbHiInit(AXFX_REVERBHI* fx) {
     __ParamConvert(fx);
@@ -15,11 +11,6 @@ BOOL AXFXReverbHiInit(AXFX_REVERBHI* fx) {
 BOOL AXFXReverbHiShutdown(AXFX_REVERBHI* fx) {
     AXFXReverbHiExpShutdown(&fx->exp);
     return TRUE;
-}
-
-BOOL AXFXReverbHiSettings(AXFX_REVERBHI* fx) {
-    __ParamConvert(fx);
-    return AXFXReverbHiExpSettings(&fx->exp);
 }
 
 void AXFXReverbHiCallback(void* chans, void* context) {

@@ -184,6 +184,18 @@ MSL/MSL_C/MSL_Common_Embedded/Math/Double_precision/e_sqrt.c:
 MSL/MSL_C/MSL_Common_Embedded/Math/Double_precision/w_sqrt.c:
 	.text       start:0x800147E8 end:0x800147EC
 
+revolution/BASE/PPCArch.c:
+	.text       start:0x8001A0B0 end:0x8001A2C0
+	.data       start:0x80421DA0 end:0x80421DD8
+
+revolution/OS/OS.c:
+	.text       start:0x8001A2C0 end:0x8001B7A0
+	.data       start:0x80421DD8 end:0x804221E8
+	.bss        start:0x804990A0 end:0x80499110
+	.sdata      start:0x80556488 end:0x805564B8
+	.sbss       start:0x8055C778 end:0x8055C7C0
+	.sdata2     start:0x8055E4C8 end:0x8055E4D0
+
 revolution/OS/OSAlarm.c:
 	.text       start:0x8001B7A0 end:0x8001C050
 	.data       start:0x804221E8 end:0x804221F8
@@ -191,6 +203,8 @@ revolution/OS/OSAlarm.c:
 
 revolution/OS/OSAlloc.c:
 	.text       start:0x8001C050 end:0x8001C370 align:16
+	.sdata      start:0x805564B8 end:0x805564C0
+	.sbss       start:0x8055C7C8 end:0x8055C7D8
 
 revolution/OS/OSThread.c:
 	.text       start:0x800244A0 end:0x80025B40
@@ -203,6 +217,80 @@ revolution/OS/OSStateTM.c:
 
 revolution/OS/OSTime.c:
 	.text       start:0x80025B40 end:0x80025F70 align:16
+
+revolution/DB/db.c:
+	.text       start:0x8002BAB0 end:0x8002BAD0 align:16
+	.sbss       start:0x8055C8F8 end:0x8055C900
+
+revolution/VI/vi.c:
+	.text       start:0x8002BAD0 end:0x8002E490 align:16
+
+revolution/AI/ai.c:
+	.text       start:0x80042860 end:0x80042E10 align:16
+	.data       start:0x80432F40 end:0x80432F88
+	.sdata      start:0x80556610 end:0x80556618
+	.sbss       start:0x8055CB40 end:0x8055CB80
+
+revolution/AX/AX.c:
+	.text       start:0x80042E10 end:0x80042E80 align:16
+	.data       start:0x80432F88 end:0x80432FD0
+	.sdata      start:0x80556618 end:0x80556620
+	.sbss       start:0x8055CB80 end:0x8055CB88
+
+revolution/AX/AXAlloc.c:
+	.text       start:0x80042E80 end:0x80043370 align:16
+	.bss        start:0x8049FF20 end:0x804A0020
+	.sbss       start:0x8055CB88 end:0x8055CB90
+
+revolution/AX/AXAux.c:
+	.text       start:0x80043370 end:0x80043C10 align:16
+	.bss        start:0x804A0020 end:0x804A31A0
+	.sbss       start:0x8055CB90 end:0x8055CBD8
+
+revolution/AX/AXCL.c:
+	.text       start:0x80043C10 end:0x800446F0 align:16
+	.bss        start:0x804A31A0 end:0x804A32A0
+	.sbss       start:0x8055CBD8 end:0x8055CC00
+
+revolution/AX/AXOut.c:
+	.text       start:0x800446F0 end:0x80044F30 align:16
+	.bss        start:0x804A32A0 end:0x804A40A0
+	.sbss       start:0x8055CC00 end:0x8055CC40
+
+revolution/AX/AXSPB.c:
+	.text       start:0x80044F30 end:0x80045360 align:16
+	.bss        start:0x804A40A0 end:0x804A4120 align:32
+	.sbss       start:0x8055CC40 end:0x8055CC90
+
+revolution/AX/AXVPB.c:
+	.text       start:0x80045360 end:0x80046120 align:16
+	.data       start:0x80432FD0 end:0x80433060
+	.bss        start:0x804A4120 end:0x804B5820 align:32
+	.sbss       start:0x8055CC90 end:0x8055CCB0
+	.sdata2     start:0x8055E6A8 end:0x8055E6C8
+
+revolution/AX/AXComp.c:
+	.data       start:0x80433060 end:0x80434020
+
+revolution/AX/DSPCode.c:
+	.data       start:0x80434020 end:0x80436020
+	.sdata      start:0x80556620 end:0x80556628
+
+revolution/AX/AXProf.c:
+	.text       start:0x80046120 end:0x80046160 align:16
+	.sbss       start:0x8055CCB0 end:0x8055CCC0
+
+revolution/AXFX/AXFXReverbHi.c:
+	.text       start:0x80046160 end:0x80046210 align:16
+	.sdata2     start:0x8055E6C8 end:0x8055E6D0
+
+revolution/SC/scapi.c:
+	.text       start:0x8004CCE0 end:0x8004D1F0
+
+revolution/ARC/arc.c:
+	.text       start:0x8004DD70 end:0x8004E730
+	.data       start:0x80438498 end:0x80438508
+	.sdata      start:0x805567A0 end:0x805567A8
 
 nw4r/g3d/g3d_camera.cpp:
 	.text       start:0x800E5AF0 end:0x800E6A10

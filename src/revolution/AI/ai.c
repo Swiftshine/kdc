@@ -1,9 +1,9 @@
 #include <revolution/AI.h>
 #include <revolution/DSP.h>
 #include <revolution/OS.h>
+#include <revolution/version.h>
 
-const char* __AIVersion =
-    "<< RVL_SDK - AI \trelease build: Nov 30 2006 03:26:11 (0x4199_60831) >>";
+RVL_LIB_VERSION_KDC(AI, "17:29:47");
 
 static AIDMACallback __AID_Callback;
 
@@ -63,6 +63,19 @@ u32 AIGetDMABytesLeft(void) {
     return (DSP_HW_REGS[DSP_AI_DMA_BYTES_LEFT] & 0x7FFF) * 32;
 }
 
+u32 AIGetDMAStartAddr(void) {
+    return ((DSP_HW_REGS[DSP_AI_DMA_START_H] & 0x1FFF) << 16) | (DSP_HW_REGS[DSP_AI_DMA_START_L] & 0xFFE0);
+}
+
+u32 AIGetDMALength() {
+    return (DSP_HW_REGS[DSP_AI_DMA_CSR] & 0x7FFF) << 5;
+}
+
+BOOL AICheckInit() {
+    return __AI_init_flag;
+}
+
+//auto inlined
 void AISetDSPSampleRate(u32 rate) {
     BOOL enabled;
 
@@ -80,6 +93,7 @@ void AISetDSPSampleRate(u32 rate) {
     }
 }
 
+//auto inlined
 u32 AIGetDSPSampleRate(void) {
     return ((AI_HW_REGS[AI_AICR] & AI_AICR_SAMPLERATE) >> 6) ^ 1;
 }

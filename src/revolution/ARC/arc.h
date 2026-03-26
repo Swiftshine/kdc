@@ -35,20 +35,25 @@ typedef struct ARCDirEntry {
     char* name;        // at 0xC
 } ARCDirEntry;
 
+//gets inlined in arc.c but besides that unused
 BOOL ARCGetCurrentDir(ARCHandle* handle, char* string, u32 maxlen);
 BOOL ARCInitHandle(void* bin, ARCHandle* handle);
 BOOL ARCOpen(ARCHandle* handle, const char* path, ARCFileInfo* info);
 BOOL ARCFastOpen(ARCHandle* handle, s32 entrynum, ARCFileInfo* info);
 s32 ARCConvertPathToEntrynum(ARCHandle* handle, const char* path);
 void* ARCGetStartAddrInMem(ARCFileInfo* info);
+//unused
 u32 ARCGetStartOffset(ARCFileInfo* info);
 u32 ARCGetLength(ARCFileInfo* info);
+//Note: Merged into nw4r::ut::DvdFileStream::CanCancel() const
 BOOL ARCClose(ARCFileInfo* info);
+
 BOOL ARCChangeDir(ARCHandle* handle, const char* path);
 BOOL ARCOpenDir(ARCHandle* handle, const char* path, ARCDir* dir);
-BOOL ARCReadDir(ARCDir* dir, ARCDirEntry* entry);
-BOOL ARCCloseDir(ARCDir* dir);
 
+BOOL ARCReadDir(ARCDir* dir, ARCDirEntry* entry);
+//Note: Merged into nw4r::ut::DvdFileStream::CanCancel() const
+BOOL ARCCloseDir(ARCDir* dir);
 #ifdef __cplusplus
 }
 #endif

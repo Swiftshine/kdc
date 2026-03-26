@@ -144,8 +144,8 @@ void PPCMtfpscr(register u32 val) {
 
     ASM (
         li r4, 0
-        stw val, fpscr.data
         stw r4, fpscr.tmp
+        stw val, fpscr.data
         lfd f31, fpscr.tmp
         mtfs f31
     )
@@ -163,15 +163,6 @@ asm void PPCMthid2(register u32 val) {
     // clang-format off
     nofralloc
     mtspr 0x398, val
-    blr
-    // clang-format on
-}
-
-asm u32 PPCMfwpar(void) {
-    // clang-format off
-    nofralloc
-    sync
-    mfwpar r3
     blr
     // clang-format on
 }

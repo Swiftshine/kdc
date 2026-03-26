@@ -284,6 +284,15 @@ revolution/AXFX/AXFXReverbHi.c:
 	.text       start:0x80046160 end:0x80046210 align:16
 	.sdata2     start:0x8055E6C8 end:0x8055E6D0
 
+revolution/AXFX/AXFXReverbHiExp.c:
+	.text       start:0x80046210 end:0x80047040 align:16
+	.data       start:0x80436020 end:0x804361C0
+	.sdata2     start:0x8055E6D0 end:0x8055E710
+
+revolution/AXFX/AXFXHooks.c:
+	.text       start:0x80047040 end:0x80047090 align:16
+	.sdata      start:0x80556628 end:0x80556630
+
 revolution/SC/scapi.c:
 	.text       start:0x8004CCE0 end:0x8004D1F0
 

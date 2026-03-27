@@ -1,4 +1,7 @@
 #include "FS/fs.h"
+#include "IPC/ipcclt.h"
+#include "NAND/NANDErrorMessage.h"
+#include "NAND/nand.h"
 #include <revolution/ESP.h>
 #include <revolution/NAND.h>
 #include <revolution/OS.h>
@@ -18,12 +21,9 @@ typedef enum {
 
 static void nandShutdownCallback(s32 result, void* arg);
 static void nandGetTypeCallback(s32 result, void* arg);
-static void nandLoggingCallback(BOOL arg1,  s32 arg);
+static void nandLoggingCallback(BOOL arg1,  s32 result);
 static BOOL nandOnShutdown(BOOL final, u32 event);
-static s32 _ES_InitLib(s32* fd);
-static s32 _ES_GetDataDir(s32* fd, u64 tid, char* dirOut) DECOMP_DONT_INLINE;
-static s32 _ES_GetTitleId(s32* fd, u64* tidOut);
-static s32 _ES_CloseLib(s32* fd);
+static void nandChangeDirCallback(s32 result, void* arg);
 
 RVL_LIB_VERSION_KDC(NAND, "17:33:46");
 
@@ -132,8 +132,12 @@ BOOL nandIsRelativePath(const char* path) {
 
 BOOL nandIsPrivatePath(const char* path) {
     size_t len = sizeof("/shared2") - 1;
-    return strncmp(path, "/shared2", len) == 0;
+    if (strncmp(path, "/shared2", len) == NULL) {
+        return TRUE;
+    }
+    return FALSE;
 }
+
 
 BOOL nandIsUnderPrivatePath(const char* path) {
     size_t len = sizeof("/shared2/") - 1;
@@ -149,11 +153,14 @@ BOOL nandIsInitialized(void) {
     return s_libState == NAND_LIB_INITIALIZED ? TRUE : FALSE;
 }
 
-// Stubbed for release
-void nandReportErrorCode(s32 result) {
-#pragma unused(result)
+void nandLoggingCallback(BOOL arg1,  s32 result) {
+    if (result != ISFS_ERROR_UNKNOWN && result !=  IPC_RESULT_UNKNOWN) {
+        return;
+    }
+    __NANDPrintErrorMessage(result);
 }
 
+//https://decomp.me/scratch/YC9xv
 s32 nandConvertErrorCode(s32 result) {
     int i;
 
@@ -232,7 +239,6 @@ s32 nandConvertErrorCode(s32 result) {
         sprintf(buf, "ISFS unexpected error code: %d", result);
         NANDLoggingAddMessageAsync(nandLoggingCallback, result, buf);
     }
-    nandReportErrorCode(result);
     return NAND_RESULT_UNKNOWN;
 }
 
@@ -352,17 +358,51 @@ static void nandShutdownCallback(s32 result, void* arg) {
     *(BOOL*)arg = TRUE;
 }
 
-s32 NANDGetCurrentDir(char* out) {
-    BOOL enabled;
+static s32 nandChangeDir(const char* path, NANDCommandBlock* block, BOOL isAsync, BOOL hasPrivateAccess) {
+    if (isAsync) {
+        nandGenerateAbsPath(block->path, path);
+        if (!hasPrivateAccess && nandIsPrivatePath(block->path)) {
+            return ISFS_ERROR_ACCESS;
+        } else {
+            return ISFS_ReadDirAsync(block->path, NULL, &block->dirFileCount, nandChangeDirCallback, block);
+        }
+    } else {
+        u32 num = 0;
 
+        char absPath[NAND_MAX_PATH] = "";
+
+        nandGenerateAbsPath(absPath, path);
+        if (!hasPrivateAccess && nandIsPrivatePath(absPath)) {
+            return ISFS_ERROR_ACCESS;
+        } else {
+            s32 err = ISFS_ReadDir(absPath, NULL, &num);
+            if (err == ISFS_ERROR_OK) {
+                BOOL enabled = OSDisableInterrupts();
+                strcpy(s_currentDir, absPath);
+                OSRestoreInterrupts(enabled);
+            }
+            return err;
+        }
+    }
+}
+
+s32 NANDChangeDir(const char* path) {
     if (!nandIsInitialized()) {
         return NAND_RESULT_FATAL_ERROR;
     }
 
-    enabled = OSDisableInterrupts();
-    strcpy(out, s_currentDir);
-    OSRestoreInterrupts(enabled);
-    return NAND_RESULT_OK;
+    return nandConvertErrorCode(nandChangeDir(path, NULL, FALSE, FALSE));
+}
+
+static void nandChangeDirCallback(s32 result, void* arg) {
+    NANDCommandBlock* block = (NANDCommandBlock*)arg;
+    if (result == ISFS_ERROR_OK) {
+        BOOL enabled = OSDisableInterrupts();
+        strcpy(s_currentDir, block->path);
+        OSRestoreInterrupts(enabled);
+    }
+
+    block->callback(nandConvertErrorCode(result), block);
 }
 
 s32 NANDGetHomeDir(char* out) {
@@ -443,7 +483,7 @@ s32 NANDPrivateGetTypeAsync(const char* path, u8* type,
 static void nandGetTypeCallback(s32 result, void* arg) {
     NANDCommandBlock* block = (NANDCommandBlock*)arg;
 
-    if (result == IPC_RESULT_OK || result == IPC_RESULT_ACCESS) {
+    if (result == IPC_RESULT_OK || result == ISFS_ERROR_ACCESS) {
         *block->type = NAND_FILE_TYPE_DIR;
         result = IPC_RESULT_OK;
     } else if (result == ISFS_ERROR_INVALID) {
@@ -456,102 +496,4 @@ static void nandGetTypeCallback(s32 result, void* arg) {
 
 const char* nandGetHomeDir(void) {
     return s_homeDir;
-}
-
-void NANDInitBanner(NANDBanner* banner, u32 flags, const wchar_t* title,
-                    const wchar_t* subtitle) {
-    memset(banner, 0, sizeof(NANDBanner));
-    banner->flags = flags;
-    banner->magic = NAND_BANNER_MAGIC;
-
-    if (wcscmp(title, L"") == 0) {
-        wcsncpy(banner->title, L" ", NAND_BANNER_TITLE_MAX);
-    } else {
-        wcsncpy(banner->title, title, NAND_BANNER_TITLE_MAX);
-    }
-
-    if (wcscmp(subtitle, L"") == 0) {
-        wcsncpy(banner->subtitle, L" ", NAND_BANNER_TITLE_MAX);
-    } else {
-        wcsncpy(banner->subtitle, subtitle, NAND_BANNER_TITLE_MAX);
-    }
-}
-
-/**
- * These were actually re(?)implemented in NANDCore/OSExec according to BBA
- */
-
-static s32 _ES_InitLib(s32* fd) {
-    s32 result;
-
-    *fd = -1;
-    result = IPC_RESULT_OK;
-
-    *fd = IOS_Open("/dev/es", IPC_OPEN_NONE);
-    if (*fd < 0) {
-        result = *fd;
-    }
-
-    return result;
-}
-
-static s32 _ES_GetDataDir(s32* fd, u64 tid, char* dirOut) {
-    // TODO(kiwi) Hacky solution
-    u8 tidWork[256] ALIGN(32);
-    u8 vectorWork[32] ALIGN(32);
-    IPCIOVector* pVectors = (IPCIOVector*)vectorWork;
-    u64* pTid = (u64*)tidWork;
-
-    // Cast is necessary
-    if (*fd < 0 || dirOut == ((void*)NULL)) {
-        return -0x3F9;
-    }
-
-    if ((u32)dirOut % 32 != 0) {
-        return -0x3F9;
-    }
-
-    *pTid = tid;
-
-    pVectors[0].base = pTid;
-    pVectors[0].length = sizeof(u64);
-    pVectors[1].base = dirOut;
-    pVectors[1].length = 30;
-
-    return IOS_Ioctlv(*fd, ES_IOCTLV_GET_DATA_DIR, 1, 1, pVectors);
-}
-
-static s32 _ES_GetTitleId(s32* fd, u64* tidOut) {
-    s32 result;
-    u64* pTid;
-    // TODO(kiwi) Hacky solution
-    u8 tidWork[256] ALIGN(32);
-    u8 vectorWork[32] ALIGN(32);
-    IPCIOVector* pVectors = (IPCIOVector*)vectorWork;
-
-    // Cast is necessary
-    if (*fd < 0 || tidOut == ((void*)NULL)) {
-        return -0x3F9;
-    }
-
-    pTid = (u64*)tidWork;
-    pVectors[0].base = pTid;
-    pVectors[0].length = sizeof(u64);
-
-    result = IOS_Ioctlv(*fd, ES_IOCTLV_GET_TITLE_ID, 0, 1, pVectors);
-    if (result == IPC_RESULT_OK) {
-        *tidOut = *pTid;
-    }
-
-    return result;
-}
-
-static s32 _ES_CloseLib(s32* fd) {
-    s32 result = IPC_RESULT_OK;
-
-    if (*fd >= 0 && (result = IOS_Close(*fd)) == IPC_RESULT_OK) {
-        *fd = -1;
-    }
-
-    return result;
 }

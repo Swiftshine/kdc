@@ -431,7 +431,7 @@ config.libs = [
             Object(Matching, "revolution/DSP/dsp_debug.c"),
             Object(NonMatching, "revolution/DSP/dsp_task.c"),
             Object(NonMatching, "revolution/NAND/nand.c"),
-            Object(NonMatching, "revolution/NAND/NANDOpenClose.c"),
+            Object(Matching, "revolution/NAND/NANDOpenClose.c"),
             Object(NonMatching, "revolution/NAND/NANDCore.c"),
             # Object(NonMatching, "revolution/SC/scapi.c"),
             Object(NonMatching, "revolution/ARC/arc.c"),

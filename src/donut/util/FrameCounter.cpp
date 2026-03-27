@@ -39,6 +39,7 @@ f32 FrameCounter::inversedNormalizedFrame() const {
     return 1.0f - normalizedFrame();
 }
 
+//Note: All functions below are code merged into other ones. Check the header file for more details
 void FrameCounter::reset() {
     mCurrentFrame = 0;
 }

@@ -11,19 +11,23 @@ Vector3 Vector3::BASIS_X = Vector3(1.0f, 0.0f, 0.0f);
 Vector3 Vector3::BASIS_Y = Vector3(0.0f, 1.0f, 0.0f);
 Vector3 Vector3::BASIS_Z = Vector3(0.0f, 0.0f, 1.0f);
 
-void Vector3::normalizedCross(const Vector3& rOther) const {
-    cross(rOther);
-    const_cast<Vector3*>(this)->normalize();
+Vector3 Vector3::normalizedCross(const Vector3& rOther) const {
+    Vector3 crossedValue =  cross(rOther);
+    crossedValue.normalize();
+    return crossedValue;
 }
 
 //https://decomp.me/scratch/QG5VG
-void Vector3::permittedNormalizedCross(const Vector3& rOther) const {
-    f32 crossVal = cross(rOther);
-    crossVal = const_cast<Vector3*>(this)->permittedNormalize();
+Vector3 Vector3::permittedNormalizedCross(const Vector3& rOther) const {
+    Vector3 crossVal = cross(rOther);
+    f32 normalizedCrossVal = crossVal.permittedNormalize();
 
-    if (crossVal == 0.0f) {
-        Vector3();
+    if (normalizedCrossVal == 0.0f) {
+        return Vector3();
     }
+
+    return crossVal;
+
 }
 
 f32 Vector3::permittedNormalize() {
@@ -111,7 +115,7 @@ f32 Vector3::cos(const Vector3& rOther) const {
 }
 
 bool Vector3::isZeroStrict() const {
-    return isZero();
+    return x == ZERO.x && y == ZERO.y && z == ZERO.z;
 }
 
 void Vector3::rotate(const Vector3& rAxis, f32 angle) {

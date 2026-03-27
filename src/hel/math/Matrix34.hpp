@@ -24,7 +24,7 @@ namespace hel  { namespace math {
         void mtxInverse(const Mtx arg1, Mtx arg2) const;
         Matrix44 toMatrix44() const;
 
-        nw4r::math::MTX34 mBaseMtx;
+        /* 0x0 */ nw4r::math::MTX34 mBaseMtx;
     };
 
 } //namespace math

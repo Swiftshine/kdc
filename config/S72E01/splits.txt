@@ -377,12 +377,24 @@ donut/app/Locale.cpp:
 donut/app/Message.cpp:
 	.text       start:0x801793BC end:0x801798A8
 
+hel/math/Direction3.cpp:
+	.text       start:0x8019DF7C end:0x8019E590
+	.ctors      start:0x80406318 end:0x8040631C
+	.bss        start:0x80545260 end:0x805452D0
+	.sdata2     start:0x8055F828 end:0x8055F838
+
 hel/math/Matrix34.cpp:
 	.text       start:0x8019E590 end:0x8019EAEC
 	.sdata2     start:0x8055F838 end:0x8055F848
 
 hel/math/Matrix44.cpp:
 	.text       start:0x8019EAEC end:0x8019EC6C
+
+hel/math/Point2.cpp:
+	.text       start:0x8019EC6C end:0x8019EC7C
+	.ctors      start:0x8040631C end:0x80406320
+	.sbss       start:0x8055D240 end:0x8055D248
+	.sdata2     start:0x8055F848 end:0x8055F850
 
 hel/math/Random.cpp:
 	.text       start:0x8019EC7C end:0x8019EF58

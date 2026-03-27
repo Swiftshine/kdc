@@ -16,7 +16,7 @@ namespace hel { namespace math {
         nw4r::math::MTX44 mulMtx(const Matrix44&) const;
         Vector3 mulVec(const Vector3&) const;
 
-        nw4r::math::MTX44 mBaseMtx;
+        /* 0x0 */ nw4r::math::MTX44 mBaseMtx;
     };
 
 } //namespace math

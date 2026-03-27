@@ -473,8 +473,10 @@ config.libs = [
         "cflags": cflags_hel,
         "progress_category": "hel",
         "objects": [
+            Object(NonMatching, "hel/math/Direction3.cpp", extra_cflags=["-O3,s"]),
             Object(NonMatching, "hel/math/Matrix34.cpp"),
             Object(NonMatching, "hel/math/Matrix44.cpp", extra_cflags=["-O3,s"]),
+            Object(Equivalent, "hel/math/Point2.cpp"),
             Object(Matching, "hel/math/Random.cpp"),
             Object(NonMatching, "hel/math/Vector2.cpp"),
             Object(NonMatching, "hel/math/Vector3.cpp"),

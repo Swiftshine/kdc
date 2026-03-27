@@ -21,6 +21,14 @@ namespace hel { namespace math {
 
         //Gets merged into nw4r::math::VEC3::VEC3(float, float, float)
         Vector3(f32 _x, f32 _y, f32 _z);
+
+        //TODO: Make this use LWZ and STW
+        Vector3(const Vector3& rOther)
+        : x(rOther.x)
+        , y(rOther.y)
+        , z(rOther.z)
+        { }
+
         Vector3();
 
         void operator=(const Vector3& rOther);
@@ -32,15 +40,18 @@ namespace hel { namespace math {
         Vector3 operator*(float scalar) const;
 
         f32 length() const;
-        f32 cross(const Vector3& rOther) const;
+        Vector3 cross(const Vector3& rOther) const;
         f32 normalize();
         f32 permittedNormalize();
-        void normalizedCross(const Vector3& rOther) const;
-        void permittedNormalizedCross(const Vector3& rOther) const;
+        Vector3 normalizedCross(const Vector3& rOther) const;
+        Vector3 permittedNormalizedCross(const Vector3& rOther) const;
         f32 setLength(f32);
         f32 cos(const Vector3& rOther) const;
         f32 dot(const Vector3& rOther) const;
-        bool isZero() const;
+
+        bool isZero() const {
+            return x == ZERO.x && y == ZERO.y && z == ZERO.z;
+        }
         //branches to isZero due to code merging lol
         bool isZeroStrict() const;
         void rotate(const Vector3& rAxis, f32 angle);
@@ -50,9 +61,9 @@ namespace hel { namespace math {
         void scale(const Vector3& rOther);
         void getScaled(const Vector3& rOther) const;
 
-        f32 x;
-        f32 y;
-        f32 z;
+        /* 0x0 */ f32 x;
+        /* 0x4 */ f32 y;
+        /* 0x8 */ f32 z;
     };
 } // math
 

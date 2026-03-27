@@ -436,3 +436,7 @@ donut/util/Alarm.cpp:
 donut/util/CurveUtility.cpp:
 	.text       start:0x80405948 end:0x80405980
 	.sdata2     start:0x80564390 end:0x80564398
+
+donut/util/FrameCounter.cpp:
+	.text       start:0x80405980 end:0x80405A9C
+	.sdata2     start:0x80564398 end:0x805643A8

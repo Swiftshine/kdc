@@ -558,6 +558,8 @@ config.libs = [
         "objects": [
             Object(NonMatching, "donut/util/Alarm.cpp"),
             Object(Matching, "donut/util/CurveUtility.cpp"),
+            Object(Equivalent, "donut/util/FrameCounter.cpp"),
+
         ],
     },
 ]

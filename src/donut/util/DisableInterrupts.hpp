@@ -1,9 +1,8 @@
 #ifndef DONUT_UTIL_DISABLE_INTERRUPTS_HPP
 #define DONUT_UTIL_DISABLE_INTERRUPTS_HPP
 
-#include "OS/OSInterrupt.h"
 #include <revolution/OS.h>
-#include <decomp.h>
+
 namespace util {
 
 class DisableInterrupts {

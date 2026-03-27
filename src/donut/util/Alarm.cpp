@@ -19,7 +19,6 @@ Alarm::Alarm() {
 Alarm::~Alarm() {
     Instance = nullptr;
     final();
-
 }
 
 //https://decomp.me/scratch/knUNk

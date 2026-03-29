@@ -17,7 +17,7 @@ public:
     void final();
 
 private:
-    /* 0x8 */ OSAlarm mAlarm;
+    /* 0x8 */ OSAlarm* mAlarm; //NOTE: Needs to be a non-pointer struct
 };
 }
 

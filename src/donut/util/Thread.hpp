@@ -5,15 +5,15 @@
 #include <donut/mem/DataBlock.hpp>
 
 namespace util {
-    class Thread : public mem::DataBlock {
+    class Thread {
         Thread(mem::IAllocator&, u32, s32, OSThreadFunc, void*);
         ~Thread();
 
         s32 GetCurrentThreadPriority();
 
+        /* 0x0 */ mem::DataBlock mDataBlock;
         /* 0x8 */ s32 m_8;
-        /* 0xC */ s32 m_C;
-        /* 0x10 */ OSThread* mThread;
+        /* 0x10 */ OSThread mThread;
     };
 }
 

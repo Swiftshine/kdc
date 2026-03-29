@@ -6,6 +6,10 @@ namespace mem {
 
 class IAllocator {
     public:
+
+    //NOTE: Gets merged into IScene's deconstructor
+    ~IAllocator();
+
     //TODO: Actually figure out and define these
     //Please note none of these are symbols in the map file and seem to be inlined
     virtual void unknown1();

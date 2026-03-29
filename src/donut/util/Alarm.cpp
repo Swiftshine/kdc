@@ -23,13 +23,13 @@ Alarm::~Alarm() {
 
 //https://decomp.me/scratch/knUNk
 void Alarm::init() {
-    OSCreateAlarm(mAlarm);
-    OSSetPeriodicAlarm(mAlarm, T_PERIOD, T_PERIOD, t_handler);
+    OSCreateAlarm(&mAlarm);
+    OSSetPeriodicAlarm(&mAlarm, T_PERIOD, T_PERIOD, t_handler);
 }
 
 //https://decomp.me/scratch/ArudS
 void Alarm::final() {
     DisableInterrupts interrupts;
 
-    OSCancelAlarm(mAlarm);
+    OSCancelAlarm(&mAlarm);
 }

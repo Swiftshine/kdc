@@ -17,7 +17,7 @@ public:
     void final();
 
 private:
-    /* 0x8 */ OSAlarm* mAlarm; //Note: currently is at 0x4 for some reason
+    /* 0x8 */ OSAlarm mAlarm;
 };
 }
 

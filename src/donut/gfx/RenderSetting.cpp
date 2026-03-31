@@ -1,4 +1,5 @@
 #pragma peephole off
+#include <nw4r/g3d/g3d_state.h>
 #include <donut/gfx/RenderSetting.hpp>
 #include <donut/gfx/VISetting.hpp>
 #include <donut/gfx/Utility.hpp>

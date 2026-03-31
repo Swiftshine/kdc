@@ -211,13 +211,13 @@ namespace gfx {
     }
 
     void RenderSetting::beginNormal() {
-    GXSetScissor(0, 0, rmode()->fbWidth, rmode()->efbHeight);
-    GXSetScissorBoxOffset(0, 0);
+        GXSetScissor(0, 0, rmode()->fbWidth, rmode()->efbHeight);
+        GXSetScissorBoxOffset(0, 0);
     }
 
     void RenderSetting::beginAABottomHalf() {
-    GXSetScissor(0, 226, rmode()->fbWidth, rmode()->efbHeight);
-    GXSetScissorBoxOffset(0, 226);
+        GXSetScissor(0, 226, rmode()->fbWidth, rmode()->efbHeight);
+        GXSetScissorBoxOffset(0, 226);
     }
 
     void RenderSetting::endNormal(void* pTarget) {
@@ -275,8 +275,8 @@ namespace gfx {
     //NOTE: All functions below are code merged into others. Refer to the header for more details
 
     void RenderSetting::beginAATopHalf() {
-    GXSetScissor(0, 0, rmode()->fbWidth, rmode()->efbHeight);
-    GXSetScissorBoxOffset(0, 0);
+        GXSetScissor(0, 0, rmode()->fbWidth, rmode()->efbHeight);
+        GXSetScissorBoxOffset(0, 0);
     }
 
     void RenderSetting::dirty() {

@@ -9,7 +9,11 @@ namespace gfx {
     class TPLTexture : TextureObj {
     public:
         TPLTexture(void*);
-        /* 0x0 */ virtual ~TPLTexture();
+        //Unused in the binary, however we need it so that TextureObj::texObj is called
+        TPLTexture(const char*);
+
+        //TODO: This needs to be linked into EasyTex3D
+        /* 0x0 */ virtual ~TPLTexture() {}
         void init(void*);
 
 

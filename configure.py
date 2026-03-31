@@ -515,7 +515,7 @@ config.libs = [
             Object(NonMatching, "donut/gfx/GXFifoMemoryManager.cpp"),
             Object(Equivalent, "donut/gfx/GXFifoProtectCanceler.cpp"),
             Object(Matching, "donut/gfx/TexBuffer.cpp"),
-            Object(NonMatching, "donut/gfx/TPLTexture.cpp"),
+            Object(NonMatching, "donut/gfx/TPLTexture.cpp", extra_cflags=["-O3,s"]),
             Object(NonMatching, "donut/gfx/VISetting.cpp", extra_cflags=["-O3,s"]),
 
         ],

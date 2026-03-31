@@ -2,19 +2,14 @@
 #include <donut/gfx/TPLTexture.hpp>
 #include <revolution/TPL.h>
 
-using gfx::TextureObj;
 using gfx::TPLTexture;
-TextureObj::TextureObj() {
 
-}
-
-GXTexObj* TextureObj::texObj() const {
-    GXTexObj* texObj;
-    for (int i = 4; i != 0; i--) {
-
-        texObj->dummy[2] = mGXTexObj.dummy[2];
-    }
-    return texObj;
+//Note: this is originally an unused function, however it seems to either A. use texObj directly or B. use TextureObj->load (another unused function)
+//In order to place texObj into this TU
+TPLTexture::TPLTexture(const char* pArg1)
+    : mFileAccessor()
+{
+    texObj();
 }
 
 TPLTexture::TPLTexture(void* pArg1)
@@ -24,8 +19,10 @@ TPLTexture::TPLTexture(void* pArg1)
 }
 
 void TPLTexture::init(void* pArg1) {
-    if ((int)(pArg1) + 0x8 < 0x80000000) {
-        TPLBind((TPLPalette *)pArg1);
+    TPLPalette* palette = (TPLPalette*)pArg1;
+
+    if ((u32)(palette->descriptorArray) < 0x80000000) {
+        TPLBind(palette);
     }
-    TPLGetGXTexObjFromPalette((TPLPalette *)pArg1, &mGXTexObj, 0);
+    TPLGetGXTexObjFromPalette(palette, &mGXTexObj, 0);
 }

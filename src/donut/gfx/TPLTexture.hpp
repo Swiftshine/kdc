@@ -13,7 +13,7 @@ namespace gfx {
         TPLTexture(const char*);
 
         //TODO: This needs to be linked into EasyTex3D
-        /* 0x0 */ virtual ~TPLTexture() {}
+        /* 0x8 */ virtual ~TPLTexture() {}
         void init(void*);
 
 

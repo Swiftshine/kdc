@@ -9,7 +9,8 @@ namespace gfx {
     public:
         TextureObj() DECOMP_DONT_INLINE {}
         //TODO: This needs to be linked into EasyTex3D
-        /* 0x0 */ virtual ~TextureObj() DECOMP_DONT_INLINE {}
+
+        /* 0x8 */ virtual ~TextureObj() DECOMP_DONT_INLINE {}
 
         //https://decomp.me/scratch/5Td3o
         GXTexObj* texObj() const {

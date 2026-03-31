@@ -13,7 +13,7 @@ public:
     DataBlock(u32 size, s32 unused, IAllocator& rAllocator);
     ~DataBlock();
 
-    MemBlock block() {
+    MemBlock block() const {
         return mBlock;
     }
 

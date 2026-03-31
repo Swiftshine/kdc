@@ -10,7 +10,9 @@ namespace hel  { namespace math {
 
     class Matrix34 {
     public:
-        Matrix34();
+        Matrix34() {
+            PSMTXIdentity(mBaseMtx);
+        }
         Matrix34(const Mtx);
         Matrix34(const Direction3&, const Vector3&);
 

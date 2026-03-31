@@ -7,6 +7,8 @@ namespace util {
     public:
         ~PlacementNew();
 
+        PlacementNew();
+
         inline operator T*() {
             return ptr;
         }

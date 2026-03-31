@@ -14,6 +14,7 @@ class Memory {
 public:
     DECL_EXPLICIT_SINGLETON(Memory);
 
+    HeapExp& mem1FixHeap();
     HeapExp& mem2FixHeap();
     IAllocator& sceneHeap();
     HeapCompaction& /* probably? */ externalHeap();

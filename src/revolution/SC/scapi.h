@@ -2,7 +2,8 @@
 #define RVL_SDK_SC_SCAPI_H
 #include <types.h>
 
-#include <revolution/BTE.h>
+//TODO: Actually configure BTE
+//#include <revolution/BTE.h>
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -45,12 +46,12 @@ typedef struct SCDevInfo {
     char devName[20]; // at 0x0
     char at_0x14[1];
     char UNK_0x15[0xB];
-    LINK_KEY linkKey; // at 0x20
+    //LINK_KEY linkKey; // at 0x20
     char UNK_0x30[0x10];
 } SCDevInfo;
 
 typedef struct SCBtDeviceInfo {
-    BD_ADDR addr;   // at 0x0
+    //BD_ADDR addr;   // at 0x0
     SCDevInfo info; // at 0x6
 } SCBtDeviceInfo;
 

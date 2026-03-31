@@ -58,7 +58,16 @@ typedef struct _GXLightObjImpl {
 } GXLightObjImpl;
 
 typedef struct _GXTexObjImpl {
-    u8 todo;
+	u32 mode0;       // _00
+	u32 mode1;       // _04
+	u32 image0;      // _08
+	u32 image3;      // _0C
+	void* userData;  // _10
+	GXTexFmt format; // _14
+	u32 tlutName;    // _18
+	u16 loadCount;   // _1C
+	u8 loadFormat;   // _1E
+	u8 flags;        // _1F
 } GXTexObjImpl;
 
 typedef struct _GXTlutObjImpl {

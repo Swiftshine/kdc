@@ -377,6 +377,42 @@ donut/app/Locale.cpp:
 donut/app/Message.cpp:
 	.text       start:0x801793BC end:0x801798A8
 
+donut/gfx/EasyRender3D.cpp:
+	.text       start:0x80194FC4 end:0x80195854
+	.ctors      start:0x804062E8 end:0x804062EC
+	.bss        start:0x80544828 end:0x80544860
+	.sdata2     start:0x8055F6C8 end:0x8055F6F0
+
+donut/gfx/EasyTex3D.cpp:
+	.text       start:0x80195854 end:0x80195934
+
+donut/gfx/FullScreenPlate.cpp:
+	.text       start:0x80195F58 end:0x80196050
+	.sdata2     start:0x8055F710 end:0x8055F720
+
+donut/gfx/GameScreen.cpp:
+	.text       start:0x80196050 end:0x8019607C
+
+donut/gfx/GXFifoMemoryManager.cpp:
+	.text       start:0x8019607C end:0x801961FC
+	.sbss       start:0x8055D1B8 end:0x8055D1C0
+
+donut/gfx/GXFifoProtectCanceler.cpp:
+	.text       start:0x801961FC end:0x801962A8
+
+donut/gfx/TexBuffer.cpp:
+	.text       start:0x80196E2C end:0x80196F38
+
+donut/gfx/TPLTexture.cpp:
+	.text       start:0x80196F38 end:0x80197024
+	.data       start:0x80454990 end:0x804549A8
+
+donut/gfx/VISetting.cpp:
+	.text       start:0x801979AC end:0x80197D50
+	.rodata     start:0x804145B8 end:0x80414970
+	.data       start:0x804549A8 end:0x804549E0
+	.sdata2     start:0x8055F770 end:0x8055F778
+
 hel/math/Direction3.cpp:
 	.text       start:0x8019DF7C end:0x8019E590
 	.ctors      start:0x80406318 end:0x8040631C

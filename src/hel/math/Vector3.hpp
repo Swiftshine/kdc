@@ -29,10 +29,21 @@ namespace hel { namespace math {
         , z(rOther.z)
         { }
 
+        //TODO: Is this compiler generated?
         Vector3();
 
         void operator=(const Vector3& rOther);
-        Vector3 operator+(const Vector3& rOther) const;
+
+        //https://decomp.me/scratch/IP61P
+        Vector3 operator+(const Vector3& rOther) const {
+            Vector3 stack(*this);
+
+            stack.x = stack.x + rOther.x;
+            stack.y = stack.y + rOther.y;
+            stack.z = stack.z + rOther.z;
+            Vector3 stack2(stack);
+            return stack2;
+        }
         void operator+=(const Vector3& rOther);
         void operator-=(const Vector3& rOther);
         void operator*=(f32 scalar);

@@ -218,6 +218,7 @@ cflags_base = [
     "-i libs/MSL/MSL_C/PPC_EABI/Include",
     "-i src/revolution/",
     "-i src/nw4r/",
+    "-i libs/nrel/include",
     f"-i build/{config.version}/src",
     f"-DBUILD_VERSION={version_num}",
     f"-DVERSION_{config.version}",
@@ -500,6 +501,23 @@ config.libs = [
             Object(NonMatching, "donut/app/AppImpl.cpp"),
             Object(Matching, "donut/app/Locale.cpp"),
             Object(Matching, "donut/app/Message.cpp"),
+        ],
+    },
+    {
+        "lib": "gfc",
+        "mw_version": config.linker_version,
+        "cflags": cflags_donut,
+        "progress_category": "donut",
+        "objects": [
+            Object(NonMatching, "donut/gfx/EasyRender3D.cpp", extra_cflags=["-O3,s"]),
+            Object(Equivalent, "donut/gfx/FullScreenPlate.cpp"),
+            Object(Matching, "donut/gfx/GameScreen.cpp"),
+            Object(NonMatching, "donut/gfx/GXFifoMemoryManager.cpp"),
+            Object(Equivalent, "donut/gfx/GXFifoProtectCanceler.cpp"),
+            Object(Matching, "donut/gfx/TexBuffer.cpp"),
+            Object(NonMatching, "donut/gfx/TPLTexture.cpp", extra_cflags=["-O3,s"]),
+            Object(NonMatching, "donut/gfx/VISetting.cpp", extra_cflags=["-O3,s"]),
+
         ],
     },
     {

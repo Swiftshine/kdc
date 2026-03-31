@@ -80,6 +80,8 @@ VITVFormat VIGetTvFormat(void);
 VIScanMode VIGetScanMode(void);
 u32 VIGetDTVStatus(void);
 
+void VIEnableDimming(BOOL dimming);
+
 #ifdef __cplusplus
 }
 #endif

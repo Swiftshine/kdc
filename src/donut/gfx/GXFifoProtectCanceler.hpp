@@ -9,6 +9,8 @@ class GXFifoProtectCanceler {
 public:
     GXFifoProtectCanceler(GXFifoMemoryManager&);
     ~GXFifoProtectCanceler();
+
+    /* 0x0 */ GXFifoMemoryManager* mManager;
 };
 
 }

@@ -14,7 +14,10 @@ struct Rect {
 
     Rect() : left(0.0f), top(0.0f), right(0.0f), bottom(0.0f) {}
     Rect(f32 l, f32 t, f32 r, f32 b) : left(l), top(t), right(r), bottom(b) {}
-    ~Rect() {}
+
+    //TODO: Needs to be at least week defined in lyt_drawInfo
+    //NOTE: Gets merged into nw4r::ef::Emitter::~Emitter()`
+    ~Rect();
 
     void SetWidth(f32 width) {
         right = left + width;

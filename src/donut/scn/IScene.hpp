@@ -7,7 +7,7 @@ namespace scn {
     class IScene {
     public:
         /* 0x08 */ virtual void GetRuntimeTypeInfo();
-        /* 0x0C */ virtual ~IScene() { }
+        /* 0x0C */ virtual ~IScene();
         /* 0x10 */ virtual void updateMain();
         /* 0x14 */ virtual void updateUseGPU();
         /* 0x18 */ virtual void updateUseDebug();

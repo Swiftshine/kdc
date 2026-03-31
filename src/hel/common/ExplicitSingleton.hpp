@@ -26,6 +26,10 @@ public:
         object_ = pOther;
     }
 
+    inline bool operator!=(T* pOther) {
+        return object_ != pOther;
+    }
+
 private:
     static T* object_;
 };

@@ -1,4 +1,3 @@
-#include "GX/GXTypes.h"
 #pragma peephole off
 #include <donut/gfx/RenderSetting.hpp>
 #include <donut/gfx/VISetting.hpp>

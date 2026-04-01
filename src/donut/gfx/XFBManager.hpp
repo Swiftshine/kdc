@@ -17,8 +17,8 @@ public:
     void* target1();
     void* target2();
 
-    /* 0x0 */ mem::DataBlock mTarget1;
-    /* 0xC */ mem::DataBlock mTarget2;
+    /* 0x00 */ mem::DataBlock mTarget1;
+    /* 0x0C */ mem::DataBlock mTarget2;
     /* 0x18 */ bool mIsDrawTarget1;
 
 };

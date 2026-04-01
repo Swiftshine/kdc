@@ -22,7 +22,7 @@ namespace hel { namespace math {
         void operator=(const Point2& rOther);
 
         /* 0x0 */ f32 mX;
-        /* 0xC */ f32 mY;
+        /* 0x4 */ f32 mY;
     };
 } // math
 

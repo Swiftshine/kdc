@@ -58,11 +58,11 @@ public:
     //NOTE: Merged into gfx::GXFifoMemoryManager::setWriteEnable()
     void dirty();
 
-    /* 0x0 */ VISetting* mVISetting;
-    /* 0x4 */ Type mType;
-    /* 0x8 */ s32 m_8;
-    /* 0xC */ bool mDirty;
-    /* 0xD */ bool m_D;
+    /* 0x00 */ VISetting* mVISetting;
+    /* 0x04 */ Type mType;
+    /* 0x08 */ s32 m_8;
+    /* 0x0C */ bool mDirty;
+    /* 0x0D */ bool m_D;
     /* 0x10 */ Rect mViewportRect;
     /* 0x20 */ Rect mScissor;
     /* 0x30 */ RenderSettingCallback m_30;

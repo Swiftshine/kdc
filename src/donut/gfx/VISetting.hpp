@@ -31,11 +31,11 @@ namespace gfx {
             return (u32)(u16)((mRenderModeObj->fbWidth + 0xF) & 0xFFFFFFF0) * mRenderModeObj->xfbHeight * 2;
         }
 
-        /* 0x0 */ GXRenderModeObj* mRenderModeObj;
-        /* 0x4 */ u16 mScreenWidth;
-        /* 0x6 */ u16 mScreenHeight;
-        /* 0x8 */ bool mIsWidescreen;
-        /* 0xC */ u32 mMode;
+        /* 0x00 */ GXRenderModeObj* mRenderModeObj;
+        /* 0x04 */ u16 mScreenWidth;
+        /* 0x06 */ u16 mScreenHeight;
+        /* 0x08 */ bool mIsWidescreen;
+        /* 0x0C */ u32 mMode;
         /* 0x10 */ bool mDimming;
     };
 }

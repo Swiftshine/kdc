@@ -21,10 +21,10 @@ namespace gfx {
         util::Mutex* mutex();
 
         private:
-        /* 0x0 */ u32 mSize;
-        /* 0x4 */ u32 m_4;
-        /* 0x8 */ void* mData;
-        /* 0xC */ bool mWriteEnabled;
+        /* 0x00 */ u32 mSize;
+        /* 0x04 */ u32 m_4;
+        /* 0x08 */ void* mData;
+        /* 0x0C */ bool mWriteEnabled;
         /* 0x10 */ util::Mutex mMutex;
     };
 

@@ -9,5 +9,5 @@ MemBlock MemBlock::EmptyBlock() {
 
 MemBlock::MemBlock(void* pData, u32 size)
     : mSize(size)
-    , mData(pData)
+    , mStartAddress(pData)
 { }

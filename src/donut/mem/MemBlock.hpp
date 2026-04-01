@@ -11,8 +11,11 @@ public:
 
     static MemBlock EmptyBlock();
 
+    //NOTE: Is merged into GetZeroBufferAddress__Q44nw4r3snd6detail9AxManagerFv
+    void* startAddress() const;
+
     /* 0x0 */ u32 mSize;
-    /* 0x4 */ void* mData;
+    /* 0x4 */ void* mStartAddress;
 };
 }
 

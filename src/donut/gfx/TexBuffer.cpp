@@ -10,7 +10,7 @@ TexBuffer::TexBuffer(mem::IAllocator& rAllocator, u16 width, u16 height, GXTexFm
     , mHeight(height & 0xFFFF)
     , mFormat(format)
 {
-    DCInvalidateRange(mDataBlock.block().mData, mDataBlock.block().mSize);
+    DCInvalidateRange(mDataBlock.block().mStartAddress, mDataBlock.block().mSize);
 }
 
 TexBuffer::~TexBuffer() {}

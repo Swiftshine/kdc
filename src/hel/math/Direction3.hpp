@@ -40,8 +40,8 @@ namespace hel { namespace math {
 
         void normalize();
 
-        /* 0x0 */ Vector3 mFront;
-        /* 0xC */ Vector3 mUp;
+        /* 0x00 */ Vector3 mFront;
+        /* 0x0C */ Vector3 mUp;
         /* 0x18 */ Vector3 mLeft;
     };
 } // math

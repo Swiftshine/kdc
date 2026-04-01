@@ -400,6 +400,12 @@ donut/gfx/GXFifoMemoryManager.cpp:
 donut/gfx/GXFifoProtectCanceler.cpp:
 	.text       start:0x801961FC end:0x801962A8
 
+donut/gfx/RenderSetting.cpp:
+	.text       start:0x801962A8 end:0x80196E2C
+	.bss        start:0x80544860 end:0x80545260
+	.sdata2     start:0x8055F720 end:0x8055F738
+	.sbss2      start:0x805643D8 end:0x805643E0
+
 donut/gfx/TexBuffer.cpp:
 	.text       start:0x80196E2C end:0x80196F38
 
@@ -412,6 +418,9 @@ donut/gfx/VISetting.cpp:
 	.rodata     start:0x804145B8 end:0x80414970
 	.data       start:0x804549A8 end:0x804549E0
 	.sdata2     start:0x8055F770 end:0x8055F778
+
+donut/gfx/XFBManager.cpp:
+	.text       start:0x80197D50 end:0x80197EF4
 
 hel/math/Direction3.cpp:
 	.text       start:0x8019DF7C end:0x8019E590

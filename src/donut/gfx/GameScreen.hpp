@@ -25,7 +25,7 @@ public:
     ScreenType getScreenType() const;
 
 private:
-    ScreenType mScreenType;
+    /* 0x0 */ ScreenType mScreenType;
 };
 
 }

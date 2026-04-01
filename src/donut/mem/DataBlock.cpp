@@ -10,5 +10,5 @@ DataBlock::DataBlock(u32 size, s32 unused, IAllocator& rAllocator)
 {}
 
 DataBlock::~DataBlock() {
-    mAllocator->freeData(mBlock.mData);
+    mAllocator->freeData(mBlock.mStartAddress);
 }

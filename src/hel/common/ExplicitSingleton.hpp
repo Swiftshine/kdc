@@ -30,6 +30,9 @@ public:
         return object_ != pOther;
     }
 
+    inline T* object() {
+        return object_;
+    }
 private:
     static T* object_;
 };

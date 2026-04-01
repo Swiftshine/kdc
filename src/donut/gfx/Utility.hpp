@@ -9,6 +9,7 @@ namespace Utility {
     void SetupGXForScreen2D(f32, f32);
     u32 CurrentGameWidth();
     u32 CurrentGameHeight();
+    void SetZBufferRange(f32, f32);
 }
 }
 

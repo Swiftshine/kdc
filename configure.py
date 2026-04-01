@@ -514,10 +514,11 @@ config.libs = [
             Object(Matching, "donut/gfx/GameScreen.cpp"),
             Object(NonMatching, "donut/gfx/GXFifoMemoryManager.cpp"),
             Object(Equivalent, "donut/gfx/GXFifoProtectCanceler.cpp"),
+            Object(NonMatching, "donut/gfx/RenderSetting.cpp", extra_cflags=["-O3,s"]),
             Object(Matching, "donut/gfx/TexBuffer.cpp"),
             Object(NonMatching, "donut/gfx/TPLTexture.cpp", extra_cflags=["-O3,s"]),
             Object(NonMatching, "donut/gfx/VISetting.cpp", extra_cflags=["-O3,s"]),
-
+            Object(NonMatching, "donut/gfx/XFBManager.cpp", extra_cflags=["-O3,s"]),
         ],
     },
     {

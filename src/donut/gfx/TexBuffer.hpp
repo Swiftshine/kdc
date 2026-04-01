@@ -20,9 +20,9 @@ namespace gfx {
 
         u16 height() const;
 
-        /* 0x0 */ mem::DataBlock mDataBlock;
-        /* 0xC */ u16 mWidth;
-        /* 0xE */ u16 mHeight;
+        /* 0x00 */ mem::DataBlock mDataBlock;
+        /* 0x0C */ u16 mWidth;
+        /* 0x0E */ u16 mHeight;
         /* 0x10 */ GXTexFmt mFormat;
     };
 }

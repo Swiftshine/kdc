@@ -11,8 +11,8 @@ namespace util {
 
         s32 GetCurrentThreadPriority();
 
-        /* 0x0 */ mem::DataBlock mDataBlock;
-        /* 0x8 */ s32 m_8;
+        /* 0x00 */ mem::DataBlock mDataBlock;
+        /* 0x08 */ s32 m_8;
         /* 0x10 */ OSThread mThread;
     };
 }

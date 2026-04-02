@@ -1,7 +1,7 @@
 #ifndef DONUT_GFX_EFBTOLETTERBOX_HPP
 #define DONUT_GFX_EFBTOLETTERBOX_HPP
 
-#include <types.h>
+#include <donut/gfx/TexBuffer.hpp>
 
 namespace gfx {
 
@@ -12,8 +12,12 @@ public:
     EFBToLetterBox(GameScreen&);
     ~EFBToLetterBox();
     void draw();
+
+    //NOTE: Merged into util::Delegate<Fv_v,64>::DelegateHeap::allocatorAlloc(unsigned long, long)
+    TexBuffer texBuffer();
 private:
-    STRUCT_FILL(0x18);
+    /* 0x0 */ GameScreen* mGameScreen;
+    /* 0x4 */ TexBuffer mBuffer;
 };
 }
 

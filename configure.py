@@ -510,6 +510,7 @@ config.libs = [
         "progress_category": "donut",
         "objects": [
             Object(NonMatching, "donut/gfx/EasyRender3D.cpp", extra_cflags=["-O3,s"]),
+            Object(NonMatching, "donut/gfx/EFBToLetterBox.cpp", extra_cflags=["-O3,s"]),
             Object(Equivalent, "donut/gfx/FullScreenPlate.cpp"),
             Object(Matching, "donut/gfx/GameScreen.cpp"),
             Object(NonMatching, "donut/gfx/GXFifoMemoryManager.cpp"),

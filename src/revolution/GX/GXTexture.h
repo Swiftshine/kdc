@@ -43,6 +43,7 @@ GXTexFmt GXGetTexObjFmt(const GXTexObj* obj);
 GXBool GXGetTexObjMipMap(const GXTexObj* obj);
 
 void GXLoadTexObj(const GXTexObj*, GXTexMapID);
+void* GXGetTexObjUserData(const GXTexObj* obj);
 
 void GXInitTexObjTlut(GXTexObj*, u32);
 u32 GXGetTexObjTlut(GXTexObj*);

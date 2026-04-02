@@ -85,12 +85,12 @@ inline int ComparePtr(const void *pPtr1, const void *pPtr2) {
  * Rounding
  */
 template <typename T>
-inline T RoundUp(T t, unsigned int alignment) {
-    return (alignment + t - 1) & ~(alignment - 1);
+T RoundUp(T t, unsigned int alignment) {
+    return (t + alignment - 1) & ~(alignment - 1);
 }
 
 template <typename T>
-inline void *RoundUp(T *pPtr, unsigned int alignment) {
+void *RoundUp(T *pPtr, unsigned int alignment) {
     u32 value = reinterpret_cast<u32>(pPtr);
     u32 rounded = (alignment + value - 1) & ~(alignment - 1);
     return reinterpret_cast<void *>(rounded);

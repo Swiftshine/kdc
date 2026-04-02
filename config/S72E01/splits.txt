@@ -386,6 +386,10 @@ donut/gfx/EasyRender3D.cpp:
 donut/gfx/EasyTex3D.cpp:
 	.text       start:0x80195854 end:0x80195934
 
+donut/gfx/EFBToLetterBox.cpp:
+	.text       start:0x80195934 end:0x80195F58
+	.sdata2     start:0x8055F6F0 end:0x8055F710
+
 donut/gfx/FullScreenPlate.cpp:
 	.text       start:0x80195F58 end:0x80196050
 	.sdata2     start:0x8055F710 end:0x8055F720

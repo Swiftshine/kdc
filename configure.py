@@ -504,7 +504,7 @@ config.libs = [
         ],
     },
     {
-        "lib": "gfc",
+        "lib": "gfx",
         "mw_version": config.linker_version,
         "cflags": cflags_donut,
         "progress_category": "donut",
@@ -520,6 +520,15 @@ config.libs = [
             Object(NonMatching, "donut/gfx/TPLTexturePlate.cpp", extra_cflags=["-O3,s"]),
             Object(NonMatching, "donut/gfx/VISetting.cpp", extra_cflags=["-O3,s"]),
             Object(NonMatching, "donut/gfx/XFBManager.cpp", extra_cflags=["-O3,s"]),
+        ],
+    },
+    {
+        "lib": "gobj",
+        "mw_version": config.linker_version,
+        "cflags": cflags_donut,
+        "progress_category": "donut",
+        "objects": [
+            Object(Matching, "donut/gobj/FootState.cpp", extra_cflags=["-O3,s"]),
         ],
     },
     {

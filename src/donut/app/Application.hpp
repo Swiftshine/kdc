@@ -2,8 +2,9 @@
 #define DONUT_APP_APPLICATION_HPP
 
 #include <hel/common/ExplicitSingleton.hpp>
-#include "app/HIDErrorMenu.hpp"
-#include "msg/Manager.hpp"
+#include <donut/app/HIDErrorMenu.hpp>
+#include <donut/msg/Manager.hpp>
+#include <donut/gfx/GameScreen.hpp>
 
 namespace app {
 
@@ -13,6 +14,7 @@ public:
 
     HIDErrorMenu& hidErrorMenu();
     msg::Manager& messageManager();
+    gfx::GameScreen& gameScreen();
 };
 
 

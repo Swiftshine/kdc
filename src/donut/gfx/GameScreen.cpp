@@ -7,14 +7,14 @@ GameScreen::GameScreen()
     : mScreenType(SCREEN_TYPE_WIDESCREEN)
 { }
 
-u32 GameScreen::gameWidth() const {
+u16 GameScreen::gameWidth() const {
     if (mScreenType == SCREEN_TYPE_FULLSCREEN) {
         return 608;
     }
     return 832;
 }
 
-u32 GameScreen::gameHeight() const {
+u16 GameScreen::gameHeight() const {
     return 456;
 }
 

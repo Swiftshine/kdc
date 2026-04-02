@@ -14,8 +14,8 @@ public:
 
     GameScreen();
 
-    u32 gameWidth() const;
-    u32 gameHeight() const;
+    u16 gameWidth() const;
+    u16 gameHeight() const;
 
     //NOTE: is merged into GameScreen's constructor
     void setDefaultScreenType();

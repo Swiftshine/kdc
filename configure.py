@@ -519,6 +519,7 @@ config.libs = [
             Object(Matching, "donut/gfx/TexBuffer.cpp"),
             Object(NonMatching, "donut/gfx/TPLTexture.cpp", extra_cflags=["-O3,s"]),
             Object(NonMatching, "donut/gfx/TPLTexturePlate.cpp", extra_cflags=["-O3,s"]),
+            Object(NonMatching, "donut/gfx/Utility.cpp", extra_cflags=["-O3,s"]),
             Object(NonMatching, "donut/gfx/VISetting.cpp", extra_cflags=["-O3,s"]),
             Object(NonMatching, "donut/gfx/XFBManager.cpp", extra_cflags=["-O3,s"]),
         ],

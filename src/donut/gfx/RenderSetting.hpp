@@ -6,7 +6,7 @@
 #include <hel/common/ExplicitSingleton.hpp>
 
 namespace nrel { namespace ezrender {
-    class OrthoCameraSetting;
+    class ViewportSetting;
 }; };
 
 namespace gfx {
@@ -53,8 +53,8 @@ public:
     GXRenderModeObj* rmode() const;
     void type(Type type);
     void setupG3DCamera(nw4r::g3d::Camera camera);
-    void setViewportValue(f32, f32, f32, f32);
-    nrel::ezrender::OrthoCameraSetting* nrelViewportSetting() const;
+    void setViewportValue(f32 left, f32 top, f32 right, f32 bottom);
+    nrel::ezrender::ViewportSetting nrelViewportSetting() const;
     //NOTE: Merged into gfx::GXFifoMemoryManager::setWriteEnable()
     void dirty();
 

@@ -4,6 +4,7 @@
 #include <donut/gfx/VISetting.hpp>
 #include <donut/gfx/Utility.hpp>
 #include <nrel/OrthoCameraSetting.hpp>
+#include <nrel/ViewportSetting.hpp>
 
 namespace {
     static const f32 VIEWPORT_NEAR = 0;
@@ -187,8 +188,8 @@ namespace gfx {
     }
 
     //https://decomp.me/scratch/mEQFW
-    nrel::ezrender::OrthoCameraSetting* RenderSetting::nrelViewportSetting() const {
-        return nrel::ezrender::OrthoCameraSetting::create(mViewportRect.mLeft, mViewportRect.mTop, mViewportRect.mRight,
+    nrel::ezrender::ViewportSetting RenderSetting::nrelViewportSetting() const {
+        return nrel::ezrender::ViewportSetting::create(mViewportRect.mLeft, mViewportRect.mTop, mViewportRect.mRight,
             mViewportRect.mBottom, VIEWPORT_NEAR, 1.0f);
     }
 

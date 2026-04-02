@@ -421,6 +421,10 @@ donut/gfx/TPLTexturePlate.cpp:
 	.text       start:0x80197024 end:0x801974C0
 	.sdata2     start:0x8055F738 end:0x8055F758
 
+donut/gfx/Utility.cpp:
+	.text       start:0x801974C0 end:0x801979AC
+	.sdata2     start:0x8055F758 end:0x8055F770
+
 donut/gfx/VISetting.cpp:
 	.text       start:0x801979AC end:0x80197D50
 	.rodata     start:0x804145B8 end:0x80414970

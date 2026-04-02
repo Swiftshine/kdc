@@ -6,7 +6,7 @@
 #include <donut/file/FileAccessor.hpp>
 
 namespace gfx {
-    class TPLTexture : TextureObj {
+    class TPLTexture : public TextureObj {
     public:
         TPLTexture(void*);
         //Unused in the binary, however we need it so that TextureObj::texObj is called

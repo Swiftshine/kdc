@@ -539,6 +539,7 @@ config.libs = [
         "cflags": cflags_donut,
         "progress_category": "donut",
         "objects": [
+            Object(Matching, "donut/hid/Accel.cpp", extra_cflags=["-O3,s"]),
             Object(Matching, "donut/hid/Button.cpp", extra_cflags=["-O3,s"]),
             Object(Equivalent, "donut/hid/DPD.cpp", extra_cflags=["-O3,s"]),
             Object(NonMatching, "donut/hid/LibInitializer.cpp", extra_cflags=["-O3,s"]),

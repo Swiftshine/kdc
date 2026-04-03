@@ -476,6 +476,10 @@ hel/geo/Rect.cpp:
 	.text       start:0x8019FD54 end:0x801A01FC
 	.sdata2     start:0x8055F8A8 end:0x8055F8B8
 
+donut/hid/DPD.cpp:
+	.text       start:0x801A2268 end:0x801A22EC
+	.sdata2     start:0x8055F908 end:0x8055F910
+
 donut/hid/Stick.cpp:
 	.text       start:0x801A4778 end:0x801A4810
 	.sdata2     start:0x8055F930 end:0x8055F938

@@ -476,6 +476,9 @@ hel/geo/Rect.cpp:
 	.text       start:0x8019FD54 end:0x801A01FC
 	.sdata2     start:0x8055F8A8 end:0x8055F8B8
 
+donut/hid/Accel.cpp:
+	.text       start:0x801A21FC end:0x801A2224
+
 donut/hid/Button.cpp:
 	.text       start:0x801A2224 end:0x801A2268
 

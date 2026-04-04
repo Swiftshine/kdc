@@ -491,6 +491,11 @@ donut/hid/LibInitializer.cpp:
 	.sbss       start:0x8055D280 end:0x8055D288
 	.sdata2     start:0x8055F918 end:0x8055F930
 
+donut/hid/RumbleResource.cpp:
+	.text       start:0x801A4178 end:0x801A4268
+	.data       start:0x80456F40 end:0x80456F80
+	.sdata      start:0x80556EA0 end:0x80556EA8
+
 donut/hid/SimpleGCHID.cpp:
 	.text       start:0x801A4268 end:0x801A4408
 

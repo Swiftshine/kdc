@@ -542,6 +542,7 @@ config.libs = [
             Object(Matching, "donut/hid/Accel.cpp", extra_cflags=["-O3,s"]),
             Object(Matching, "donut/hid/Button.cpp", extra_cflags=["-O3,s"]),
             Object(Equivalent, "donut/hid/DPD.cpp", extra_cflags=["-O3,s"]),
+            Object(NonMatching, "donut/hid/RumbleResource.cpp", extra_cflags=["-O3,s"]),
             Object(NonMatching, "donut/hid/SimpleGCHID.cpp", extra_cflags=["-O3,s"]),
             Object(NonMatching, "donut/hid/LibInitializer.cpp", extra_cflags=["-O3,s"]),
             Object(Matching, "donut/hid/Stick.cpp", extra_cflags=["-O3,s"]),

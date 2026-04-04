@@ -42,6 +42,13 @@ public:
     #else
     void* dataHeadAddress();
     #endif
+
+    bool isValidData() const;
+
+    inline XDataHeader* header() const {
+        return (XDataHeader*)&mHeader;
+    }
+
 private:
     /* 0x0 */ XDataHeader mHeader;
 };

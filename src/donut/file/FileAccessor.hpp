@@ -8,7 +8,11 @@ namespace file {
 class FileAccessor {
 public:
     FileAccessor();
+    FileAccessor(const char*, bool);
     ~FileAccessor();
+    //TODO: Double check this
+    void* block() const;
+
 private:
     STRUCT_FILL(0x4);
 };

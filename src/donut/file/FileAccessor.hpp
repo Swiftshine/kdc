@@ -2,6 +2,7 @@
 #define DONUT_FILE_FILE_ACCESSOR_HPP
 
 #include <types.h>
+#include <donut/mem/MemBlock.hpp>
 
 namespace file {
 
@@ -11,7 +12,7 @@ public:
     FileAccessor(const char*, bool);
     ~FileAccessor();
     //TODO: Double check this
-    void* block() const;
+    mem::MemBlock block() const;
 
 private:
     STRUCT_FILL(0x4);

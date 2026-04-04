@@ -11,13 +11,10 @@ namespace {
     };
 }
 
-//https://decomp.me/scratch/493hJ
 RumbleResource::RumbleResource(hid::RumbleResourceKind kind)
     : mFileAccessor(T_DAT_PATH_TABLE[kind], false)
-{
-    xdata::XData* data = (xdata::XData*)mFileAccessor.block();
-    mRumbleData = data;
-}
+    , mRumbleData((xdata::XData*)mFileAccessor.block().mStartAddress)
+{ }
 
 //https://decomp.me/scratch/2oK6D
 u32 RumbleResource::commandList(u32 arg1) const {

@@ -218,6 +218,7 @@ cflags_base = [
     "-i libs/MSL/MSL_C/PPC_EABI/Include",
     "-i src/revolution/",
     "-i src/nw4r/",
+    "-i libs/libms/include",
     "-i libs/nrel/include",
     f"-i build/{config.version}/src",
     f"-DBUILD_VERSION={version_num}",
@@ -631,6 +632,15 @@ config.libs = [
         "objects": [
             Object(Matching, "donut/mem/MemBlock.cpp"),
             Object(Matching, "donut/mem/DataBlock.cpp"),
+        ],
+    },
+    {
+        "lib": "donut/msg",
+        "mw_version": config.linker_version,
+        "cflags": cflags_donut,
+        "progress_category": "donut",
+        "objects": [
+            Object(Equivalent, "donut/msg/Project.cpp", extra_cflags=["-O3,s"]),
         ],
     },
 ]

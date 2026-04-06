@@ -633,7 +633,7 @@ config.libs = [
             Object(Matching, "donut/mem/DataBlock.cpp"),
             Object(NonMatching, "donut/mem/HeapCompactionNode.cpp", extra_cflags=["-O3,s"]),
             Object(Matching, "donut/mem/MemBlock.cpp"),
-            Object(NonMatching, "donut/mem/OperatorNewDelete.cpp", extra_cflags=["-O3,s"]),
+            Object(Equivalent, "donut/mem/OperatorNewDelete.cpp", extra_cflags=["-O3,s"]),
         ],
     },
     {

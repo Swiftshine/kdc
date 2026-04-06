@@ -36,11 +36,9 @@ namespace gfx {
         }
     }
 
-    //TODO: Similar thing to XFBManager where mem2FixHeap is used as an IAllocator
-    //Very possible HeapExp inherits IAllocator
     EFBToLetterBox::EFBToLetterBox(GameScreen& rGameScreen)
         : mGameScreen(&rGameScreen)
-        , mBuffer(*(mem::IAllocator*)&mem::Memory::Instance->mem2FixHeap(), 640,
+        , mBuffer(mem::Memory::Instance->mem2FixHeap(), 640,
         456, GX_TF_RGBA8)
     {
     }

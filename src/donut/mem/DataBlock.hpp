@@ -10,7 +10,7 @@ class IAllocator;
 
 class DataBlock {
 public:
-    DataBlock(u32 size, s32 unused, IAllocator& rAllocator);
+    DataBlock(u32 size, s32 arg2, IAllocator& rAllocator);
     ~DataBlock();
 
     MemBlock block() const {

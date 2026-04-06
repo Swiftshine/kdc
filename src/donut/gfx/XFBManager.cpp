@@ -5,14 +5,10 @@
 
 using gfx::XFBManager;
 
-//TODO: Does HeapExp inherit IAllocator?
-//This can't be a member or virtual or anything
-//Its just pure mem2FixHeap
 XFBManager::XFBManager(const gfx::VISetting& rVISetting)
-    : mTarget1(rVISetting.fbSize(), 0x20, *(mem::IAllocator*)&mem::Memory::Instance->mem2FixHeap())
-    , mTarget2(rVISetting.fbSize(), 0x20, *(mem::IAllocator*)&mem::Memory::Instance->mem2FixHeap())
+    : mTarget1(rVISetting.fbSize(), 0x20, mem::Memory::Instance->mem2FixHeap())
+    , mTarget2(rVISetting.fbSize(), 0x20, mem::Memory::Instance->mem2FixHeap())
     , mIsDrawTarget1(false)
-
 {
     VISetNextFrameBuffer(drawTargetXFB());
     VIWaitForRetrace();

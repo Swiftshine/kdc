@@ -1,16 +1,17 @@
 #ifndef DONUT_MEM_HEAPEXP_HPP
 #define DONUT_MEM_HEAPEXP_HPP
 
-#include "mem/IAllocator.hpp"
+#include <donut/mem/IAllocator.hpp>
 
 namespace mem {
 
-class HeapExp {
+class HeapExp : public IAllocator {
 
 public:
 
-    /* 0x0 */ virtual ~HeapExp();
-    /* 0x4 */ virtual void* allocatorAlloc(u32, s32);
+    /* 0x08 */ virtual ~HeapExp();
+    /* 0x0C */ virtual void* allocatorAlloc(u32, s32);
+    /* 0x10 */ virtual void allocatorFree(void* pData);
 
     void* alloc(u32 size);
     void free(void* pData);

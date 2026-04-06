@@ -4,11 +4,11 @@
 
 using mem::DataBlock;
 
-DataBlock::DataBlock(u32 size, s32 unused, IAllocator& rAllocator)
+DataBlock::DataBlock(u32 size, s32 arg2, IAllocator& rAllocator)
     : mAllocator(&rAllocator)
-    , mBlock(rAllocator.getPtr(), size)
+    , mBlock(rAllocator.allocatorAlloc(size, arg2), size)
 {}
 
 DataBlock::~DataBlock() {
-    mAllocator->freeData(mBlock.mStartAddress);
+    mAllocator->allocatorFree(mBlock.mStartAddress);
 }

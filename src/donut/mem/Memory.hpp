@@ -18,6 +18,8 @@ public:
     HeapExp& mem2FixHeap();
     IAllocator& sceneHeap();
     HeapCompaction& /* probably? */ externalHeap();
+
+    static void SetupIfNotSetup();
 };
 
 }

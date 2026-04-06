@@ -512,6 +512,11 @@ donut/mem/HeapCompactionNode.cpp:
 donut/mem/MemBlock.cpp:
 	.text       start:0x801BF1B4 end:0x801BF1F8
 
+donut/mem/OperatorNewDelete.cpp:
+	.text       start:0x801BF618 end:0x801BF760
+	.ctors      start:0x80406338 end:0x8040633C
+	.sbss       start:0x8055D2A8 end:0x8055D2B0
+
 donut/msg/Message.cpp:
 	.text       start:0x801D1404 end:0x801D168C
 	.data       start:0x8045D1D0 end:0x8045D2A8

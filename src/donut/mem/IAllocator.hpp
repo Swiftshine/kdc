@@ -8,13 +8,9 @@ class IAllocator {
     public:
 
     //NOTE: Gets merged into IScene's deconstructor
-    ~IAllocator();
-
-    //TODO: Actually figure out and define these
-    //Please note none of these are symbols in the map file and seem to be inlined
-    virtual void unknown1();
-    virtual void* getPtr();
-    virtual void freeData(void* pData);
+    /* 0x08 */ virtual ~IAllocator() = 0;
+    /* 0x0C */ virtual void* allocatorAlloc(u32 size, s32 arg2) = 0;
+    /* 0x10 */ virtual void allocatorFree(void* pData) = 0;
 
 };
 

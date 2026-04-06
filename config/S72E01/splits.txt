@@ -506,6 +506,9 @@ donut/hid/Stick.cpp:
 donut/mem/DataBlock.cpp:
 	.text       start:0x801BD2A4 end:0x801BD370
 
+donut/mem/HeapCompactionNode.cpp:
+	.text       start:0x801BE1F8 end:0x801BE2A8
+
 donut/mem/MemBlock.cpp:
 	.text       start:0x801BF1B4 end:0x801BF1F8
 

@@ -1,4 +1,3 @@
-#include "MEM/mem_expHeap.h"
 #pragma peephole off
 #include <donut/mem/HeapExp.hpp>
 #include <donut/mem/Utility.hpp>

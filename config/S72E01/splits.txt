@@ -512,6 +512,10 @@ donut/mem/GlobalNewDeleteChanger.cpp:
 donut/mem/HeapCompactionNode.cpp:
 	.text       start:0x801BE1F8 end:0x801BE2A8
 
+donut/mem/HeapExp.cpp:
+	.text       start:0x801BE2B0 end:0x801BE640
+	.data       start:0x80459D10 end:0x80459D48
+
 donut/mem/MemBlock.cpp:
 	.text       start:0x801BF1B4 end:0x801BF1F8
 

@@ -1,7 +1,6 @@
 #ifndef HEL_FIXED_STRING_HPP
 #define HEL_FIXED_STRING_HPP
 
-#include <types.h>
 #include <hel/common/Traits.hpp>
 
 namespace hel {

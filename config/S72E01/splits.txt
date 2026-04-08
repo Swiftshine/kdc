@@ -503,6 +503,9 @@ donut/hid/Stick.cpp:
 	.text       start:0x801A4778 end:0x801A4810
 	.sdata2     start:0x8055F930 end:0x8055F938
 
+donut/mem/AllocatorHandle.cpp:
+	.text       start:0x801BD204 end:0x801BD204
+
 donut/mem/DataBlock.cpp:
 	.text       start:0x801BD2A4 end:0x801BD370
 
@@ -511,6 +514,9 @@ donut/mem/GlobalNewDeleteChanger.cpp:
 
 donut/mem/HeapCompactionNode.cpp:
 	.text       start:0x801BE1F8 end:0x801BE2A8
+
+donut/mem/HeapCompactionNodeHandle.cpp:
+	.text       start:0x801BE2A8 end:0x801BE2B0
 
 donut/mem/HeapExp.cpp:
 	.text       start:0x801BE2B0 end:0x801BE640

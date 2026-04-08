@@ -631,6 +631,8 @@ config.libs = [
         "progress_category": "donut",
         "objects": [
             Object(Matching, "donut/mem/DataBlock.cpp"),
+            Object(Matching, "donut/mem/HeapCompactionNodeHandle.cpp", extra_cflags=["-O3,s"]),
+            Object(Matching, "donut/mem/AllocatorHandle.cpp", extra_cflags=["-O3,s"]),
             Object(Matching, "donut/mem/GlobalNewDeleteChanger.cpp", extra_cflags=["-O3,s"]),
             Object(NonMatching, "donut/mem/HeapCompactionNode.cpp", extra_cflags=["-O3,s"]),
             Object(NonMatching, "donut/mem/HeapExp.cpp", extra_cflags=["-O3,s"]),

@@ -16,7 +16,7 @@ public:
 
     HeapExp& mem1FixHeap();
     HeapExp& mem2FixHeap();
-    IAllocator& sceneHeap();
+    HeapExp& sceneHeap();
     HeapCompaction& /* probably? */ externalHeap();
 
     static void SetupIfNotSetup();

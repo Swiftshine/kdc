@@ -5,6 +5,7 @@
 #include <donut/app/HIDErrorMenu.hpp>
 #include <donut/msg/Manager.hpp>
 #include <donut/gfx/GameScreen.hpp>
+#include <donut/preload/PreLoadManager.hpp>
 
 namespace app {
 
@@ -15,6 +16,7 @@ public:
     HIDErrorMenu& hidErrorMenu();
     msg::Manager& messageManager();
     gfx::GameScreen& gameScreen();
+    preload::PreLoadManager& preLoadManager();
 };
 
 

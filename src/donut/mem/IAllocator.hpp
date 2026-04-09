@@ -8,9 +8,10 @@ class IAllocator {
     public:
 
     //NOTE: Gets merged into IScene's deconstructor
-    /* 0x08 */ virtual ~IAllocator() = 0;
-    /* 0x0C */ virtual void* allocatorAlloc(u32 size, s32 arg2) = 0;
-    /* 0x10 */ virtual void allocatorFree(void* pData) = 0;
+    /* 0x08 */ virtual ~IAllocator();
+
+    /* 0x0C */ virtual void* allocatorAlloc(u32 size, s32 arg2);
+    /* 0x10 */ virtual void allocatorFree(void* pData);
 
 };
 

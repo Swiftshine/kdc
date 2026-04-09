@@ -377,6 +377,10 @@ donut/app/Locale.cpp:
 donut/app/Message.cpp:
 	.text       start:0x801793BC end:0x801798A8
 
+donut/file/FileLoader.cpp:
+	.text       start:0x80187C00 end:0x80188204
+	.sdata      start:0x80556D18 end:0x80556D20
+
 donut/gfx/EasyRender3D.cpp:
 	.text       start:0x80194FC4 end:0x80195854
 	.ctors      start:0x804062E8 end:0x804062EC

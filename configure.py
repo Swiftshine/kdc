@@ -505,6 +505,15 @@ config.libs = [
         ],
     },
     {
+        "lib": "file",
+        "mw_version": config.linker_version,
+        "cflags": cflags_donut,
+        "progress_category": "donut",
+        "objects": [
+            Object(NonMatching, "donut/file/FileLoader.cpp", extra_cflags=["-O3,s"]),
+        ],
+    },
+    {
         "lib": "gfx",
         "mw_version": config.linker_version,
         "cflags": cflags_donut,

@@ -14,7 +14,7 @@ public:
     HeapCompactionNodeHandle(HeapCompactionNode& rNode);
 
     //TODO: Does this exist?
-    ~HeapCompactionNodeHandle();
+    ~HeapCompactionNodeHandle() {}
 
     //NOTE: Merged into nrel::mem::ExpHeapBlockIterator::hasNext() const
     bool isValid() const;

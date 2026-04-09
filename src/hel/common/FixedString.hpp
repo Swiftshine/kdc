@@ -9,8 +9,10 @@ namespace common {
 template <size_t S>
 class FixedString {
 public:
+    FixedString();
+
     FixedString(const char* pString)
-        : mString(0)
+        : mString()
     {
         Traits<char>::Strncpy(mString, pString, S);
     }
@@ -18,7 +20,6 @@ public:
     inline char* str() const {
         return (char*)mString;
     }
-
 private:
     /* 0x0 */ char mString[S];
 };

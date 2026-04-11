@@ -1,7 +1,7 @@
 #ifndef DONUT_FILE_FILEMANAGER_HPP
 #define DONUT_FILE_FILEMANAGER_HPP
 
-#include <types.h>
+#include <donut/file/FileTree.hpp>
 
 namespace file {
 
@@ -11,8 +11,13 @@ public:
     ~FileManager();
 
     void clearFilesIfEnable();
+
+    //NOTE: Merged into DefaultSwitchThreadCallback
+    FileTree* treeRoot() const;
+
 private:
-    STRUCT_FILL(0x44);
+    /* 0x00 */ FileTree mTreeRoot;
+    /* 0x40 */ s32 m_40;
 };
 
 }

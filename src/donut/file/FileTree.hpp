@@ -4,18 +4,19 @@
 #include <types.h>
 
 namespace file {
-class IFileInitializer;
-class FileLoader;
-class FileTree {
-public:
-    FileTree();
-    ~FileTree();
+    class IFileInitializer;
+    class FileLoader;
 
-    FileLoader* findFile(const char* pFilePath) const;
-    FileLoader* addFile(const char* pFilePath, const IFileInitializer* pInitializer);
-private:
-    STRUCT_FILL(0x40);
-};
+    class FileTree {
+    public:
+        FileTree();
+        ~FileTree();
+
+        FileLoader* findFile(const char* pFilePath) const;
+        FileLoader* addFile(const char* pFilePath, const IFileInitializer* pInitializer);
+    private:
+        STRUCT_FILL(0x40);
+    };
 
 }
 

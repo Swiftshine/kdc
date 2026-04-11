@@ -6,6 +6,7 @@
 #include <donut/msg/Manager.hpp>
 #include <donut/gfx/GameScreen.hpp>
 #include <donut/preload/PreLoadManager.hpp>
+#include <donut/file/FileManager.hpp>
 
 namespace app {
 
@@ -17,6 +18,7 @@ public:
     msg::Manager& messageManager();
     gfx::GameScreen& gameScreen();
     preload::PreLoadManager& preLoadManager();
+    file::FileManager& fileManager();
 };
 
 

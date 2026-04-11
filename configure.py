@@ -511,6 +511,7 @@ config.libs = [
         "progress_category": "donut",
         "objects": [
             Object(NonMatching, "donut/file/FileLoader.cpp", extra_cflags=["-O3,s"]),
+            Object(Equivalent, "donut/file/FileAccessor.cpp", extra_cflags=["-O3,s"]),
         ],
     },
     {

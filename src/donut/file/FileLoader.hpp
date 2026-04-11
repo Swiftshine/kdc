@@ -1,5 +1,5 @@
-#ifndef DONUT_FILE_FILE_ACCESSOR_HPP
-#define DONUT_FILE_FILE_ACCESSOR_HPP
+#ifndef DONUT_FILE_FILE_LOADER_HPP
+#define DONUT_FILE_FILE_LOADER_HPP
 
 #include <donut/mem/HeapCompactionNodeHandle.hpp>
 #include <donut/mem/MemBlock.hpp>

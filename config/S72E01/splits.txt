@@ -380,6 +380,9 @@ donut/app/Message.cpp:
 donut/file/FileAccessor.cpp:
 	.text       start:0x80187A50 end:0x80187B5C
 
+donut/file/FileClearDisableScope.cpp:
+	.text       start:0x80187B5C end:0x80187C00
+
 donut/file/FileLoader.cpp:
 	.text       start:0x80187C00 end:0x80188204
 	.sdata      start:0x80556D18 end:0x80556D20

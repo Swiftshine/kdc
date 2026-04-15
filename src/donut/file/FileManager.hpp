@@ -14,6 +14,8 @@ public:
 
     //NOTE: Merged into DefaultSwitchThreadCallback
     FileTree* treeRoot() const;
+    void disableClearInc();
+    void disableClearDec();
 
 private:
     /* 0x00 */ FileTree mTreeRoot;

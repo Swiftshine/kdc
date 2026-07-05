@@ -1262,6 +1262,207 @@ donut/info/common/Confirm.cpp:
 	.sdata      start:0x80557060 end:0x80557098
 	.sdata2     start:0x8055F950 end:0x8055F958
 
+donut/info/common/LowBattery.cpp:
+	.text       start:0x801A9DC0 end:0x801AA114
+	.data       start:0x804575D0 end:0x804575E8
+	.sdata      start:0x80557098 end:0x805570B0
+
+donut/info/common/SkipHelp.cpp:
+	.text       start:0x801AA114 end:0x801AA56C
+	.data       start:0x804575E8 end:0x80457640
+	.sdata      start:0x805570B0 end:0x805570D0
+	.sdata2     start:0x8055F958 end:0x8055F968
+
+donut/info/common/TotalScore.cpp:
+	.text       start:0x801AA56C end:0x801AAB58
+	.data       start:0x80457640 end:0x804576D0
+	.sdata      start:0x805570D0 end:0x80557100
+
+donut/info/common/WiiButton.cpp:
+	.text       start:0x801AAB58 end:0x801AB11C
+	.data       start:0x804576D0 end:0x80457768
+	.sdata      start:0x80557100 end:0x80557138
+
+donut/info/cutin/CutIn.cpp:
+	.text       start:0x801AB11C end:0x801AB604
+	.data       start:0x80457768 end:0x80457870
+	.sdata      start:0x80557138 end:0x80557158
+
+donut/info/cutin/Manager.cpp:
+	.text       start:0x801AB604 end:0x801ABA4C
+
+donut/info/ticker/Ticker.cpp:
+	.text       start:0x801ABA4C end:0x801AC058
+	.sdata2     start:0x8055F968 end:0x8055F978
+
+donut/info/ticker/TickerContext.cpp:
+	.text       start:0x801AC058 end:0x801AC0D8
+	.sdata2     start:0x8055F978 end:0x8055F980
+
+donut/lyt/AllocatorChanger.cpp:
+	.text       start:0x801AC0D8 end:0x801AC190
+
+donut/lyt/Layout.cpp:
+	.text       start:0x801AC190 end:0x801ADD64
+	.data       start:0x80457870 end:0x80457988
+	.sdata      start:0x80557158 end:0x80557170
+	.sdata2     start:0x8055F980 end:0x8055F990
+
+donut/lyt/LayoutContext.cpp:
+	.text       start:0x801ADD64 end:0x801ADDF8
+
+donut/lyt/MaterialAccessor.cpp:
+	.text       start:0x801ADDF8 end:0x801ADFC8
+	.data       start:0x80457988 end:0x80457A00
+
+donut/lyt/PaneAccessor.cpp:
+	.text       start:0x801ADFC8 end:0x801AE550
+	.sdata2     start:0x8055F990 end:0x8055F998
+
+donut/lyt/SystemTagProcessor.cpp:
+	.text       start:0x801AE550 end:0x801AFC70
+	.data       start:0x80457A00 end:0x80457DA0
+	.sdata2     start:0x8055F998 end:0x8055F9C0
+
+donut/lyt/TagProcessor.cpp:
+	.text       start:0x801AFC70 end:0x801AFDF4
+	.data       start:0x80457DA0 end:0x80457DB8
+
+donut/lyt/TagUtil.cpp:
+	.text       start:0x801AFDF4 end:0x801B012C
+	.data       start:0x80457DB8 end:0x80457DE0
+
+donut/lyt/UserTagProcessor.cpp:
+	.text       start:0x801B012C end:0x801B11D8
+	.rodata     start:0x80414B70 end:0x80414C30
+	.data       start:0x80457DE0 end:0x80458078
+	.sdata      start:0x80557170 end:0x80557200
+
+donut/lyt/Utility.cpp:
+	.text       start:0x801B11D8 end:0x801B13B0
+	.sdata2     start:0x8055F9C0 end:0x8055F9E0
+
+donut/mcoll/Actor.cpp:
+	.text       start:0x801B13B0 end:0x801B16D8
+
+donut/mcoll/LandManager.cpp:
+	.text       start:0x801B16D8 end:0x801B27E8
+	.sdata2     start:0x8055F9E0 end:0x8055F9F0
+
+donut/mcoll/detail/ActorDiamond.cpp:
+	.text       start:0x801B287C end:0x801B65A8
+	.rodata     start:0x80414C30 end:0x80414C48
+	.data       start:0x80458078 end:0x80458098
+	.sdata      start:0x80557200 end:0x80557260
+	.sbss       start:0x8055D288 end:0x8055D290
+	.sdata2     start:0x8055F9F0 end:0x8055FA38
+
+donut/mcoll/detail/ActorInfo.cpp:
+	.text       start:0x801B65A8 end:0x801B6698
+
+donut/mcoll/detail/CollidedAction.cpp:
+	.text       start:0x801B6698 end:0x801B66EC
+	.sdata2     start:0x8055FA38 end:0x8055FA40
+
+donut/mcoll/detail/CollidedDetectionInfo.cpp:
+	.text       start:0x801B66EC end:0x801B68C8
+
+donut/mcoll/detail/CollidedInfo.cpp:
+	.text       start:0x801B68C8 end:0x801B6B0C
+	.sdata2     start:0x8055FA40 end:0x8055FA48
+
+donut/mcoll/detail/CollidedLog.cpp:
+	.text       start:0x801B6B0C end:0x801B6C84
+
+donut/mcoll/detail/CollideTarget.cpp:
+	.text       start:0x801B6C84 end:0x801B6D10
+
+donut/mcoll/detail/CollideTargetRepos.cpp:
+	.text       start:0x801B6D10 end:0x801B6DFC
+
+donut/mcoll/detail/CollideTargetReposSet.cpp:
+	.text       start:0x801B6DFC end:0x801B71C4
+
+donut/mcoll/detail/DetectArg.cpp:
+	.text       start:0x801B71C4 end:0x801B72CC
+	.sdata2     start:0x8055FA48 end:0x8055FA50
+
+donut/mcoll/detail/DetectResult.cpp:
+	.text       start:0x801B72CC end:0x801B7558
+
+donut/mcoll/detail/DetectResultContext.cpp:
+	.text       start:0x801B7558 end:0x801B75C4
+	.sdata2     start:0x8055FA50 end:0x8055FA58
+
+donut/mcoll/detail/FixedGridManager.cpp:
+	.text       start:0x801B75C4 end:0x801B789C
+	.sdata2     start:0x8055FA58 end:0x8055FA60
+
+donut/mcoll/detail/IActor.cpp:
+	.text       start:0x801B789C end:0x801B789C
+
+donut/mcoll/detail/IResponder.cpp:
+	.text       start:0x801B789C end:0x801B789C
+
+donut/mcoll/detail/LadderInfo.cpp:
+	.text       start:0x801B789C end:0x801B78F8
+	.sdata2     start:0x8055FA60 end:0x8055FA68
+
+donut/mcoll/detail/LandAttribute.cpp:
+	.text       start:0x801B78F8 end:0x801B7904
+
+donut/mcoll/detail/LandGatherOption.cpp:
+	.text       start:0x801B7904 end:0x801B7934
+
+donut/mcoll/detail/LandGrid.cpp:
+	.text       start:0x801B7934 end:0x801B80D4
+
+donut/mcoll/detail/LandLayer.cpp:
+	.text       start:0x801B80D4 end:0x801B9AD0
+	.ctors      start:0x8040632C end:0x80406330
+	.data       start:0x80458098 end:0x80458E68
+	.sdata2     start:0x8055FA68 end:0x8055FAF8
+	.sbss2      start:0x805643E0 end:0x805643E8
+
+donut/mcoll/detail/LandProperty.cpp:
+	.text       start:0x801B9AD0 end:0x801B9AE0
+
+donut/mcoll/detail/LandSet.cpp:
+	.text       start:0x801B9AE0 end:0x801B9B6C
+
+donut/mcoll/detail/MoveGrid.cpp:
+	.text       start:0x801B9B6C end:0x801B9D78
+	.sbss       start:0x8055D290 end:0x8055D2A0
+
+donut/mcoll/detail/MoveGridGroup.cpp:
+	.text       start:0x801B9D78 end:0x801BBA6C
+	.ctors      start:0x80406330 end:0x80406334
+	.data       start:0x80458E68 end:0x80459C38
+	.sdata      start:0x80557260 end:0x80557268
+	.sdata2     start:0x8055FAF8 end:0x8055FB90
+	.sbss2      start:0x805643E8 end:0x805643F0
+
+donut/mcoll/detail/MoveGridGroupId.cpp:
+	.text       start:0x801BBA6C end:0x801BBA84
+
+donut/mcoll/detail/MoveGridManager.cpp:
+	.text       start:0x801BBA84 end:0x801BC514
+	.rodata     start:0x80414C48 end:0x80414DD0
+	.data       start:0x80459C38 end:0x80459C98
+	.sdata2     start:0x8055FB90 end:0x8055FBA0
+
+donut/mcoll/detail/RayChecker.cpp:
+	.text       start:0x801BC514 end:0x801BCCE4
+	.sdata2     start:0x8055FBA0 end:0x8055FBB0
+
+donut/mcoll/detail/ShapeDiamondContext.cpp:
+	.text       start:0x801BCCE4 end:0x801BCF04
+	.sdata2     start:0x8055FBB0 end:0x8055FBB8
+
+donut/mcoll/detail/StdResponder.cpp:
+	.text       start:0x801BCF04 end:0x801BD204
+	.data       start:0x80459C98 end:0x80459CB0
+
 donut/mem/AllocatorHandle.cpp:
 	.text       start:0x801BD204 end:0x801BD204
 
@@ -1341,6 +1542,185 @@ donut/mem/UnitHeapMapUser.cpp:
 donut/mem/Utility.cpp:
 	.text       start:0x801BFA30 end:0x801BFAD4
 
+donut/mint/Engine.cpp:
+	.text       start:0x801BFAD4 end:0x801BFCEC
+	.sdata      start:0x805572B8 end:0x805572C8
+
+donut/mint/Heap.cpp:
+	.text       start:0x801BFCEC end:0x801C05FC
+	.data       start:0x80459DB0 end:0x80459DC0
+	.sdata      start:0x805572C8 end:0x805572D8
+	.sbss       start:0x8055D2B0 end:0x8055D2B8
+
+donut/mint/Manager.cpp:
+	.text       start:0x801C05FC end:0x801C0778
+	.data       start:0x80459DC0 end:0x80459DE0
+	.sbss       start:0x8055D2B8 end:0x8055D2C0
+
+donut/mint/Runner.cpp:
+	.text       start:0x801C0778 end:0x801C0B00
+	.data       start:0x80459DE0 end:0x80459E10
+
+donut/mint/ScriptArchive.cpp:
+	.text       start:0x801C0B00 end:0x801C0C5C
+	.data       start:0x80459E10 end:0x80459E28
+	.sdata      start:0x805572D8 end:0x805572E0
+
+donut/mintglue/App__Alert.cpp:
+	.text       start:0x801C0C5C end:0x801C15C8
+	.data       start:0x80459E28 end:0x8045A0E8
+
+donut/mintglue/App__Random.cpp:
+	.text       start:0x801C15C8 end:0x801C1868
+	.data       start:0x8045A0E8 end:0x8045A1C0
+
+donut/mintglue/HEL__Math__Vector2.cpp:
+	.text       start:0x801C1868 end:0x801C2340
+	.data       start:0x8045A1C0 end:0x8045A510
+	.sdata      start:0x805572E0 end:0x805572E8
+
+donut/mintglue/HEL__Math__Vector3.cpp:
+	.text       start:0x801C2340 end:0x801C3464
+	.data       start:0x8045A510 end:0x8045AA88
+	.sdata      start:0x805572E8 end:0x805572F8
+
+donut/mintglue/Scn__ChallengeTitle__Chara.cpp:
+	.text       start:0x801C3464 end:0x801C3D24
+	.data       start:0x8045AA88 end:0x8045ACC0
+	.sdata      start:0x805572F8 end:0x80557300
+	.sdata2     start:0x8055FBC8 end:0x8055FBD0
+
+donut/mintglue/Scn__ChallengeTitle__Commander.cpp:
+	.text       start:0x801C3D24 end:0x801C4098
+	.data       start:0x8045ACC0 end:0x8045ACC0
+
+donut/mintglue/Scn__GrandTitle__Block.cpp:
+	.text       start:0x801C4098 end:0x801C42DC
+	.data       start:0x8045AF18 end:0x8045AFE0
+	.sdata      start:0x80557300 end:0x80557308
+
+donut/mintglue/Scn__GrandTitle__Chara.cpp:
+	.text       start:0x801C42DC end:0x801C4F0C
+	.data       start:0x8045AFE0 end:0x8045B2B8
+	.sdata      start:0x80557308 end:0x80557310
+	.sdata2     start:0x8055FBD0 end:0x8055FBD8
+
+donut/mintglue/Scn__GrandTitle__Commander.cpp:
+	.text       start:0x801C4F0C end:0x801C54D0
+	.data       start:0x8045B2B8 end:0x8045B628
+
+donut/mintvm/BCModule.cpp:
+	.text       start:0x801C54D0 end:0x801C55DC
+
+donut/mintvm/BCOpCode.cpp:
+	.text       start:0x801C55DC end:0x801C5AF0
+	.data       start:0x8045B628 end:0x8045BA30
+	.sdata      start:0x80557310 end:0x80557528
+
+donut/mintvm/MintSetting.cpp:
+	.text       start:0x801C5AF0 end:0x801C5FA4
+	.data       start:0x8045BA30 end:0x8045BCA0
+	.sdata      start:0x80557528 end:0x80557548
+
+donut/mintvm/MintSystemCall.cpp:
+	.text       start:0x801C5FA4 end:0x801C6134
+	.data       start:0x8045BCA0 end:0x8045BCC8
+
+donut/mintvm/N_Mint_Cast.cpp:
+	.text       start:0x801C6134 end:0x801C62CC
+	.data       start:0x8045BCC8 end:0x8045BD18
+	.sdata2     start:0x8055FBD8 end:0x8055FBE0
+
+donut/mintvm/N_Mint_Debug.cpp:
+	.text       start:0x801C62CC end:0x801C6898
+	.data       start:0x8045BD18 end:0x8045BE98
+	.sdata      start:0x80557548 end:0x80557558
+	.sdata2     start:0x8055FBE0 end:0x8055FBE8
+
+donut/mintvm/Regset.cpp:
+	.text       start:0x801C6898 end:0x801C872C
+	.data       start:0x8045BE98 end:0x8045C198
+	.sdata      start:0x80557558 end:0x80557578
+	.sdata2     start:0x8055FBE8 end:0x8055FC00
+
+donut/mintvm/Runner.cpp:
+	.text       start:0x801C872C end:0x801C9D5C
+	.data       start:0x8045C198 end:0x8045C580
+	.sbss       start:0x8055D2C0 end:0x8055D2C8
+
+donut/mintvm/VMCore.cpp:
+	.text       start:0x801C9D5C end:0x801CCE30
+	.data       start:0x8045C580 end:0x8045CAD0
+	.sdata      start:0x80557578 end:0x805575D0
+
+donut/mintvm/VMFunction.cpp:
+	.text       start:0x801CCE30 end:0x801CCF90
+	.data       start:0x8045CAD0 end:0x8045CB68
+
+donut/mintvm/VMFunctionList.cpp:
+	.text       start:0x801CCF90 end:0x801CD1E0
+	.data       start:0x8045CB68 end:0x8045CBA0
+
+donut/mintvm/VMModule.cpp:
+	.text       start:0x801CD1E0 end:0x801CD3D4
+	.data       start:0x8045CBA0 end:0x8045CBC8
+
+donut/mintvm/VMObjectType.cpp:
+	.text       start:0x801CD3D4 end:0x801CD780
+	.data       start:0x8045CBC8 end:0x8045CC28
+
+donut/mintvm/VMObjectTypeList.cpp:
+	.text       start:0x801CD780 end:0x801CDBD4
+	.data       start:0x8045CC28 end:0x8045CC80
+
+donut/mintvm/VMSymbolTable.cpp:
+	.text       start:0x801CDBD4 end:0x801CDDA8
+	.data       start:0x8045CC80 end:0x8045CCA8
+
+donut/mintvm/VMVariable.cpp:
+	.text       start:0x801CDDA8 end:0x801CDDB8
+
+donut/mintvm/VMVariableList.cpp:
+	.text       start:0x801CDDB8 end:0x801CDF28
+
+donut/mov/DvdControl.cpp:
+	.text       start:0x801CDF28 end:0x801CE5C4
+	.ctors      start:0x8040633C end:0x80406340
+	.data       start:0x8045CCA8 end:0x8045CCE8
+	.sbss       start:0x8055D2C8 end:0x8055D2D8
+
+donut/mov/MovieAudio.cpp:
+	.text       start:0x801CE5C4 end:0x801CE904
+
+donut/mov/MovieCommand.cpp:
+	.text       start:0x801CE904 end:0x801CEC80
+
+donut/mov/MovieKindUtil.cpp:
+	.text       start:0x801CEC80 end:0x801CEDAC
+	.ctors      start:0x80406340 end:0x80406344
+	.data       start:0x8045CCE8 end:0x8045D018
+	.sdata2     start:0x8055FC00 end:0x8055FC08
+
+donut/mov/MoviePlayer.cpp:
+	.text       start:0x801CEDAC end:0x801CFA28
+	.data       start:0x8045D018 end:0x8045D040
+	.sdata2     start:0x8055FC08 end:0x8055FC40
+
+donut/mov/MovieThread.cpp:
+	.text       start:0x801CFA28 end:0x801D055C
+	.data       start:0x8045D040 end:0x8045D0E8
+
+donut/mov/MovieYuv.cpp:
+	.text       start:0x801D055C end:0x801D0E54
+	.data       start:0x8045D0E8 end:0x8045D108
+	.sdata2     start:0x8055FC40 end:0x8055FC58
+
+donut/msg/Manager.cpp:
+	.text       start:0x801D0E54 end:0x801D1404
+	.ctors      start:0x80406344 end:0x80406348
+	.data       start:0x8045D108 end:0x8045D1D0
+	.sbss       start:0x8055D2D8 end:0x8055D2E0
+
 donut/msg/Message.cpp:
 	.text       start:0x801D1404 end:0x801D168C
 	.data       start:0x8045D1D0 end:0x8045D2A8
@@ -1350,8 +1730,216 @@ donut/msg/Project.cpp:
 	.text       start:0x801D168C end:0x801D17CC
 	.data       start:0x8045D2A8 end:0x8045D2B8
 
+donut/nand/NandManager.cpp:
+	.text       start:0x801D17CC end:0x801D1950
+
+donut/nand/NandThread.cpp:
+	.text       start:0x801D1950 end:0x801D3028
+	.rodata     start:0x80414DD0 end:0x80414E88
+	.data       start:0x8045D2B8 end:0x8045D3C8
+	.sdata      start:0x80557638 end:0x80557658
+
+donut/nururi/Manager.cpp:
+	.text       start:0x801D3028 end:0x801D347C
+
+donut/nururi/Nururi.cpp:
+	.text       start:0x801D347C end:0x801D3A10
+	.data       start:0x8045D3C8 end:0x8045D3D8
+	.sdata2     start:0x8055FC58 end:0x8055FC70
+
+donut/ocoll/Attack.cpp:
+	.text       start:0x801D3A10 end:0x801D450C
+
+donut/ocoll/AttackCenter.cpp:
+	.text       start:0x801D450C end:0x801D475C
+
+donut/ocoll/AttackLog.cpp:
+	.text       start:0x801D475C end:0x801D4A38
+
+donut/ocoll/AttackNode.cpp:
+	.text       start:0x801D4A38 end:0x801D4D8C
+	.sdata2     start:0x8055FC70 end:0x8055FC78
+
+donut/ocoll/AttackResult.cpp:
+	.text       start:0x801D4D8C end:0x801D5120
+	.sdata2     start:0x8055FC78 end:0x8055FC80
+
+donut/ocoll/AttackResultGimmick.cpp:
+	.text       start:0x801D5120 end:0x801D51CC
+	.sdata2     start:0x8055FC80 end:0x8055FC88
+
+donut/ocoll/AttackRoot.cpp:
+	.text       start:0x801D51CC end:0x801D57FC
+
+donut/ocoll/CollDataTable.cpp:
+	.text       start:0x801D57FC end:0x801D5C28
+
 donut/ocoll/Gimmick.cpp:
 	.text       start:0x801D5C28 end:0x801D5FB8
+	.rodata     start:0x80414E88 end:0x80415068
+
+donut/ocoll/Hit.cpp:
+	.text       start:0x801D5FB8 end:0x801D68BC
+	.data       start:0x8045D3D8 end:0x8045D3E8
+
+donut/ocoll/HitNode.cpp:
+	.text       start:0x801D68BC end:0x801D6C1C
+	.sdata2     start:0x8055FC88 end:0x8055FC90
+
+donut/ocoll/HitResult.cpp:
+	.text       start:0x801D6C1C end:0x801D6F9C
+
+donut/ocoll/Manager.cpp:
+	.text       start:0x801D6F9C end:0x801D805C
+
+donut/ocoll/NodeDesc.cpp:
+	.text       start:0x801D805C end:0x801D8160
+	.sdata2     start:0x8055FC90 end:0x8055FC98
+
+donut/ocoll/Owner.cpp:
+	.text       start:0x801D8160 end:0x801D8318
+
+donut/ocoll/SearchAttack.cpp:
+	.text       start:0x801D8318 end:0x801D89F0
+	.data       start:0x8045D3E8 end:0x8045D3F8
+
+donut/ocoll/SearchAttackNode.cpp:
+	.text       start:0x801D89F0 end:0x801D8CA4
+	.sdata2     start:0x8055FC98 end:0x8055FCA0
+
+donut/ocoll/SearchAttackResult.cpp:
+	.text       start:0x801D8CA4 end:0x801D8DD8
+	.sdata2     start:0x8055FCA0 end:0x8055FCA8
+
+donut/ocoll/SearchHit.cpp:
+	.text       start:0x801D8DD8 end:0x801D93E0
+	.data       start:0x8045D3F8 end:0x8045D408
+
+donut/ocoll/SearchHitNode.cpp:
+	.text       start:0x801D93E0 end:0x801D9528
+	.sdata2     start:0x8055FCA8 end:0x8055FCB0
+
+donut/ocoll/SearchHitResult.cpp:
+	.text       start:0x801D9528 end:0x801D9634
+
+donut/ocoll/Shape.cpp:
+	.text       start:0x801D9634 end:0x801D98A4
+	.sdata2     start:0x8055FCB0 end:0x8055FCB8
+
+donut/ostop/Actor.cpp:
+	.text       start:0x801D98A4 end:0x801D9BA4
+
+donut/ostop/IActorEventReceiver.cpp:
+	.text       start:0x801D9BA4 end:0x801D9BA4
+
+donut/ostop/Manager.cpp:
+	.text       start:0x801D9BA4 end:0x801DA2DC
+
+donut/ostop/ReqHandle.cpp:
+	.text       start:0x801DA2DC end:0x801DA2FC
+
+donut/param/JITParam.cpp:
+	.text       start:0x801DA2FC end:0x801DA3FC
+
+donut/param/ParamAccessor.cpp:
+	.text       start:0x801DA3FC end:0x801DA574
+	.data       start:0x8045D408 end:0x8045D420
+	.sdata      start:0x80557658 end:0x80557660
+
+donut/pause/ButtonPanel.cpp:
+	.text       start:0x801DA574 end:0x801DA754
+	.data       start:0x8045D420 end:0x8045D460
+	.sdata      start:0x80557660 end:0x80557670
+
+donut/pause/ClosePanel.cpp:
+	.text       start:0x801DA754 end:0x801DA8D0
+	.data       start:0x8045D460 end:0x8045D470
+
+donut/pause/Component.cpp:
+	.text       start:0x801DA8D0 end:0x801DB28C
+	.sdata      start:0x80557670 end:0x80557688
+
+donut/pause/Constant.cpp:
+	.text       start:0x801DB28C end:0x801DB2AC
+	.rodata     start:0x80415068 end:0x80415080
+	.data       start:0x8045D470 end:0x8045D4A8
+
+donut/pause/ContextInit.cpp:
+	.text       start:0x801DB2AC end:0x801DB318
+
+donut/pause/ContextOpen.cpp:
+	.text       start:0x801DB318 end:0x801DB404
+
+donut/pause/CursorPanel.cpp:
+	.text       start:0x801DB404 end:0x801DB5D0
+	.sdata      start:0x80557688 end:0x805576A0
+
+donut/pause/FramePanel.cpp:
+	.text       start:0x801DB5D0 end:0x801DBD40
+	.data       start:0x8045D4A8 end:0x8045D558
+	.sdata      start:0x805576A0 end:0x80557710
+	.sdata2     start:0x8055FCB8 end:0x8055FCC0
+
+donut/pause/HID.cpp:
+	.text       start:0x801DBD40 end:0x801DBE24
+
+donut/pause/ICallback.cpp:
+	.text       start:0x801DBE24 end:0x801DBE24
+
+donut/pause/IPage.cpp:
+	.text       start:0x801DBE24 end:0x801DBE24
+
+donut/pause/ManualData.cpp:
+	.text       start:0x801DBE24 end:0x801DC458
+	.rodata     start:0x80415080 end:0x80415438
+	.data       start:0x8045D558 end:0x8045D768
+	.sdata      start:0x80557710 end:0x80557898
+
+donut/pause/PageAbility.cpp:
+	.text       start:0x801DC458 end:0x801DC734
+	.data       start:0x8045D768 end:0x8045D7F0
+	.sdata      start:0x80557898 end:0x805578B8
+
+donut/pause/PageCommand.cpp:
+	.text       start:0x801DC734 end:0x801DCE68
+	.data       start:0x8045D7F0 end:0x8045D8E8
+	.sdata      start:0x805578B8 end:0x805578D8
+
+donut/pause/PageDropout.cpp:
+	.text       start:0x801DCE68 end:0x801DD9B8
+	.rodata     start:0x80415438 end:0x80415490
+	.data       start:0x8045D8E8 end:0x8045DA78
+	.sdata      start:0x805578D8 end:0x80557908
+	.sdata2     start:0x8055FCC0 end:0x8055FCD8
+
+donut/pause/PageManager.cpp:
+	.text       start:0x801DD9B8 end:0x801DE914
+	.rodata     start:0x80415490 end:0x804154A0
+	.data       start:0x8045DA78 end:0x8045DB60
+	.sdata      start:0x80557908 end:0x80557920
+	.sdata2     start:0x8055FCD8 end:0x8055FCE0
+
+donut/pause/Pause.cpp:
+	.text       start:0x801DE914 end:0x801DF204
+	.data       start:0x8045DB60 end:0x8045DB70
+	.sdata      start:0x80557920 end:0x80557928
+
+donut/pause/PlayerEntryInfo.cpp:
+	.text       start:0x801DF204 end:0x801DF2E4
+
+donut/pause/ResultSetter.cpp:
+	.text       start:0x801DF2E4 end:0x801DF304
+
+donut/pause/WindowPanel.cpp:
+	.text       start:0x801DF304 end:0x801DF3E0
+	.data       start:0x8045DB70 end:0x8045DB88
+	.sdata      start:0x80557928 end:0x80557930
+
+donut/preload/PreLoadManager.cpp:
+	.text       start:0x801DF3E0 end:0x801DFC90
+
+donut/scn/DrawReqInfo.cpp:
+	.text       start:0x801DFC90 end:0x801DFC90
 
 donut/scn/step/Component.cpp:
 	.text       start:0x8021D0D4 end:0x80220F6C

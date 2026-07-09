@@ -407,6 +407,15 @@ donut/Main.cpp:
 	.text       start:0x80174AD8 end:0x80174AF8
 	.sdata      start:0x80556B70 end:0x80556B78
 
+donut/TPL.cpp:
+	.text       start:0x80174AF8 end:0x80174CB8
+
+donut/app/AddOnMint.cpp:
+	.text       start:0x80174CB8 end:0x80174CEC
+
+donut/app/AlertMint.cpp:
+	.text       start:0x80174CEC end:0x80174CEC
+
 donut/app/AppImpl.cpp:
 	.text       start:0x80174CEC end:0x80176268
 	.data       start:0x80452B00 end:0x80452B30
@@ -2009,9 +2018,163 @@ donut/scn/vc/SceneVC.cpp:
 	.data       start:0x804955F0 end:0x80495618
 	.sbss       start:0x8055DE78 end:0x8055DE88
 
+donut/seq/ContextStory.cpp:
+	.text       start:0x803FCB20 end:0x803FCBDC
+
+donut/seq/ISequence.cpp:
+	.text       start:0x803FCBDC end:0x803FCC4C
+
+donut/seq/SequenceChallengeRoot.cpp:
+	.text       start:0x803FCC4C end:0x803FD988
+	.data       start:0x804963B0 end:0x804963D8
+	.sbss       start:0x8055DEB8 end:0x8055DED8
+
+donut/seq/SequenceChallengeTitle.cpp:
+	.text       start:0x803FD988 end:0x803FE028
+	.data       start:0x804963D8 end:0x80496400
+	.sbss       start:0x8055DED8 end:0x8055DF18
+
+donut/seq/SequenceFirstDemo.cpp:
+	.text       start:0x803FE028 end:0x803FE2C4
+	.data       start:0x80496400 end:0x80496428
+
+donut/seq/SequenceGrandMenu.cpp:
+	.text       start:0x803FE2C4 end:0x803FE750
+	.data       start:0x80496428 end:0x80496450
+	.sbss       start:0x8055DF18 end:0x8055DF48
+
+donut/seq/SequenceHistory.cpp:
+	.text       start:0x803FE750 end:0x803FEC20
+	.data       start:0x80496450 end:0x80496478
+
+donut/seq/SequenceLvMapRoot.cpp:
+	.text       start:0x803FEC20 end:0x803FF424
+	.data       start:0x80496478 end:0x804964A0
+
+donut/seq/SequenceProductRoot.cpp:
+	.text       start:0x803FF424 end:0x803FF96C
+	.data       start:0x804964A0 end:0x804964C8
+	.sbss       start:0x8055DF48 end:0x8055DF58
+
+donut/seq/SequenceRoot.cpp:
+	.text       start:0x803FF96C end:0x803FFA5C
+	.data       start:0x804964C8 end:0x804964F0
+
+donut/seq/SequenceStack.cpp:
+	.text       start:0x803FFA5C end:0x803FFC30
+
+donut/seq/SequenceStaffCredit.cpp:
+	.text       start:0x803FFC30 end:0x803FFDAC
+	.data       start:0x804964F0 end:0x80496518
+
+donut/seq/SequenceStep.cpp:
+	.text       start:0x803FFDAC end:0x80400440
+	.data       start:0x80496518 end:0x80496540
+	.sdata2     start:0x805642A0 end:0x805642A8
+
+donut/seq/SequenceVC.cpp:
+	.text       start:0x80400440 end:0x80400510
+	.data       start:0x80496540 end:0x80496568
+
+donut/sfx/CinemaScopeModel.cpp:
+	.text       start:0x80400510 end:0x8040078C
+	.data       start:0x80496568 end:0x80496578
+	.sdata      start:0x8055C6A0 end:0x8055C6B8
+
+donut/sfx/Fade.cpp:
+	.text       start:0x8040078C end:0x80400C6C
+	.sdata2     start:0x805642A8 end:0x805642D0
+
+donut/sfx/FullScreenModel.cpp:
+	.text       start:0x80400C6C end:0x804011D4
+	.sdata      start:0x8055C6B8 end:0x8055C6C0
+	.sdata2     start:0x805642D0 end:0x805642F8
+
+donut/sfx/Manager.cpp:
+	.text       start:0x804011D4 end:0x8040130C
+
+donut/sfx/Monotone.cpp:
+	.text       start:0x8040130C end:0x80401708
+	.sdata2     start:0x805642F8 end:0x80564308
+
+donut/sfx/ScreenRemap.cpp:
+	.text       start:0x80401708 end:0x80401A64
+	.sdata2     start:0x80564308 end:0x80564318
+
+donut/sfx/Utility.cpp:
+	.text       start:0x80401A64 end:0x80401D90
+	.sdata2     start:0x80564318 end:0x80564330
+
+donut/sfx/Warp.cpp:
+	.text       start:0x80401D90 end:0x80402248
+	.sdata2     start:0x80564330 end:0x80564348
+
+donut/sfx/Wipe.cpp:
+	.text       start:0x80402248 end:0x8040257C
+	.sdata      start:0x8055C6C0 end:0x8055C6D0
+	.sdata2     start:0x80564348 end:0x80564358
+
+donut/snd/AddOnMint.cpp:
+	.text       start:0x8040257C end:0x80402654
+	.data       start:0x80496578 end:0x804965D0
+
 donut/snd/BgmPlayer.cpp:
 	.text       start:0x80402654 end:0x80402A3C
+	.sbss       start:0x8055DF58 end:0x8055DF60
 	.sdata2     start:0x80564358 end:0x80564360
+
+donut/snd/MintSERequestor.cpp:
+	.text       start:0x80402A3C end:0x80402A6C
+	.ctors      start:0x80406524 end:0x80406528
+
+donut/snd/SERequestor.cpp:
+	.text       start:0x80402A6C end:0x80402EE0
+	.data       start:0x804965D0 end:0x80496600
+
+donut/snd/SoundManager.cpp:
+	.text       start:0x80402EE0 end:0x80403638
+	.rodata     start:0x80420F28 end:0x80420FC8
+	.data       start:0x80496600 end:0x804966B8
+
+donut/snd/SoundSystem.cpp:
+	.text       start:0x80403638 end:0x80403C74
+	.sbss       start:0x8055DF60 end:0x8055DF68
+
+donut/snd/SystemSERequestor.cpp:
+	.text       start:0x80403C74 end:0x80403D0C
+
+donut/snd/WaveHandle.cpp:
+	.text       start:0x80403D0C end:0x8040429C
+	.data       start:0x804966B8 end:0x804966D0
+	.sdata2     start:0x80564360 end:0x80564368
+
+donut/storage/BackupData.cpp:
+	.text       start:0x8040429C end:0x804042FC
+
+donut/storage/BackupFileData2.cpp:
+	.text       start:0x804042FC end:0x804047E4
+	.rodata     start:0x80420FC8 end:0x80421030
+
+donut/storage/GhostData.cpp:
+	.text       start:0x804047E4 end:0x80404824
+
+donut/storage/GhostFileData.cpp:
+	.text       start:0x80404824 end:0x804048AC
+
+donut/storage/StorageData.cpp:
+	.text       start:0x804048AC end:0x80404914
+
+donut/storage/StorageManager.cpp:
+	.text       start:0x80404914 end:0x80404F84
+	.sdata2     start:0x80564368 end:0x80564370
+
+donut/storage/StorageUtil.cpp:
+	.text       start:0x80404F84 end:0x80405194
+	.data       start:0x804966D0 end:0x804966E0
+
+donut/storage/VolatileData2.cpp:
+	.text       start:0x80405194 end:0x80405514
+	.sdata2     start:0x80564370 end:0x80564378
 
 donut/util/Alarm.cpp:
 	.text       start:0x80405514 end:0x804056C0
@@ -2053,3 +2216,7 @@ donut/util/StateChanger.cpp:
 
 donut/util/Thread.cpp:
 	.text       start:0x80405F14 end:0x8040603C
+
+donut/util/UIntAABBox.cpp:
+	.text       start:0x8040603C end:0x80406244
+	.sdata2     start:0x805643A8 end:0x805643B0

@@ -2120,12 +2120,12 @@ donut/snd/AddOnMint.cpp:
 
 donut/snd/BgmPlayer.cpp:
 	.text       start:0x80402654 end:0x80402A3C
-	.sbss       start:0x8055DF58 end:0x8055DF60
 	.sdata2     start:0x80564358 end:0x80564360
 
 donut/snd/MintSERequestor.cpp:
 	.text       start:0x80402A3C end:0x80402A6C
 	.ctors      start:0x80406524 end:0x80406528
+	.sbss       start:0x8055DF58 end:0x8055DF60
 
 donut/snd/SERequestor.cpp:
 	.text       start:0x80402A6C end:0x80402EE0

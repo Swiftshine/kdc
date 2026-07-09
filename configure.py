@@ -354,7 +354,7 @@ config.libs = [
         "lib": "Runtime.PPCEABI.H",
         "mw_version": config.linker_version,
         "cflags": cflags_runtime,
-        "progress_category": "sdk",  # str | List[str]
+        "progress_category": "sdk",
         "objects": [
             Object(NonMatching, "runtime/ptmf.c"),
             Object(NonMatching, "runtime/runtime.c"),
@@ -372,7 +372,7 @@ config.libs = [
         "src_dir": "libs/",
         "mw_version": config.linker_version,
         "cflags": cflags_msl,
-        "progress_category": "msl",  # str | List[str]
+        "progress_category": "msl",
         "objects": [
             Object(Matching, "MSL/MSL_C/MSL_Common/Src/float.c"),
             Object(NonMatching, "MSL/MSL_C/PPC_EABI/SRC/abort_exit_ppc_eabi.c"),

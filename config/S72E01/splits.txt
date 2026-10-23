@@ -2794,6 +2794,9 @@ donut/scn/step/hero/IndiviUtil.cpp:
 	.data       start:0x80484CD0 end:0x80484D28
 	.sdata2     start:0x80562C10 end:0x80562C20
 
+donut/scn/step/hero/Invincible.cpp:
+	.text       start:0x80342180 end:0x803429D0
+
 donut/scn/step/spstop/Manager.cpp:
 	.text       start:0x803D0B9C end:0x803D0E90
 

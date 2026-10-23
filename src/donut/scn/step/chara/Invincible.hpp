@@ -34,7 +34,7 @@ public:
     u32 getFlashAlpha() const;
     void updateFrame();
 
-private:
+public:
     /* 0x00 */ u32 mFrame;
     /* 0x04 */ u32 mAnimFrame;
     /* 0x08 */ bool mIsPerm;

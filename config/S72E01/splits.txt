@@ -2731,6 +2731,9 @@ donut/scn/step/chara/HitPoint.cpp:
 	.text       start:0x8026EAE0 end:0x8026ECE8
 	.sdata2     start:0x80560C88 end:0x80560C90
 
+donut/scn/step/chara/HitStop.cpp:
+	.text       start:0x8026ECE8 end:0x8026EE48
+
 donut/scn/step/chara/Invincible.cpp:
 	.text       start:0x8026EE48 end:0x8026EFA8
 	.rodata     start:0x80417960 end:0x80417988

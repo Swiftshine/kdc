@@ -20,6 +20,7 @@ HitStop::HitStop(IHitStopCallBack& callback)
     , mCallback(&callback)
 { }
 
+// https://decomp.me/scratch/qv1mo
 void HitStop::update()
 {
     if (mFrame != 0)

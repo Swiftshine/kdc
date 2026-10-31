@@ -1406,6 +1406,8 @@ config.libs = [
         "objects": [
             Object(Equivalent, "donut/scn/step/chara/Invincible.cpp"),
             Object(Equivalent, "donut/scn/step/chara/Shake.cpp"),
+            Object(Equivalent, "donut/scn/step/chara/HitPoint.cpp"),
+            Object(Equivalent, "donut/scn/step/chara/HitStop.cpp"),
         ],
     },
     {

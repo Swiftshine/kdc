@@ -8,11 +8,11 @@ s32 Thread::GetCurrentThreadPriority() {
     return OSGetThreadPriority(curThread);
 }
 
-Thread::Thread(mem::IAllocator& rAllocator, u32 size, s32 arg3, OSThreadFunc threadFunc, void* arg5)
-    : mDataBlock(size, 0x20, rAllocator)
+Thread::Thread(mem::IAllocator& rAllocator, u32 stackSize, s32 prio, OSThreadFunc threadFunc, void* pFuncArg)
+    : mStack(stackSize, 32, rAllocator)
 {
-    s32 blockData  = (s32)mDataBlock.block().mStartAddress;
-    OSCreateThread(&mThread, threadFunc, arg5, (void*)(blockData + size), size, arg3, 0);
+    s32 stackStart  = (s32)mStack.block().mStartAddress;
+    OSCreateThread(&mThread, threadFunc, pFuncArg, (void*)(stackStart + stackSize), stackSize, prio, 0);
     OSResumeThread(&mThread);
 }
 
